@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registro | Almara+</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../../styles/main.css" />
+</head>
+<body class="auth-page">
+  <main class="auth">
+    <h1>Crear cuenta</h1>
+    <form class="form" method="POST" action="/users/register" enctype="multipart/form-data">
+      <label>Nombre completo
+        <input type="text" name="name" placeholder="Ej: Ana Morales" required />
+      </label>
+
+      <label>Email
+        <input type="email" name="email" placeholder="tu@correo.com" required />
+      </label>
+
+      <label>Whatsapp
+        <input type="text" name="whatsapp" placeholder="+54########" />
+      </label>
+
+      <label>Imagen de perfil
+        <input type="file" name="avatar" accept="image/*" />
+      </label>
+
+      <label>Contraseña
+        <input type="password" name="password" required minlength="6" />
+      </label>
+
+      <label>Confirmar contraseña
+        <input type="password" name="confirmPassword" required minlength="6" />
+      </label>
+
+      <button type="submit" class="btn btn--primary">Registrarme</button>
+      <p class="auth__alt">¿Ya tenés cuenta? <a href="/users/login">Ingresá</a></p>
+    </form>
+  </main>
+  <script src="../../assets/js/forms.js"></script>
+</body>
+</html>
+
+

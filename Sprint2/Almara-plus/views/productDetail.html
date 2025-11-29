@@ -1,0 +1,2377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title id="pageTitle">Cargando... | Almara+ Talles Reales</title>
+  <link rel="icon" type="image/png" href="../favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <style>
+    /* ===== CUSTOMER TYPE TOGGLE ===== */
+    .customer-toggle {
+      display: flex;
+      background: #f0f0f0;
+      border-radius: 50px;
+      padding: 4px;
+      margin-bottom: 1.5rem;
+      max-width: 320px;
+    }
+
+    .customer-toggle__btn {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .customer-toggle__btn.active {
+      background: var(--gold);
+      color: var(--black);
+      box-shadow: 0 2px 8px rgba(201, 162, 39, 0.3);
+    }
+
+    .customer-toggle__btn:not(.active):hover {
+      background: rgba(0,0,0,0.05);
+    }
+
+    /* ===== PRICE DISPLAY ===== */
+    .price-display {
+      margin: 1.5rem 0;
+    }
+
+    .price-main {
+      text-align: center;
+      padding: 1.5rem;
+      background: #f8f8f8;
+      border-radius: 12px;
+      border: 2px solid #e0e0e0;
+    }
+
+    .price-main--wholesale {
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      border-color: #4caf50;
+      position: relative;
+    }
+
+    .price-main__label {
+      display: block;
+      font-size: 0.85rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.25rem;
+    }
+
+    .price-main__badge {
+      display: inline-block;
+      background: #4caf50;
+      color: #fff;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .price-main__value {
+      display: block;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--black);
+      line-height: 1.2;
+    }
+
+    .price-main--wholesale .price-main__value {
+      color: #2e7d32;
+    }
+
+    .price-main--curva {
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      border-color: #2196f3;
+    }
+
+    .price-main--curva .price-main__badge {
+      background: #2196f3;
+    }
+
+    .price-main--curva .price-main__value {
+      color: #1565c0;
+    }
+
+    .price-main__note {
+      display: block;
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+
+    .price-boxes-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 500px) {
+      .price-boxes-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== PRICING TIERS ===== */
+    .pricing-tiers-mini {
+      background: linear-gradient(135deg, #f8f5f0 0%, #fff9f0 100%);
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .pricing-tiers-mini__header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .pricing-tiers-mini__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+    }
+
+    .mini-tier {
+      background: #fff;
+      border: 2px solid #eee;
+      border-radius: 8px;
+      padding: 0.75rem 0.5rem;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .mini-tier:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .mini-tier--best {
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      border-color: #4caf50;
+    }
+
+    .mini-tier__qty {
+      display: block;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--gold);
+    }
+
+    .mini-tier--best .mini-tier__qty {
+      color: #2e7d32;
+    }
+
+    .mini-tier__price {
+      display: block;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #333;
+      margin: 0.25rem 0;
+    }
+
+    .mini-tier__label {
+      display: block;
+      font-size: 0.7rem;
+      color: #666;
+    }
+
+    .pricing-tiers-mini__note {
+      font-size: 0.75rem;
+      color: #888;
+      margin: 0.75rem 0 0;
+      text-align: center;
+    }
+
+    /* ===== MINORISTA VIEW ===== */
+    .view-minorista, .view-revendedor {
+      display: none;
+    }
+
+    .view-minorista.active, .view-revendedor.active {
+      display: block;
+    }
+
+    /* ===== REVENDEDOR VIEW - MATRIX TABLE ===== */
+    .matrix-container {
+      margin: 1.5rem 0;
+    }
+
+    .matrix-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .matrix-header h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .curva-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.25rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .curva-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .curva-info {
+      font-size: 0.8rem;
+      color: #666;
+      background: #f5f5f5;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .matrix-table-wrapper {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 2px solid #e0e0e0;
+    }
+
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 400px;
+    }
+
+    .matrix-table th {
+      background: var(--black);
+      color: #fff;
+      padding: 0.75rem 0.5rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+    }
+
+    .matrix-table th:first-child {
+      background: #333;
+      width: 60px;
+    }
+
+    .matrix-table td {
+      padding: 0.5rem;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    .matrix-table td:first-child {
+      background: #f8f8f8;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    .matrix-table tr:hover td {
+      background: #fafafa;
+    }
+
+    .matrix-table tr:hover td:first-child {
+      background: #f0f0f0;
+    }
+
+    .matrix-input {
+      width: 50px;
+      height: 36px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .matrix-input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2);
+    }
+
+    .matrix-input:not(:placeholder-shown):not([value="0"]) {
+      background: #fff9e6;
+      border-color: var(--gold);
+    }
+
+    /* ===== ORDER SUMMARY ===== */
+    .order-summary {
+      background: linear-gradient(135deg, #f8f5f0 0%, #fff 100%);
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .order-summary__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .order-summary__header h4 {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .clear-selection-btn {
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .clear-selection-btn:hover {
+      background: #c82333;
+    }
+
+    .order-summary__details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .summary-item {
+      background: #fff;
+      padding: 0.75rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .summary-item__label {
+      font-size: 0.75rem;
+      color: #666;
+      display: block;
+    }
+
+    .summary-item__value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    .summary-item__value--highlight {
+      color: #28a745;
+    }
+
+    .summary-item--full {
+      grid-column: span 2;
+      background: var(--gold);
+    }
+
+    .summary-item--full .summary-item__label {
+      color: rgba(0,0,0,0.7);
+    }
+
+    .summary-item--full .summary-item__value {
+      font-size: 1.5rem;
+    }
+
+    .order-summary__tier {
+      background: #333;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .order-summary__tier span {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .order-summary__actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .order-summary__actions .btn {
+      flex: 1;
+    }
+
+    /* ===== SELECTED ITEMS LIST ===== */
+    .selected-items {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #ccc;
+    }
+
+    .selected-items__title {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+
+    .selected-items__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .selected-item-tag {
+      background: #e8e8e8;
+      padding: 0.35rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .selected-item-tag strong {
+      color: var(--gold);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .pricing-tiers-mini__grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      
+      .matrix-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .order-summary__details {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-item--full {
+        grid-column: span 1;
+      }
+
+      .order-summary__actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <p>🏷️ Comprá 4+ prendas y obtené precio MAYORISTA · 💰 ¡Cuánto más comprás, más ahorrás!</p>
+  </div>
+
+  <header class="header">
+    <div class="container header__inner">
+      <div class="header__logo">
+        <a href="index.html">
+          <img src="../assets/img/logo.jpg" alt="Almara+">
+        </a>
+      </div>
+      <form class="header__search">
+        <input type="text" placeholder="Buscar productos..." />
+        <button type="submit" aria-label="Buscar">
+          <svg class="search-icon" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="6" />
+            <line x1="15" y1="15" x2="20" y2="20" />
+          </svg>
+        </button>
+      </form>
+      <div class="header__actions">
+        <a href="/users/login" class="header__link">Ingresar</a>
+        <a href="productCart.html" class="cart-icon">
+          🛒
+          <span class="badge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__item">Inicio</a>
+      <a href="shop.html" class="nav__item">Tienda</a>
+      <a href="coleccion.html" class="nav__item">Primavera Verano</a>
+      <a href="giftcard.html" class="nav__item">Gift Card</a>
+      <a href="talles.html" class="nav__item">Tabla de Talles</a>
+      <a href="nosotros.html" class="nav__item">Nosotros</a>
+      <a href="contacto.html" class="nav__item">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="index.html">Inicio</a> / <a href="shop.html">Tienda</a> / <a href="shop.html" id="breadcrumbCategory">Cargando...</a> / <span id="breadcrumbProduct">Cargando...</span>
+    </div>
+  </div>
+
+  <!-- Product Detail Section -->
+  <main class="product-page container">
+    
+    <!-- Gallery Section -->
+    <section class="product-gallery">
+      <div class="gallery-main">
+        <button class="gallery-zoom" id="zoomBtn" title="Ampliar imagen">🔍</button>
+        <img src="" alt="Producto" id="mainImage">
+      </div>
+      <div class="gallery-thumbs-wrapper">
+        <button class="thumb-nav thumb-nav--up" id="thumbUp" title="Anterior">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+        </button>
+        <div class="gallery-thumbs" id="galleryThumbs">
+          <!-- Thumbnails will be loaded dynamically -->
+        </div>
+        <button class="thumb-nav thumb-nav--down" id="thumbDown" title="Siguiente">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Image Zoom Modal -->
+    <div class="zoom-modal" id="zoomModal">
+      <div class="zoom-modal__overlay"></div>
+      <div class="zoom-modal__content">
+        <button class="zoom-modal__close" id="zoomClose">&times;</button>
+        <button class="zoom-modal__nav zoom-modal__nav--prev" id="zoomPrev">❮</button>
+        <img src="" alt="Imagen ampliada" id="zoomImage">
+        <button class="zoom-modal__nav zoom-modal__nav--next" id="zoomNext">❯</button>
+        <div class="zoom-modal__counter" id="zoomCounter">1 / 1</div>
+      </div>
+    </div>
+
+    <!-- Product Info Section -->
+    <section class="product-info">
+      <span class="product-info__badge">Nuevo · Colección 2025</span>
+      <h1 class="product-info__title" id="productName">Cargando...</h1>
+      
+      <!-- Customer Type Toggle -->
+      <div class="customer-toggle">
+        <button class="customer-toggle__btn active" onclick="switchView('minorista')">
+          🛍️ Minorista
+        </button>
+        <button class="customer-toggle__btn" onclick="switchView('revendedor')">
+          📦 Revendedor
+        </button>
+      </div>
+
+      <!-- Precio para Minorista -->
+      <div class="price-display price-display--minorista" id="priceMinorista">
+        <div class="price-main">
+          <span class="price-main__label">Precio</span>
+          <span class="price-main__value" id="retailPriceDisplay">$ --</span>
+        </div>
+        
+        <!-- Tabla de precios según cantidad (solo minorista) -->
+        <div class="pricing-tiers-mini">
+          <div class="pricing-tiers-mini__header">
+            <span>💰</span>
+            <strong>¡Cuánto más comprás, más ahorrás!</strong>
+          </div>
+          <div class="pricing-tiers-mini__grid">
+            <div class="mini-tier">
+              <span class="mini-tier__qty">1 prenda</span>
+              <span class="mini-tier__price" id="tier1Price">$--</span>
+              <span class="mini-tier__label">precio por unidad</span>
+            </div>
+            <div class="mini-tier">
+              <span class="mini-tier__qty">2-3 prendas</span>
+              <span class="mini-tier__price" id="tier2Price">$--</span>
+              <span class="mini-tier__label">precio por unidad</span>
+            </div>
+            <div class="mini-tier mini-tier--best">
+              <span class="mini-tier__qty">4+ prendas</span>
+              <span class="mini-tier__price" id="tier4Price">$--</span>
+              <span class="mini-tier__label">🌟 precio por unidad</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Precio para Revendedor -->
+      <div class="price-display price-display--revendedor" id="priceRevendedor" style="display: none;">
+        <div class="price-boxes-row">
+          <div class="price-main price-main--wholesale">
+            <span class="price-main__badge">🌟 Mayorista</span>
+            <span class="price-main__value" id="wholesalePriceDisplay">$ --</span>
+            <span class="price-main__note">4+ unidades</span>
+          </div>
+          <div class="price-main price-main--curva">
+            <span class="price-main__badge">🔄 Precio Curva</span>
+            <span class="price-main__value" id="curvaPriceDisplay">$ --</span>
+            <span class="price-main__note">$1.000 menos por unidad</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== MINORISTA VIEW ===================== -->
+      <div class="view-minorista active" id="viewMinorista">
+        <!-- Color Selector -->
+        <div class="product-option">
+          <span class="option-label">Color</span>
+          <div class="color-selector" id="colorSelector">
+            <!-- Colors will be loaded dynamically -->
+          </div>
+          <span class="color-selected" id="colorSelected">--</span>
+        </div>
+
+        <!-- Size Selector -->
+        <div class="product-option">
+          <span class="option-label">Talle</span>
+          <div class="size-selector" id="sizeSelector">
+            <!-- Sizes will be loaded dynamically -->
+          </div>
+        </div>
+
+        <!-- Size Guide Link -->
+        <a href="talles.html" class="size-guide-link">📏 GUÍA DE TALLES</a>
+
+        <!-- Quantity & Add to Cart -->
+        <div class="product-actions">
+          <div class="quantity-selector">
+            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+            <input type="number" value="1" min="1" max="10" id="quantity" class="qty-input">
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
+          </div>
+          <button class="btn btn--primary btn--lg add-to-cart" onclick="addToCartMinorista()">
+            AGREGAR AL CARRITO
+          </button>
+        </div>
+      </div>
+
+      <!-- ===================== REVENDEDOR VIEW ===================== -->
+      <div class="view-revendedor" id="viewRevendedor">
+        
+        <div class="matrix-container">
+          <div class="matrix-header">
+            <h3>📊 Seleccioná cantidades por talle y color</h3>
+            <button class="curva-btn" onclick="addCurva()">
+              🔄 Agregar Curva
+            </button>
+          </div>
+          <div class="curva-info">
+            <span>ℹ️</span>
+            <span><strong>Curva</strong> = 1 unidad de cada talle en colores variados (rotación automática)</span>
+          </div>
+          
+          <div class="matrix-table-wrapper">
+            <table class="matrix-table" id="matrixTable">
+              <!-- Table will be generated dynamically -->
+            </table>
+          </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary" id="orderSummary">
+          <div class="order-summary__header">
+            <h4>🛒 Resumen de tu pedido</h4>
+            <button class="clear-selection-btn" onclick="clearMatrix()">🗑️ Limpiar</button>
+          </div>
+
+          <div class="order-summary__tier" id="summaryTier">
+            Tu nivel de precio: <span>Calculando...</span>
+          </div>
+
+          <div class="order-summary__details">
+            <div class="summary-item">
+              <span class="summary-item__label">Cantidad total</span>
+              <span class="summary-item__value" id="summaryQty">0 unidades</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-item__label">Precio por unidad</span>
+              <span class="summary-item__value" id="summaryUnitPrice">$0</span>
+            </div>
+            <div class="summary-item summary-item--full">
+              <span class="summary-item__label">TOTAL DEL PEDIDO</span>
+              <span class="summary-item__value" id="summaryTotal">$0</span>
+            </div>
+          </div>
+
+          <div class="order-summary__actions">
+            <button class="btn btn--primary btn--lg" onclick="addToCartRevendedor()">
+              🛒 AGREGAR TODO AL CARRITO
+            </button>
+            <button class="btn btn--whatsapp" onclick="sendWhatsAppOrder()">
+              💬 Pedir por WhatsApp
+            </button>
+          </div>
+
+          <div class="selected-items" id="selectedItems" style="display: none;">
+            <div class="selected-items__title">Artículos seleccionados:</div>
+            <div class="selected-items__list" id="selectedItemsList">
+              <!-- Tags will appear here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="product-tabs">
+        <div class="tabs-header">
+          <button class="tab-btn active" onclick="showTab('description')">DESCRIPCIÓN</button>
+          <button class="tab-btn" onclick="showTab('details')">INFORMACIÓN</button>
+          <button class="tab-btn" onclick="showTab('care')">CUIDADOS</button>
+        </div>
+        
+        <div class="tab-content active" id="description">
+          <p id="productDescription">Cargando descripción...</p>
+          <ul id="productFeatures">
+            <li>✨ Cargando características...</li>
+          </ul>
+        </div>
+        
+        <div class="tab-content" id="details">
+          <table class="info-table">
+            <tr>
+              <td><strong>SKU</strong></td>
+              <td id="detailSku">--</td>
+            </tr>
+            <tr>
+              <td><strong>Categoría</strong></td>
+              <td id="detailCategory">--</td>
+            </tr>
+            <tr>
+              <td><strong>Colección</strong></td>
+              <td>Primavera-Verano 2025</td>
+            </tr>
+            <tr>
+              <td><strong>Tela</strong></td>
+              <td id="detailFabric">--</td>
+            </tr>
+            <tr>
+              <td><strong>Talles disponibles</strong></td>
+              <td id="detailSizes">--</td>
+            </tr>
+          </table>
+        </div>
+        
+        <div class="tab-content" id="care">
+          <ul class="care-list">
+            <li>🧼 Lavar a mano o máquina en ciclo delicado</li>
+            <li>🌡️ Agua fría o tibia (máximo 30°C)</li>
+            <li>🚫 No usar lavandina</li>
+            <li>👕 Secar a la sombra</li>
+            <li>🔥 Planchar a temperatura baja</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Trust badges -->
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <span class="trust-badge__icon">🚚</span>
+          <span>Envío a todo el país</span>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-badge__icon">🔄</span>
+          <span>Cambios sin costo</span>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-badge__icon">💳</span>
+          <span>Hasta 3 cuotas</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Related Products -->
+  <section class="section related-products">
+    <div class="container">
+      <h2 class="section__title">También te puede gustar</h2>
+      <div class="products__grid" id="relatedProducts">
+        <!-- Related products will be loaded dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__col footer__col-main">
+        <h4>ALMARA+</h4>
+        <p>Talles reales para curvas auténticas. Moda plus size diseñada con amor.</p>
+      </div>
+      <div class="footer__col">
+        <h5>Navegación</h5>
+        <a href="shop.html">Tienda</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
+      <div class="footer__col">
+        <h5>Ayuda</h5>
+        <a href="talles.html">Guía de talles</a>
+        <a href="contacto.html">Envíos</a>
+        <a href="contacto.html">Cambios</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <span>© 2025 Almara+ — Todos los derechos reservados</span>
+        <span>Diseño con 💛 para mujeres reales</span>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5491112345678" class="whatsapp-float" target="_blank">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    // ============================================
+    // PRODUCT DATABASE (simplified for this page)
+    // ============================================
+    const productsDB = {
+      "0401LU": {
+        sku: "0401LU",
+        name: "Blusa Cruzada Lurex",
+        category: "BLUSAS",
+        fabric: "Lurex Premium",
+        sizes: ["8", "10", "12", "14"],
+        wholesalePrice: 23000,
+        retailPrice: 26000,
+        colors: ["Azul Francia", "Fucsia", "Rojo", "Negro", "Plateado", "Verde Esmeralda", "Dorado"],
+        colorCodes: {
+          "Azul Francia": "#0055a4",
+          "Fucsia": "#ff1493",
+          "Rojo": "#c41e3a",
+          "Negro": "#1a1a1a",
+          "Plateado": "#c0c0c0",
+          "Verde Esmeralda": "#50c9b5",
+          "Dorado": "#d4af37"
+        },
+        folder: "0401LU-Blusa Cruzada Lurex",
+        images: ["DSC_0198.jpg", "DSC_0199.jpg", "DSC_0201.jpg", "DSC_0202.jpg", "DSC_0203.jpg", "DSC_0204.jpg", "DSC_0205.jpg", "DSC_0206.jpg", "DSC_0207.jpg", "DSC_0208.jpg", "DSC_0209.jpg", "DSC_0224.jpg", "DSC_0225.jpg", "DSC_0226.jpg", "DSC_0227.jpg", "DSC_0228.jpg"],
+        description: "Blusa de diseño cruzado en tela Lurex Premium. Elegancia sofisticada con brillo sutil.",
+        features: ["Diseño cruzado favorecedor", "Tela con brillo sutil", "Ideal para ocasiones especiales", "Moldería plus size real"]
+      },
+      "3109CA": {
+        sku: "3109CA",
+        name: "Vestido Cey",
+        category: "VESTIDOS",
+        fabric: "Cey Airflow",
+        sizes: ["8", "10", "12", "14"],
+        wholesalePrice: 17000,
+        retailPrice: 20000,
+        colors: ["Negro", "Bordo", "Azul"],
+        colorCodes: { "Negro": "#1a1a1a", "Bordo": "#722f37", "Azul": "#2c5282" },
+        folder: "3109CA-Vestido Cey",
+        images: ["DSC_0988.jpg", "DSC_0989.jpg", "DSC_0990.jpg", "DSC_0991.jpg", "DSC_0992.jpg", "DSC_0993.jpg", "DSC_6459.jpg", "DSC_6476.jpg", "DSC_6477.jpg", "DSC_6478.jpg", "DSC_6479.jpg", "19.jpg"],
+        description: "Vestido confeccionado en tela Cey Airflow. Fresco, liviano y con caída perfecta.",
+        features: ["Tela que respira", "Caída suelta y fresca", "Ideal para verano", "Moldería ampliada"]
+      },
+      "3125CY": {
+        sku: "3125CY",
+        name: "Vestido Cey Scarlett",
+        category: "VESTIDOS",
+        fabric: "Cey Premium",
+        sizes: ["12", "14", "16"],
+        wholesalePrice: 17000,
+        retailPrice: 20000,
+        colors: ["Negro", "Rojo", "Verde Esmeralda"],
+        colorCodes: { "Negro": "#1a1a1a", "Rojo": "#c41e3a", "Verde Esmeralda": "#046307" },
+        folder: "3125CY-Vestido Cey Scarlett",
+        images: ["26.jpg", "IMG_1936.jpg", "IMG_2004.jpg", "IMG_2030.jpg", "IMG_2056.jpg", "IMG_2082.jpg", "IMG_2088.jpg", "IMG_2108.jpg", "IMG_2114.jpg", "IMG_2134.jpg", "IMG_2140.jpg", "IMG_2166.jpg"],
+        description: "El Vestido Cey Scarlett combina elegancia y pasión. Perfecto para destacar.",
+        features: ["Diseño elegante", "Escote favorecedor", "Tela premium", "Ocasiones especiales"]
+      },
+      "0200MD": {
+        sku: "0200MD",
+        name: "Babucha Modal",
+        category: "BABUCHAS",
+        fabric: "Modal con Lycra",
+        sizes: ["8", "10", "12", "14", "16"],
+        wholesalePrice: 8500,
+        retailPrice: 9500,
+        colors: ["Negro", "Gris Noche", "Verde Musgo", "Gris", "Uva"],
+        colorCodes: { "Negro": "#1a1a1a", "Gris Noche": "#2f2f2f", "Verde Musgo": "#4a5d23", "Gris": "#808080", "Uva": "#722f37" },
+        folder: "0200MD-Babucha Modal",
+        images: ["DSC_0033.jpg", "DSC_0034.jpg", "DSC_0035.jpg", "DSC_0036.jpg", "DSC_0037.jpg", "DSC_0038.jpg", "DSC_0039.jpg", "DSC_0040.jpg", "DSC_0041.jpg", "DSC_0042.jpg", "DSC_0043.jpg", "DSC_0044.jpg"],
+        description: "Babucha en Modal con Lycra. Comodidad absoluta para tu día a día.",
+        features: ["Súper cómoda", "Tela suave al tacto", "Cintura elástica", "Ideal para uso diario"]
+      },
+      "2900MD": {
+        sku: "2900MD",
+        name: "Short Modal",
+        category: "SHORTS",
+        fabric: "Modal Premium",
+        sizes: ["6", "8", "10", "12", "14", "16"],
+        wholesalePrice: 8000,
+        retailPrice: 11000,
+        colors: ["Negro", "Blanco", "Rosa", "Celeste", "Gris", "Uva"],
+        colorCodes: { "Negro": "#1a1a1a", "Blanco": "#ffffff", "Rosa": "#f8b4c4", "Celeste": "#87ceeb", "Gris": "#808080", "Uva": "#722f37" },
+        folder: "2900MD-Short Modal",
+        images: ["DSC_0062.jpg", "DSC_0063.jpg", "DSC_0064.jpg", "DSC_0067.jpg", "DSC_0068.jpg", "DSC_0069.jpg", "DSC_0760.jpg", "DSC_0761.jpg", "DSC_0762.jpg", "DSC_0763.jpg", "DSC_0764.jpg"],
+        description: "Short en Modal Premium. Frescura y comodidad para el verano.",
+        features: ["Tela fresca", "Cintura elástica", "Corte cómodo", "Ideal para verano"]
+      },
+      "1901LU": {
+        sku: "1901LU",
+        name: "Palazzo Lurex",
+        category: "PALAZZOS",
+        fabric: "Lurex con Lycra",
+        sizes: ["8", "10", "12", "14", "16"],
+        wholesalePrice: 24000,
+        retailPrice: 26000,
+        colors: ["Negro"],
+        colorCodes: { "Negro": "#1a1a1a" },
+        folder: "1901LU-Palazzo Lurex",
+        images: ["DSC_0029.jpg", "DSC_0030.jpg", "DSC_0031.jpg", "DSC_0032.jpg", "DSC_0035.jpg", "DSC_0036.jpg", "DSC_0037.jpg"],
+        description: "Palazzo en Lurex con brillo elegante. Perfecto para noches especiales.",
+        features: ["Brillo sofisticado", "Tela con caída", "Cintura alta", "Look glamoroso"]
+      },
+      "0302BE": {
+        sku: "0302BE",
+        name: "Blazer Golden",
+        category: "BLAZERS",
+        fabric: "Bengalina Premium",
+        sizes: ["6", "8"],
+        wholesalePrice: 13500,
+        retailPrice: 14500,  // Según BD: iguales $13,500 → +$1,000 minorista
+        colors: ["Negro", "Verde Militar", "Verde Esmeralda"],
+        colorCodes: { "Negro": "#1a1a1a", "Verde Militar": "#4a5d23", "Verde Esmeralda": "#50c9b5" },
+        folder: "0302BE-Blazer Golden",
+        images: ["blazergolden.jpg", "blazergolde2.jpg", "blazergolden3.jpg", "DSC_0250.jpg", "DSC_0251.jpg", "DSC_0252.jpg", "DSC_0253.jpg", "DSC_0254.jpg"],
+        description: "Blazer estructurado en Bengalina Premium. Elegancia que impone presencia.",
+        features: ["Corte estructurado", "Tela premium", "Ideal para oficina", "Versatilidad total"]
+      },
+      "1923CA": {
+        sku: "1923CA",
+        name: "Palazzo Cey",
+        category: "PALAZZOS",
+        fabric: "Cey Airflow",
+        sizes: ["8", "10", "12", "14", "16"],
+        wholesalePrice: 14000,
+        retailPrice: 17000,
+        colors: ["Negro", "Blanco", "Azul", "Verde", "Rosa"],
+        colorCodes: { "Negro": "#1a1a1a", "Blanco": "#ffffff", "Azul": "#2c5282", "Verde": "#2f855a", "Rosa": "#f8b4c4" },
+        folder: "1923CA-Palazzo Cey",
+        images: ["IMG_2024.jpg", "12.jpg", "IMG_2050.jpg", "IMG_2061.jpg", "IMG_2076.jpg", "IMG_2087.jpg", "IMG_2102.jpg", "IMG_2113.jpg", "0aed4d66-dd06-48d9-b7f0-cd7c0ddfa7dc.jpg"],
+        description: "Palazzo en tela Cey Airflow. Frescura y elegancia en cada paso.",
+        features: ["Tela fresca", "Pierna ancha", "Cintura elástica", "Caída perfecta"]
+      },
+      "1601LS": {
+        sku: "1601LS",
+        name: "Mono Lino",
+        category: "MONOS",
+        fabric: "Lino Premium",
+        sizes: ["12", "14"],
+        wholesalePrice: 20000,
+        retailPrice: 21000,
+        colors: ["Natural", "Negro"],
+        colorCodes: { "Natural": "#f5f0e6", "Negro": "#1a1a1a" },
+        folder: "1601LS-Mono Lino",
+        images: ["DSC_0352.jpg", "DSC_0353.jpg", "DSC_0354.jpg", "DSC_0355.jpg", "DSC_0356.jpg", "DSC_0357.jpg", "DSC_0358.jpg", "DSC_0711.jpg", "DSC_0712.jpg", "DSC_0713.jpg", "DSC_0714.jpg", "DSC_0716.jpg"],
+        description: "Mono en Lino Premium. Un solo paso y lista para brillar.",
+        features: ["Tela natural", "Diseño práctico", "Look completo", "Ideal para verano"]
+      },
+      // ========== BLUSAS ==========
+      "0402LU": {
+        sku: "0402LU", name: "Blusa Peplum", category: "BLUSAS", fabric: "Lino",
+        sizes: ["8","10","12","14"], wholesalePrice: 12000, retailPrice: 14000,
+        colors: ["Negro","Azul Marino","Beige","Camel"],
+        colorCodes: { "Negro": "#1a1a1a", "Azul Marino": "#1e3a5f", "Beige": "#f5f0e6", "Camel": "#c19a6b" },
+        folder: "0402LU-Blusa Peplum", images: ["1.jpg", "blusapeplum.png", "1d583804-59b4-44f8-8e96-9982f190c2bd.jpg", "71c93be0-5da4-4973-b77c-89f343007034.jpg", "73a73d3a-ae79-465c-9184-ed22a8fff277.jpg", "942c70a2-61ae-472b-95fe-79387d770e04.jpg", "998bfa2b-e6fd-401a-b06e-f7d79e77e792.jpg", "b819035e-cbac-4057-9936-fb65df0041e4.jpg", "bac907d7-c54e-4669-8cf3-383a18c1a6db.jpg", "c2026bb6-b2e0-41dd-9fbd-6aabf29f6b27.jpg"],
+        description: "El peplum que disimula y favorece.", features: ["Diseño favorecedor", "Tela premium", "Oculta pancita", "Elegante"]
+      },
+      "0403PM": {
+        sku: "0403PM", name: "Blusa Plumetí", category: "BLUSAS", fabric: "Plumetí",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 8000, retailPrice: 10000,
+        colors: ["Negro","Rosa bebé","Rosa viejo","Beige"],
+        colorCodes: { "Negro": "#1a1a1a", "Rosa bebé": "#f8b4c4", "Rosa viejo": "#d4a5a5", "Beige": "#f5f0e6" },
+        folder: "0403PM-Blusa Plumetí", images: ["2.jpg", "20a9f801-7346-4197-83ee-8e9119f96f88.jpg", "2e6db554-521e-453d-ad9e-ec3495e86567.jpg", "31127547-780c-4c2c-8144-d7933cf58a05.jpg", "61f9ebec-9430-4d56-8b1e-2fad5bbc933c.jpg", "951a81e0-0838-4b62-8db4-6db48330989a.jpg", "a2b35f8e-d6ca-4414-bc0d-e89e0600aa54.jpg", "a66cbd55-0b30-49be-95c9-9fda32b65380.jpg", "aaf96408-1dc4-4e6d-8f1d-c35a66660458.jpg"],
+        description: "Textura delicada y romántica.", features: ["Textura delicada", "Romántica", "Ideal para eventos", "Tela premium"]
+      },
+      // ========== CAMISAS ==========
+      "0801FP": {
+        sku: "0801FP", name: "Camisa Lazo Fibrana", category: "CAMISAS", fabric: "Fibrana Poplin",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 15000, retailPrice: 17000,
+        colors: ["Estampados"],
+        colorCodes: { "Estampados": "linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1)" },
+        folder: "0801FP-Camisa Lazo Fibrana", images: ["DSC_0099.jpg", "DSC_0100.jpg", "DSC_0101.jpg", "DSC_0102.jpg", "DSC_0103.jpg", "DSC_0104.jpg", "DSC_0105.jpg", "DSC_0106.jpg", "DSC_0107.jpg", "19051cc7-4331-4e51-beb9-a1c9e5b4fd16.jpg"],
+        description: "El lazo que añade sofisticación.", features: ["Lazo elegante", "Tela fresca", "Estampados únicos", "Versátil"]
+      },
+      "0802LY": {
+        sku: "0802LY", name: "Camisa Lino Cey", category: "CAMISAS", fabric: "Lino Cey",
+        sizes: ["6","8","10","12","14"], wholesalePrice: 14000, retailPrice: 16000,
+        colors: ["Negro","Natural","Beige","Aero"],
+        colorCodes: { "Negro": "#1a1a1a", "Natural": "#f5f0e6", "Beige": "#d4c4b0", "Aero": "#7cb9e8" },
+        folder: "0802LY-Camisa Lino Sey", images: ["DSC_0224-2.jpg", "DSC_0225-2.jpg", "DSC_0226-2.jpg", "DSC_0227-2.jpg", "DSC_0228-2.jpg", "DSC_0229-2.jpg", "DSC_0230-2.jpg", "56d09161-d2e5-4773-8a9d-98b88af61caa.jpg", "a3bc9dec-bc8f-43a5-a1b9-7cdabf952f2d.jpg"],
+        description: "Lino premium que respira frescura.", features: ["Tela natural", "Fresca", "Elegante", "Versátil"]
+      },
+      "0803LI": {
+        sku: "0803LI", name: "Camisa Andrea", category: "CAMISAS", fabric: "Lino Spandex",
+        sizes: ["6","8","10","12","14"], wholesalePrice: 13000, retailPrice: 15000,
+        colors: ["Camel","Coral","Fucsia"],
+        colorCodes: { "Camel": "#c19a6b", "Coral": "#ff7f50", "Fucsia": "#ff1493" },
+        folder: "0803LI-Camisa Andrea", images: ["DSC_0997.jpg", "DSC_0998.jpg", "DSC_0999.jpg", "DSC_1000.jpg", "DSC_1001.jpg", "DSC_1002.jpg", "DSC_1003.jpg", "DSC_1004.jpg", "DSC_1005.jpg", "DSC_1006.jpg", "DSC_1007.jpg", "DSC_1008.jpg"],
+        description: "Versatilidad con estilo.", features: ["Colores vibrantes", "Tela con stretch", "Cómoda", "Moderna"]
+      },
+      "0804LI": {
+        sku: "0804LI", name: "Camisa Aflora", category: "CAMISAS", fabric: "Lino Spandex",
+        sizes: ["6","8","10","12","14"], wholesalePrice: 17000, retailPrice: 19000,
+        colors: ["Negro","Blanco","Azul Marino","Rojo","Camel","Verde"],
+        colorCodes: { "Negro": "#1a1a1a", "Blanco": "#ffffff", "Azul Marino": "#1e3a5f", "Rojo": "#c41e3a", "Camel": "#c19a6b", "Verde": "#2f855a" },
+        folder: "0804LI-Camisa Aflora", images: ["DSC_6616.jpg", "DSC_6617.jpg", "6.jpg", "camisaaflora.jpg", "1e5797d4-18e0-423b-addb-e1fb86916b86.jpg", "22c9360e-331a-4ecc-8925-e631bfb0bb81.jpg", "5c7b1044-72eb-4686-9595-c7e5487bef1e.jpg", "5fabd3d5-4066-43f1-a351-41f7ffe433f6.jpg", "849bc287-f7ac-465c-a2b0-2f2dd86caa5c.jpg"],
+        description: "Diseño que florece en cada ocasión.", features: ["Amplia gama de colores", "Diseño elegante", "Tela premium", "Versátil"]
+      },
+      // ========== CAMISOLAS ==========
+      "0902FI": {
+        sku: "0902FI", name: "Camisola Fibrana Lisa", category: "CAMISOLAS", fabric: "Fibrana Poplin",
+        sizes: ["6","8","12","14"], wholesalePrice: 5000, retailPrice: 7000,
+        colors: ["Negro","Beige"],
+        colorCodes: { "Negro": "#1a1a1a", "Beige": "#f5f0e6" },
+        folder: "0902FI-Camisola Fibrana Lisa", images: ["DSC_0235-2.jpg", "DSC_0236-2.jpg", "DSC_0237-2.jpg", "DSC_0238-2.jpg", "DSC_0239-2.jpg", "5352488f-0fbb-43bb-b4ae-3bc41eabec25.jpg"],
+        description: "Simplicidad sofisticada.", features: ["Básica elegante", "Tela fresca", "Combinable", "Cómoda"]
+      },
+      "0902FS": {
+        sku: "0902FS", name: "Camisola Selva", category: "CAMISOLAS", fabric: "Fibrana Poplin",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 11000, retailPrice: 13000,
+        colors: ["Negro","Beige","Verde Oliva"],
+        colorCodes: { "Negro": "#1a1a1a", "Beige": "#f5f0e6", "Verde Oliva": "#556b2f" },
+        folder: "0902FS-Camisola Selva", images: ["DSC_0994.jpg", "DSC_0995.jpg", "DSC_0996.jpg", "DSC_0997.jpg", "DSC_0998.jpg", "DSC_0999.jpg", "DSC_1000.jpg", "DSC_1001.jpg", "DSC_1002.jpg", "DSC_1003.jpg", "9.jpg"],
+        description: "Estampado tropical que enamora.", features: ["Estampado único", "Tela fresca", "Ideal para verano", "Moderna"]
+      },
+      "0902FC": {
+        sku: "0902FC", name: "Camisola Cebra", category: "CAMISOLAS", fabric: "Fibrana Poplin",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 11000, retailPrice: 13000,
+        colors: ["Negro","Blanco","Beige"],
+        colorCodes: { "Negro": "#1a1a1a", "Blanco": "#ffffff", "Beige": "#f5f0e6" },
+        folder: "0902FC-Camisola Cebra", images: ["DSC_6586.jpg", "DSC_6587.jpg", "DSC_6588.jpg", "DSC_6590.jpg", "DSC_6591.jpg", "7.jpg", "141cd094-39ff-4f23-90fb-0ddbbb44e8a7.jpg", "2e97a61b-7078-4e37-9006-6c03354d4646.jpg", "489d15d4-f964-4df3-9141-83511e5c3a22.jpg"],
+        description: "Animal print que marca tendencia.", features: ["Animal print", "A la moda", "Versátil", "Elegante"]
+      },
+      "0907LY": {
+        sku: "0907LY", name: "Camisola Cey", category: "CAMISOLAS", fabric: "Lino Cey",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 8000, retailPrice: 10000,
+        colors: ["Negro","Verde Oliva","Beige","Camel"],
+        colorCodes: { "Negro": "#1a1a1a", "Verde Oliva": "#556b2f", "Beige": "#f5f0e6", "Camel": "#c19a6b" },
+        folder: "0907LY-Camisola Cey", images: ["2e36678b-8b6b-4c39-be91-6ee8ef6f0c15.jpg", "3e900f5c-2de1-4a08-b4f2-381d651dcf43.jpg", "3fe99f59-0d84-46ac-b497-20fe41e45253.jpg", "61bda75b-c573-495c-a63c-98a364751ccc.jpg", "966786b3-77f5-4df7-9da3-0a9802456674.jpg", "9d121705-85d1-40de-89c7-72f47066ee0c.jpg", "a6c3f8a1-c3ef-445b-9c47-5863c797fb77.jpg", "b4990311-22d0-4057-818a-db3b525c8ffc.jpg", "e0a6b2c6-1869-4df8-a4ce-cb4e96d3aa52.jpg"],
+        description: "Liviandad que acaricia tu piel.", features: ["Tela liviana", "Fresca", "Cómoda", "Elegante"]
+      },
+      "0908LY": {
+        sku: "0908LY", name: "Camisola Cey Lazo", category: "CAMISOLAS", fabric: "Lino Cey",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 8000, retailPrice: 10000,
+        colors: ["Negro","Crudo","Rojo","Azul","Verde Oliva"],
+        colorCodes: { "Negro": "#1a1a1a", "Crudo": "#f5f0e6", "Rojo": "#c41e3a", "Azul": "#2c5282", "Verde Oliva": "#556b2f" },
+        folder: "0908LY-Camisola Cey Lazo Nudo", images: ["DSC_0222.jpg", "DSC_0223.jpg", "DSC_0224.jpg", "DSC_0225.jpg", "DSC_0226.jpg", "DSC_0227.jpg", "DSC_0228.jpg", "DSC_0229.jpg", "9.jpg", "colores.jpg"],
+        description: "Detalle de lazo que conquista miradas.", features: ["Lazo decorativo", "Tela premium", "Romántica", "Versátil"]
+      },
+      // ========== CAMPERAS ==========
+      "1000MD": {
+        sku: "1000MD", name: "Campera Modal", category: "CAMPERAS", fabric: "Modal con Lycra",
+        sizes: ["8","10","12","14"], wholesalePrice: 13000, retailPrice: 15000,
+        colors: ["Negro","Bordo","Verde Militar","Gris Topo"],
+        colorCodes: { "Negro": "#1a1a1a", "Bordo": "#722f37", "Verde Militar": "#4a5d23", "Gris Topo": "#6b6b6b" },
+        folder: "1000MD-Campera Modal", images: ["10.jpg", "20200122_185937.jpg", "20200122_185942.jpg", "20200122_185948.jpg", "20200122_190003.jpg", "20200122_190010.jpg", "20200122_190015.jpg", "a5dcb9b8-ef0a-4cd0-ae6a-7d7f9dd636db.jpg", "b89a5717-4eb6-4051-b363-8829ea395a92.jpg"],
+        description: "Abrigo liviano y súper suave.", features: ["Súper suave", "Liviana", "Cómoda", "Ideal para entretiempo"]
+      },
+      "1005BE": {
+        sku: "1005BE", name: "Campera Bengalina", category: "CAMPERAS", fabric: "Bengalina Elastizada",
+        sizes: ["10","12","14"], wholesalePrice: 18000, retailPrice: 20000,
+        colors: ["Negro","Gris Topo","Azul Cielo","Mostaza","Chocolate"],
+        colorCodes: { "Negro": "#1a1a1a", "Gris Topo": "#6b6b6b", "Azul Cielo": "#87ceeb", "Mostaza": "#ffdb58", "Chocolate": "#7b3f00" },
+        folder: "1005BE-Campera Bengalina", images: ["DSC_0083.jpg", "DSC_0084.jpg", "DSC_0085.jpg", "DSC_0086.jpg", "DSC_0087.jpg", "DSC_0088.jpg", "DSC_0089.jpg", "11.jpg", "46167cd1-17a3-4990-acc3-3860652e3b70.jpg", "96439b63-5343-40b6-9d0e-574f68d16c1b.jpg"],
+        description: "Estructura y confort en una prenda.", features: ["Tela estructurada", "Elegante", "Versátil", "Abrigada"]
+      },
+      // ========== CAPRIS ==========
+      "1100MD": {
+        sku: "1100MD", name: "Capri Modal", category: "CAPRIS", fabric: "Modal con Lycra",
+        sizes: ["6","8","10","12","14","16"], wholesalePrice: 8000, retailPrice: 10000,
+        colors: ["Negro","Camel","Azul Francia"],
+        colorCodes: { "Negro": "#1a1a1a", "Camel": "#c19a6b", "Azul Francia": "#0055a4" },
+        folder: "1100MD-Capri Modal", images: ["12.jpg", "20191120_210221.jpg", "20191120_210228.jpg", "20191120_210237.jpg", "20191120_210244.jpg", "20191120_210304.jpg", "20191120_210320.jpg", "4286c6ca-d46c-4453-9994-36ee62140a6f.jpg", "42dcd017-2461-4e94-8832-3472255f1e76.jpg"],
+        description: "Comodidad que no negocia con el estilo.", features: ["Súper cómoda", "Tela suave", "Versátil", "Ideal para diario"]
+      },
+      "1102MQ": {
+        sku: "1102MQ", name: "Capri Morley Viscosa", category: "CAPRIS", fabric: "Morley Viscosa",
+        sizes: ["8"], wholesalePrice: 7000, retailPrice: 9000,
+        colors: ["Camel","Azul Francia"],
+        colorCodes: { "Camel": "#c19a6b", "Azul Francia": "#0055a4" },
+        folder: "1102MQ-Capri Morley Viscosa", images: ["DSC_0273-2.jpg", "DSC_0274.jpg", "DSC_0275.jpg", "DSC_0276.jpg", "DSC_0277.jpg", "DSC_0278.jpg", "DSC_0279.jpg", "DSC_0280.jpg", "122eb2c7-31a8-4b68-a7a6-0aa36f299d58.jpg", "9615f4b9-ba1a-4b20-8935-ff5d706fa023.jpg"],
+        description: "Textura morley que abraza tus curvas.", features: ["Textura única", "Cómoda", "Elegante", "Tela premium"]
+      },
+      "1105LI": {
+        sku: "1105LI", name: "Capri Lino Tribotón", category: "CAPRIS", fabric: "Lino Spandex",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 14000, retailPrice: 16000,
+        colors: ["Negro","Camel","Rojo","Azul Marino"],
+        colorCodes: { "Negro": "#1a1a1a", "Camel": "#c19a6b", "Rojo": "#c41e3a", "Azul Marino": "#1e3a5f" },
+        folder: "1105LI-Capri Lino Tribotón",
+        images: ["DSC_0048.jpg","DSC_0049.jpg","DSC_0050.jpg","DSC_0051.jpg","DSC_0052.jpg","DSC_0053.jpg","DSC_0054.jpg","DSC_0055.jpg"],
+        description: "Detalle de botones que enamora.", features: ["Detalle de botones", "Tela natural", "Elegante", "Versátil"]
+      },
+      // ========== CHALECOS ==========
+      "1202CT": {
+        sku: "1202CT", name: "Chaleco Crochet", category: "CHALECOS", fabric: "Crochet",
+        sizes: ["12","14","16"], wholesalePrice: 8000, retailPrice: 10000,
+        colors: ["Negro","Camel"],
+        colorCodes: { "Negro": "#1a1a1a", "Camel": "#c19a6b" },
+        folder: "1202CT-Chaleco Crochet", images: ["DSC_0064.jpg", "DSC_0065.jpg", "DSC_0066.jpg", "DSC_0068.jpg", "DSC_0069.jpg", "IMG_1951.jpg", "IMG_2019.jpg", "IMG_2128.jpg", "IMG_2154.jpg"],
+        description: "Artesanía que viste tu alma.", features: ["Tejido artesanal", "Bohemio", "Único", "Versátil"]
+      },
+      "1203HW": {
+        sku: "1203HW", name: "Chaleco Hawai", category: "CHALECOS", fabric: "Hawai",
+        sizes: ["8","10","12","14"], wholesalePrice: 8000, retailPrice: 10000,
+        colors: ["Negro","Chocolate","Rosa","Crudo"],
+        colorCodes: { "Negro": "#1a1a1a", "Chocolate": "#7b3f00", "Rosa": "#f8b4c4", "Crudo": "#f5f0e6" },
+        folder: "1203HW-Chaleco Hawai", images: ["14.jpg", "22d38641-3f5e-4a3b-9931-ba6f9003f63b.jpg", "484b0917-d4fe-43f1-b646-add477d305ee.jpg", "4ba8ef7e-649b-49c1-a283-e9fc281c5120.jpg", "7759c18f-8179-429e-8a1e-dfb12e2e4b84.jpg", "876bbec1-5343-4f0d-b154-c8b32e7c79df.jpg", "9f4bc156-51e0-47a3-8b7c-b38b37db26e9.jpg", "b9a8f308-79a9-49f8-9f05-b9af77283e19.jpg", "ee1cb901-10d7-4fbc-9813-833b230b2e5b.jpg"],
+        description: "Versatilidad tropical para superponer.", features: ["Liviano", "Ideal para capas", "Fresco", "Moderno"]
+      },
+      // ========== KIMONOS ==========
+      "1500FI": {
+        sku: "1500FI", name: "Kimono Fibrana", category: "KIMONOS", fabric: "Fibrana Poplin",
+        sizes: ["8","10","12"], wholesalePrice: 4000, retailPrice: 6000,
+        colors: ["Estampados"],
+        colorCodes: { "Estampados": "linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1)" },
+        folder: "1500FI-Kimono Fibrana", images: ["DSC_0168.jpg", "DSC_0169.jpg", "09bf0b82-f0fb-46ef-9ed8-7d7ec836e7c2.jpg", "1c014e8e-43bb-4d22-9905-7463aee365ca.jpg", "27d6b869-30c8-4ca4-bdc8-624c3ad5c849.jpg", "3a31485c-fb00-4b91-94a5-961488773c31.jpg", "477c71bc-937e-4af9-87c0-2aea1c94aab0.jpg", "727f35a5-aa15-4add-87da-927409354bfb.jpg", "7ddfe7be-60b8-4ddd-82fd-57a0abaf802e.jpg"],
+        description: "El toque bohemio que completa tu outfit.", features: ["Bohemio", "Versátil", "Estampados únicos", "Ligero"]
+      },
+      // ========== MUSCULOSAS ==========
+      "1700FI": {
+        sku: "1700FI", name: "Musculosa Fibrana", category: "MUSCULOSAS", fabric: "Fibrana Poplin",
+        sizes: ["8","12"], wholesalePrice: 6000, retailPrice: 8000,
+        colors: ["Negro","Rojo","Natural","Camel","Estampados"],
+        colorCodes: { "Negro": "#1a1a1a", "Rojo": "#c41e3a", "Natural": "#f5f0e6", "Camel": "#c19a6b", "Estampados": "linear-gradient(45deg, #ff6b6b, #4ecdc4)" },
+        folder: "1700FI-Musculosa Fibrana", images: ["DSC_0167.jpg", "DSC_0168.jpg", "DSC_0169.jpg", "DSC_0170.jpg", "DSC_0171.jpg", "DSC_0206.jpg", "DSC_0207.jpg", "DSC_0208.jpg", "DSC_0209.jpg", "DSC_0210.jpg"],
+        description: "Básico esencial reinventado.", features: ["Básica versátil", "Tela fresca", "Combinable", "Cómoda"]
+      },
+      "1702MM": {
+        sku: "1702MM", name: "Musculosa Bretel Rip", category: "MUSCULOSAS", fabric: "Morley Rip",
+        sizes: ["8","10","12","14"], wholesalePrice: 6000, retailPrice: 8000,
+        colors: ["Negro","Gris","Blanco"],
+        colorCodes: { "Negro": "#1a1a1a", "Gris": "#808080", "Blanco": "#ffffff" },
+        folder: "1702MM-Musculosa Bretel Rip", images: ["DSC_0217.jpg", "DSC_0218.jpg", "DSC_0219.jpg", "DSC_0220.jpg", "DSC_0221.jpg", "74fac043-c940-4cf1-adf4-a009258b5b9b.jpg", "7c8eb800-712f-4320-8042-dadb9c41e27a.jpg"],
+        description: "Breteles que estilizan.", features: ["Breteles finos", "Tela con textura", "Elegante", "Versátil"]
+      },
+      "1704MM": {
+        sku: "1704MM", name: "Musculosa Rip", category: "MUSCULOSAS", fabric: "Morley Rip",
+        sizes: ["8","10","12","14"], wholesalePrice: 7000, retailPrice: 9000,
+        colors: ["Negro","Gris Topo","Blanco"],
+        colorCodes: { "Negro": "#1a1a1a", "Gris Topo": "#6b6b6b", "Blanco": "#ffffff" },
+        folder: "1704MM-Musculosa Rip", images: ["DSC_0056.jpg", "DSC_0057.jpg", "DSC_0058.jpg", "DSC_0059.jpg", "DSC_0060.jpg", "DSC_0061.jpg", "b1e3caa0-7b2f-4aa3-9329-97e3b0594321.jpg"],
+        description: "El básico premium que no puede faltar.", features: ["Básica premium", "Textura única", "Cómoda", "Versátil"]
+      },
+      "1705SX": {
+        sku: "1705SX", name: "Musculosa Buche", category: "MUSCULOSAS", fabric: "Lurex",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 15000, retailPrice: 17000,
+        colors: ["Negro","Beige","Plateado","Rojo","Verde","Fucsia"],
+        colorCodes: { "Negro": "#1a1a1a", "Beige": "#f5f0e6", "Plateado": "#c0c0c0", "Rojo": "#c41e3a", "Verde": "#2f855a", "Fucsia": "#ff1493" },
+        folder: "1705SX-Musculosa Buche", images: ["DSC_0232-2.jpg", "DSC_0233-2.jpg", "DSC_0234-2.jpg", "DSC_0235-2.jpg", "DSC_0236-2.jpg", "DSC_0237-2.jpg", "DSC_0238-2.jpg", "DSC_0239-2.jpg", "DSC_0240-2.jpg", "37d27431-862b-4502-8043-5ed0fb77c354.jpg"],
+        description: "Brillo para las noches especiales.", features: ["Brillo elegante", "Tela premium", "Ideal para fiestas", "Glamorosa"]
+      },
+      // ========== PANTALONES ==========
+      "1900MD": {
+        sku: "1900MD", name: "Pantalón Modal", category: "PANTALONES", fabric: "Modal con Lycra",
+        sizes: ["10","12"], wholesalePrice: 7500, retailPrice: 9500,
+        colors: ["Verde Militar","Bordo"],
+        colorCodes: { "Verde Militar": "#4a5d23", "Bordo": "#722f37" },
+        folder: "1900MD-Pantalón Modal",
+        images: ["DSC_0026.jpg","DSC_0027.jpg","DSC_0028.jpg","DSC_0029.jpg","DSC_0030.jpg","DSC_0031.jpg","DSC_0032.jpg","DSC_0170.jpg","DSC_0171.jpg","DSC_0172.jpg","DSC_0173.jpg","DSC_0174.jpg","DSC_0175.jpg","DSC_0176.jpg"],
+        description: "Suavidad extrema en cada movimiento.", features: ["Súper suave", "Cómodo", "Tela premium", "Versátil"]
+      },
+      "1901SF": {
+        sku: "1901SF", name: "Palazzo Seda Fría", category: "PANTALONES", fabric: "Seda Fría",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 20000, retailPrice: 22000,
+        colors: ["Negro"],
+        colorCodes: { "Negro": "#1a1a1a" },
+        folder: "1901SF-Palazzo Seda Fría",
+        images: ["DSC_0584.jpg","DSC_0662.jpg","DSC_0663.jpg","DSC_0664.jpg","DSC_0665.jpg"],
+        description: "Fluidez de seda que acaricia.", features: ["Tela fluida", "Elegante", "Caída perfecta", "Lujosa"]
+      },
+      "1901SB": {
+        sku: "1901SB", name: "Palazzo Boreal", category: "PANTALONES", fabric: "Seda Fría Haytiway",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 21000, retailPrice: 23000,
+        colors: ["Estampados"],
+        colorCodes: { "Estampados": "linear-gradient(45deg, #1e3a5f, #4ecdc4, #45b7d1)" },
+        folder: "1901SB-Palazzo Boreal", images: ["DSC_6506.jpg", "DSC_6507.jpg", "DSC_6508.jpg", "DSC_6510.jpg", "DSC_6511.jpg", "DSC_6513.jpg", "DSC_6515.jpg", "DSC_6516.jpg", "15.jpg", "061c360a-7bf1-48c7-ae56-3ac408be02fd.jpg"],
+        description: "Estampado exclusivo que captura miradas.", features: ["Estampado único", "Tela premium", "Elegante", "Exclusivo"]
+      },
+      "1902MD": {
+        sku: "1902MD", name: "Pantalón Recto Modal", category: "PANTALONES", fabric: "Modal con Lycra",
+        sizes: ["6","8","10","12","14","16"], wholesalePrice: 10000, retailPrice: 12000,
+        colors: ["Bordo","Negro","Verde Musgo"],
+        colorCodes: { "Bordo": "#722f37", "Negro": "#1a1a1a", "Verde Musgo": "#4a5d23" },
+        folder: "1902MD-Pantalón Recto Modal",
+        images: ["DSC_0055.jpg","DSC_0056.jpg","DSC_0057.jpg","DSC_0058.jpg","DSC_0060.jpg","DSC_0061.jpg","DSC_0423.jpg","DSC_0424.jpg","DSC_0425.jpg","DSC_0426.jpg"],
+        description: "Línea recta que alarga la silueta.", features: ["Corte recto", "Estiliza", "Cómodo", "Versátil"]
+      },
+      "1904FE": {
+        sku: "1904FE", name: "Pantalón Fibrana Estampado", category: "PANTALONES", fabric: "Fibrana Poplin",
+        sizes: ["6","8","12","14","16"], wholesalePrice: 10000, retailPrice: 12000,
+        colors: ["Estampados"],
+        colorCodes: { "Estampados": "linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1)" },
+        folder: "1904FE-Pantalón Fibrana Estampado",
+        images: ["DSC_0145-2.jpg","DSC_0146-2.jpg","DSC_0147-2.jpg","DSC_0148-2.jpg","DSC_0149-2.jpg","DSC_0150-2.jpg","DSC_0151-2.jpg","DSC_0152-2.jpg","DSC_0153-2.jpg","DSC_0154-2.jpg"],
+        description: "Estampados vibrantes que alegran.", features: ["Estampados únicos", "Tela fresca", "Alegre", "Moderno"]
+      },
+      "1904FI": {
+        sku: "1904FI", name: "Pantalón Fibrana Liso", category: "PANTALONES", fabric: "Fibrana Poplin",
+        sizes: ["6","12","14","16"], wholesalePrice: 10000, retailPrice: 12000,
+        colors: ["Negro","Gris Topo"],
+        colorCodes: { "Negro": "#1a1a1a", "Gris Topo": "#6b6b6b" },
+        folder: "1904FI-Pantalón Fibrana Liso",
+        images: ["DSC_0694.jpg","DSC_0695.jpg","DSC_0696.jpg","DSC_0697.jpg","DSC_0698.jpg","DSC_0699.jpg"],
+        description: "La elegancia de lo simple.", features: ["Simple", "Elegante", "Versátil", "Cómodo"]
+      },
+      "1905LI": {
+        sku: "1905LI", name: "Pantalón Lazo Lino", category: "PANTALONES", fabric: "Lino",
+        sizes: ["6","8","10","12","14","16"], wholesalePrice: 14000, retailPrice: 16000,
+        colors: ["Negro","Beige","Azul Marino","Verde Militar","Rojo","Chocolate"],
+        colorCodes: { "Negro": "#1a1a1a", "Beige": "#f5f0e6", "Azul Marino": "#1e3a5f", "Verde Militar": "#4a5d23", "Rojo": "#c41e3a", "Chocolate": "#7b3f00" },
+        folder: "1905LI-Pantalón Lazo Lino",
+        images: ["DSC_0040.jpg","DSC_0041.jpg","DSC_0042.jpg","DSC_0043.jpg","DSC_0044.jpg","DSC_0046.jpg","DSC_0194.jpg","DSC_0195.jpg","DSC_0196.jpg"],
+        description: "El lazo que define tu cintura.", features: ["Lazo decorativo", "Tela natural", "Elegante", "Favorecedor"]
+      },
+      "1917MQ": {
+        sku: "1917MQ", name: "Pantalón Morley", category: "PANTALONES", fabric: "Morley Viscosa",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 12000, retailPrice: 14000,
+        colors: ["Camel","Azul Francia"],
+        colorCodes: { "Camel": "#c19a6b", "Azul Francia": "#0055a4" },
+        folder: "1917MQ-Pantalón Morley",
+        images: ["DSC_0259-2.jpg","DSC_0260-2.jpg","DSC_0261-2.jpg","DSC_0262-2.jpg","DSC_0263-2.jpg","DSC_0264-2.jpg","DSC_0265-2.jpg","DSC_0311.jpg","DSC_0312.jpg","DSC_0313.jpg"],
+        description: "Elasticidad y estilo combinados.", features: ["Elástico", "Cómodo", "Estiloso", "Versátil"]
+      },
+      "1921BE": {
+        sku: "1921BE", name: "Pantalón Bengalina", category: "PANTALONES", fabric: "Bengalina Elastizada",
+        sizes: ["10","12","14"], wholesalePrice: 18000, retailPrice: 20000,
+        colors: ["Negro","Camel","Marrón","Celeste","Gris Topo"],
+        colorCodes: { "Negro": "#1a1a1a", "Camel": "#c19a6b", "Marrón": "#8b4513", "Celeste": "#87ceeb", "Gris Topo": "#6b6b6b" },
+        folder: "1921BE-Pantalón Bengalina",
+        images: ["DSC_0077.jpg","DSC_0078.jpg","DSC_0079.jpg","DSC_0080.jpg","DSC_0081.jpg","DSC_0082.jpg","DSC_0090.jpg","DSC_0091.jpg","DSC_0092.jpg","DSC_0093.jpg"],
+        description: "Sastrero reinventado para curvas reales.", features: ["Corte sastrero", "Elegante", "Estructurado", "Favorecedor"]
+      },
+      "1922HW": {
+        sku: "1922HW", name: "Palazzo Hawai", category: "PANTALONES", fabric: "Hawai",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 12000, retailPrice: 14000,
+        colors: ["Negro","Rosa","Beige","Camel"],
+        colorCodes: { "Negro": "#1a1a1a", "Rosa": "#f8b4c4", "Beige": "#f5f0e6", "Camel": "#c19a6b" },
+        folder: "1922HW-Palazzo Hawai",
+        images: ["24.jpg","02b9a946-08a1-4d34-9c7b-3d80a1cf9cf6.jpg","1dbc83a2-469e-4fba-ab99-e67361dfec14.jpg","2c796c5f-6e06-4ad2-9bd3-006c9df5b15c.jpg","391b96d3-91d4-4a14-8cf9-959e56dc92fc.jpg"],
+        description: "Tela liviana con caída perfecta.", features: ["Liviano", "Caída perfecta", "Fresco", "Cómodo"]
+      },
+      "1923LI": {
+        sku: "1923LI", name: "Palazzo Lino", category: "PANTALONES", fabric: "Lino Spandex",
+        sizes: ["6","8","10","12","14","16"], wholesalePrice: 14000, retailPrice: 16000,
+        colors: ["Negro","Azul","Verde"],
+        colorCodes: { "Negro": "#1a1a1a", "Azul": "#2c5282", "Verde": "#2f855a" },
+        folder: "1923LI-Palazzo Lino",
+        images: ["DSC_6623.jpg","DSC_6624.jpg","DSC_6625.jpg","DSC_6626.jpg","DSC_6627.jpg","DSC_6628.jpg","DSC_6686.jpg","DSC_6687.jpg","DSC_6688.jpg"],
+        description: "Lino premium con elasticidad.", features: ["Tela natural", "Con stretch", "Elegante", "Fresco"]
+      },
+      "1923ST": {
+        sku: "1923ST", name: "Palazzo Stella", category: "PANTALONES", fabric: "Stella",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 9000, retailPrice: 11000,
+        colors: ["Negro","Beige","Chocolate","Bordo"],
+        colorCodes: { "Negro": "#1a1a1a", "Beige": "#f5f0e6", "Chocolate": "#7b3f00", "Bordo": "#722f37" },
+        folder: "1923ST-Palazzo Stella",
+        images: ["DSC_6606.jpg","DSC_6607.jpg","DSC_6608.jpg","DSC_6609.jpg","DSC_6610.jpg"],
+        description: "Brilla como estrella.", features: ["Brillo sutil", "Elegante", "Moderno", "Versátil"]
+      },
+      "1923HW": {
+        sku: "1923HW", name: "Palazzo Oxford Hawai", category: "PANTALONES", fabric: "Hawai",
+        sizes: ["8","10","12","14"], wholesalePrice: 12000, retailPrice: 14000,
+        colors: ["Negro","Beige","Camel"],
+        colorCodes: { "Negro": "#1a1a1a", "Beige": "#f5f0e6", "Camel": "#c19a6b" },
+        folder: "1923HW-Palazzo Oxford Hawai",
+        images: ["7c40c24a-f86a-4e88-9be2-5959dbeaded3.jpg","86dfd560-b171-4253-aa6a-9194a59c13aa.jpg","aea29f4f-5db4-4b21-91fd-b2c26a60f1cf.jpg"],
+        description: "Corte oxford que estiliza.", features: ["Corte oxford", "Estiliza", "Fresco", "Moderno"]
+      },
+      "1923MQ": {
+        sku: "1923MQ", name: "Palazzo Oxford Morley", category: "PANTALONES", fabric: "Morley Viscosa",
+        sizes: ["8","10","12","14"], wholesalePrice: 12000, retailPrice: 14000,
+        colors: ["Verde Musgo","Azul","Negro"],
+        colorCodes: { "Verde Musgo": "#4a5d23", "Azul": "#2c5282", "Negro": "#1a1a1a" },
+        folder: "1923MQ-Palazzo Oxford Morley",
+        images: ["DSC_0976.jpg","DSC_0977.jpg","DSC_0978.jpg","DSC_0979.jpg","DSC_0980.jpg","DSC_0981.jpg","DSC_0982.jpg","DSC_6532.jpg","DSC_6533.jpg","DSC_6534.jpg"],
+        description: "Morley que abraza sin apretar.", features: ["Textura morley", "Cómodo", "Elegante", "Versátil"]
+      },
+      "1924CA": {
+        sku: "1924CA", name: "Pantalón Recto Sastrero", category: "PANTALONES", fabric: "Sastrero",
+        sizes: ["8","10","12","14"], wholesalePrice: 16000, retailPrice: 18000,
+        colors: ["Negro","Beige"],
+        colorCodes: { "Negro": "#1a1a1a", "Beige": "#f5f0e6" },
+        folder: "1924CA-Pantalón Recto Sastrero",
+        images: ["DSC_6577.jpg","DSC_6578.jpg","DSC_6579.jpg","DSC_6580.jpg","DSC_6581.jpg"],
+        description: "El pantalón de vestir que necesitás.", features: ["Corte sastrero", "Elegante", "Formal", "Versátil"]
+      },
+      // ========== POLLERAS ==========
+      "2100SH": {
+        sku: "2100SH", name: "Pollera Seda Fría", category: "POLLERAS", fabric: "Seda Fría Haytiway",
+        sizes: ["12","14","16"], wholesalePrice: 19000, retailPrice: 21000,
+        colors: ["Estampados"],
+        colorCodes: { "Estampados": "linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1)" },
+        folder: "2100SH-Pollera Seda Fría",
+        images: ["DSC_0070.jpg","DSC_0071.jpg","DSC_0072.jpg","DSC_0073.jpg","DSC_0074.jpg","DSC_0677.jpg","DSC_0678.jpg","DSC_0679.jpg"],
+        description: "Fluidez que danza con el viento.", features: ["Tela fluida", "Elegante", "Estampado único", "Femenina"]
+      },
+      // ========== REMERAS ==========
+      "2401SB": {
+        sku: "2401SB", name: "Remera Ana", category: "REMERAS", fabric: "Seda Fría Slinky",
+        sizes: ["8","12","14","16"], wholesalePrice: 13000, retailPrice: 15000,
+        colors: ["Negro","Rojo","Azul Francia","Azul Marino"],
+        colorCodes: { "Negro": "#1a1a1a", "Rojo": "#c41e3a", "Azul Francia": "#0055a4", "Azul Marino": "#1e3a5f" },
+        folder: "2401SB-Remera Ana", images: ["DSC_0171-2.jpg", "DSC_0172-2.jpg", "DSC_0173-2.jpg", "DSC_0174-2.jpg", "DSC_0175-2.jpg", "DSC_0176.jpg", "DSC_0177.jpg", "DSC_0190.jpg", "DSC_0191.jpg"],
+        description: "Brillo sutil para tu día a día.", features: ["Brillo sutil", "Elegante", "Versátil", "Cómoda"]
+      },
+      "2401MD": {
+        sku: "2401MD", name: "Remera Modal Jana", category: "REMERAS", fabric: "Modal con Lycra",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 12000, retailPrice: 14000,
+        colors: ["Negro","Camel","Beige","Azul Marino","Verde Menta"],
+        colorCodes: { "Negro": "#1a1a1a", "Camel": "#c19a6b", "Beige": "#f5f0e6", "Azul Marino": "#1e3a5f", "Verde Menta": "#98fb98" },
+        folder: "2401MD-Remera Modal Jana", images: ["15.jpg", "DSC_0071.jpg", "DSC_0072.jpg", "DSC_0074.jpg", "376a0e97-15a7-48ce-82bb-f6cd08c19f5b.jpg", "71e14e2c-a49b-45c9-b26b-0ef3ba020845.jpg", "802f13ca-8a67-42fb-b2c0-f5c7de5602c8.jpg", "808be478-8d9d-4c34-9ede-b919b11d6cf6.jpg"],
+        description: "Modal premium que acaricia tu piel.", features: ["Tela premium", "Súper suave", "Cómoda", "Versátil"]
+      },
+      "2401MV": {
+        sku: "2401MV", name: "Remera Dina", category: "REMERAS", fabric: "Modal Viscosa",
+        sizes: ["8","10","12","14"], wholesalePrice: 10000, retailPrice: 12000,
+        colors: ["Negro","Camel","Coral","Verde Botella","Azul Francia","Verde Militar","Rojo Tomate"],
+        colorCodes: { "Negro": "#1a1a1a", "Camel": "#c19a6b", "Coral": "#ff7f50", "Verde Botella": "#006b3c", "Azul Francia": "#0055a4", "Verde Militar": "#4a5d23", "Rojo Tomate": "#ff6347" },
+        folder: "2401MV-Remera Dina", images: ["DSC_0075.jpg", "DSC_0076.jpg", "DSC_0077.jpg", "DSC_0078.jpg", "001c7324-b151-4ef5-9ba4-cfbe71a35e60.jpg", "3265a9d4-46f9-4728-9363-3092e11ee6da.jpg", "4bbef5fc-a57b-42eb-920b-16be0fa41d3c.jpg", "572171d2-1078-4b7f-9cdc-a5ee3aaf5db6.jpg"],
+        description: "Colores vibrantes para personalidades auténticas.", features: ["Colores vibrantes", "Cómoda", "Versátil", "Moderna"]
+      },
+      "2401AL": {
+        sku: "2401AL", name: "Remera Algodón", category: "REMERAS", fabric: "Algodón",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 10000, retailPrice: 12000,
+        colors: ["Negro","Beige","Amarillo","Rosa"],
+        colorCodes: { "Negro": "#1a1a1a", "Beige": "#f5f0e6", "Amarillo": "#ffd700", "Rosa": "#f8b4c4" },
+        folder: "2401AL-Remera Algodón", images: ["1.jpg", "DSC_0084.jpg", "DSC_0085.jpg", "DSC_0086.jpg", "DSC_0087.jpg", "DSC_0088.jpg", "DSC_0089.jpg", "DSC_0090.jpg", "DSC_0091.jpg"],
+        description: "Algodón natural que respira.", features: ["Tela natural", "Fresca", "Cómoda", "Básica"]
+      },
+      "2401MQ": {
+        sku: "2401MQ", name: "Remera Morley Viscosa", category: "REMERAS", fabric: "Morley Viscosa",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 10000, retailPrice: 12000,
+        colors: ["Marrón","Verde Inglés","Bordo","Crudo","Negro"],
+        colorCodes: { "Marrón": "#8b4513", "Verde Inglés": "#1b4d3e", "Bordo": "#722f37", "Crudo": "#f5f0e6", "Negro": "#1a1a1a" },
+        folder: "2401MQ-Remera Morley Viscosa", images: ["16.jpg", "DSC_0668.jpg", "IMG_1939.jpg", "IMG_1954.jpg", "IMG_2007.jpg", "IMG_2022.jpg", "IMG_2026.jpg", "IMG_2027.jpg", "IMG_2052.jpg"],
+        description: "Textura morley con caída perfecta.", features: ["Textura morley", "Caída perfecta", "Elegante", "Cómoda"]
+      },
+      "2404LU": {
+        sku: "2404LU", name: "Remera Bianca", category: "REMERAS", fabric: "Lúrex",
+        sizes: ["6"], wholesalePrice: 8000, retailPrice: 10000,
+        colors: ["Dorado"],
+        colorCodes: { "Dorado": "#d4af37" },
+        folder: "2404LU-Remera Bianca", images: ["DSC_0095.jpg", "DSC_0096.jpg", "DSC_0097.jpg", "DSC_0098.jpg", "DSC_0099.jpg", "DSC_0100.jpg", "IMG-20230929-WA0039.jpg"],
+        description: "Brillo dorado para ocasiones únicas.", features: ["Brillo dorado", "Elegante", "Especial", "Glamorosa"]
+      },
+      "2404MQ": {
+        sku: "2404MQ", name: "Remera Leila", category: "REMERAS", fabric: "Modal Viscosa",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 10000, retailPrice: 12000,
+        colors: ["Negro","Azul Francia","Gris Melange","Verde Agua","Coral","Gris Topo","Verde Militar"],
+        colorCodes: { "Negro": "#1a1a1a", "Azul Francia": "#0055a4", "Gris Melange": "#9e9e9e", "Verde Agua": "#66cdaa", "Coral": "#ff7f50", "Gris Topo": "#6b6b6b", "Verde Militar": "#4a5d23" },
+        folder: "2404MQ-Remera Leila", images: ["DSC_0059.jpg", "DSC_0060.jpg", "DSC_0061.jpg", "DSC_0062.jpg", "DSC_0063.jpg", "DSC_0064.jpg", "DSC_0065.jpg", "DSC_0066.jpg", "DSC_0067.jpg"],
+        description: "Versatilidad en estado puro.", features: ["Versátil", "Múltiples colores", "Cómoda", "Moderna"]
+      },
+      "2404MZ": {
+        sku: "2404MZ", name: "Remera Lunar", category: "REMERAS", fabric: "Modal Viscosa",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 14000, retailPrice: 16000,
+        colors: ["Negro","Verde Menta","Beige","Rosa"],
+        colorCodes: { "Negro": "#1a1a1a", "Verde Menta": "#98fb98", "Beige": "#f5f0e6", "Rosa": "#f8b4c4" },
+        folder: "2404MZ-Remera Lunar", images: ["3.jpg", "DSC_6668.jpg", "DSC_6669.jpg", "DSC_6670.jpg", "DSC_6671.jpg", "DSC_6672.jpg", "DSC_6673.jpg", "DSC_6674.jpg", "DSC_6675.jpg"],
+        description: "Detalle lunar que añade dulzura.", features: ["Detalle lunar", "Romántica", "Femenina", "Moderna"]
+      },
+      "2404MV": {
+        sku: "2404MV", name: "Remera Modal Viscosa", category: "REMERAS", fabric: "Modal Viscosa",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 10000, retailPrice: 12000,
+        colors: ["Negro","Azul Marino","Verde Menta","Beige","Natural"],
+        colorCodes: { "Negro": "#1a1a1a", "Azul Marino": "#1e3a5f", "Verde Menta": "#98fb98", "Beige": "#f5f0e6", "Natural": "#faf0e6" },
+        folder: "2404MV-Remera Modal Viscosa", images: ["17.jpg", "DSC_0084.jpg", "DSC_1007.jpg", "DSC_1008.jpg", "DSC_1009.jpg", "DSC_1010.jpg", "DSC_1011.jpg", "DSC_1012.jpg", "DSC_1013.jpg", "DSC_1014.jpg"],
+        description: "La combinación perfecta de suavidad.", features: ["Súper suave", "Cómoda", "Versátil", "Básica premium"]
+      },
+      "2404SF": {
+        sku: "2404SF", name: "Remera Seda Fría V", category: "REMERAS", fabric: "Seda Fría",
+        sizes: ["6","8"], wholesalePrice: 8000, retailPrice: 10000,
+        colors: ["Negro","Blanco"],
+        colorCodes: { "Negro": "#1a1a1a", "Blanco": "#ffffff" },
+        folder: "2404SF-Remera Seda Fría V", images: ["DSC_0089.jpg", "DSC_0090.jpg", "DSC_0091.jpg", "DSC_0092.jpg", "DSC_0093.jpg", "DSC_0094.jpg", "DSC_0703.jpg", "DSC_0704.jpg", "DSC_0705.jpg", "DSC_0706.jpg"],
+        description: "Escote V que estiliza.", features: ["Escote V", "Elegante", "Estiliza", "Versátil"]
+      },
+      "2405MV": {
+        sku: "2405MV", name: "Remera Modal 3/4", category: "REMERAS", fabric: "Modal Viscosa",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 15000, retailPrice: 17000,
+        colors: ["Negro","Bordo","Verde Militar","Azul","Natural"],
+        colorCodes: { "Negro": "#1a1a1a", "Bordo": "#722f37", "Verde Militar": "#4a5d23", "Azul": "#2c5282", "Natural": "#faf0e6" },
+        folder: "2405MV-Remera Modal 3-4", images: ["4.jpg", "DSC_0067-2.jpg", "DSC_0068-2.jpg", "DSC_0069-2.jpg", "DSC_0070-2.jpg", "DSC_0071-2.jpg", "DSC_0072-2.jpg", "DSC_0074-2.jpg"],
+        description: "Manga 3/4 para entretiempo.", features: ["Manga 3/4", "Entretiempo", "Cómoda", "Versátil"]
+      },
+      "2407MQ": {
+        sku: "2407MQ", name: "Remera Nora", category: "REMERAS", fabric: "Morley Viscosa",
+        sizes: ["6","12"], wholesalePrice: 5000, retailPrice: 7000,
+        colors: ["Natural","Mostaza","Azul Francia","Rosa","Gris Melange","Gris Topo"],
+        colorCodes: { "Natural": "#faf0e6", "Mostaza": "#ffdb58", "Azul Francia": "#0055a4", "Rosa": "#f8b4c4", "Gris Melange": "#9e9e9e", "Gris Topo": "#6b6b6b" },
+        folder: "2407MQ-Remera Nora", images: ["5.jpg", "DSC_0068.jpg", "DSC_0069.jpg", "DSC_0070.jpg", "DSC_0071.jpg", "DSC_0072.jpg", "DSC_0325.jpg", "DSC_0326.jpg", "DSC_0327.jpg", "DSC_0389.jpg"],
+        description: "Precio amigable, calidad premium.", features: ["Precio accesible", "Calidad premium", "Versátil", "Cómoda"]
+      },
+      "2409MQ": {
+        sku: "2409MQ", name: "Remera Rubí", category: "REMERAS", fabric: "Morley Viscosa",
+        sizes: ["6"], wholesalePrice: 3000, retailPrice: 5000,
+        colors: ["Negro","Gris Topo"],
+        colorCodes: { "Negro": "#1a1a1a", "Gris Topo": "#6b6b6b" },
+        folder: "2409MQ-Remera Rubí", images: ["11.jpg", "DSC_0093.jpg", "DSC_0094.jpg", "DSC_0095.jpg", "DSC_0096.jpg", "DSC_0202-2.jpg", "DSC_0203-2.jpg", "DSC_0204.jpg", "DSC_0205-2.jpg", "DSC_0206-2.jpg"],
+        description: "Simplicidad brillante.", features: ["Simple", "Elegante", "Básica", "Versátil"]
+      },
+      "2416BR": {
+        sku: "2416BR", name: "Remera Broderie", category: "REMERAS", fabric: "Broderie",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 10000, retailPrice: 12000,
+        colors: ["Negro","Camel","Beige"],
+        colorCodes: { "Negro": "#1a1a1a", "Camel": "#c19a6b", "Beige": "#f5f0e6" },
+        folder: "2416BR-Remera Broderie", images: ["23.jpg", "2c2d4362-0313-4d34-b82b-e3093212cf7a.jpg", "3ff59193-59b6-474a-8ce3-52116a11040f.jpg", "59587c80-8dc3-438e-b418-e46647a4da57.jpg", "636e59c0-682e-409d-8ed6-eb81abe7bbb4.jpg", "9cb33195-792d-4ed1-bb0f-149e92ace0fd.jpg", "a56b1ad0-fea6-407b-99fc-00094773ad53.jpg", "c9fe3130-d08d-412b-aa6e-3bf5e901e6ad.jpg"],
+        description: "Bordado artesanal que enamora.", features: ["Bordado artesanal", "Romántica", "Elegante", "Única"]
+      },
+      "2416MV": {
+        sku: "2416MV", name: "Remera Estampada", category: "REMERAS", fabric: "Modal Viscosa",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 14000, retailPrice: 16000,
+        colors: ["Rojo","Negro","Verde Menta","Azul Marino"],
+        colorCodes: { "Rojo": "#c41e3a", "Negro": "#1a1a1a", "Verde Menta": "#98fb98", "Azul Marino": "#1e3a5f" },
+        folder: "2416MV-Remera Estampada", images: ["21.jpg", "DSC_0105.jpg", "DSC_0106.jpg", "DSC_0107.jpg", "DSC_0108.jpg", "DSC_0109.jpg", "DSC_0110.jpg", "DSC_0111.jpg", "DSC_0112.jpg"],
+        description: "Estampados exclusivos que te hacen única.", features: ["Estampado exclusivo", "Moderna", "Única", "Versátil"]
+      },
+      "2416HW": {
+        sku: "2416HW", name: "Remera Hawai", category: "REMERAS", fabric: "Hawai",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 8000, retailPrice: 10000,
+        colors: ["Negro","Beige","Rosa","Camel"],
+        colorCodes: { "Negro": "#1a1a1a", "Beige": "#f5f0e6", "Rosa": "#f8b4c4", "Camel": "#c19a6b" },
+        folder: "2416HW-Remera Hawai", images: ["25.jpg", "27f0cc6a-8a1d-4794-af54-4562c2aeb386.jpg", "873f8f3c-8503-49ed-ad12-3af0e39b52ce.jpg", "9a4b3298-a07c-487b-98e1-01e92582d610.jpg", "a045859c-65fc-42cd-baf8-de0c80017f75.jpg", "aef47028-e161-48aa-b9a0-e9ef0c738caa.jpg", "c61cf3d5-c572-4ba9-904d-c85d7ec47c1f.jpg", "ce9989f9-6754-4c37-bc33-fc11abe1e53f.jpg"],
+        description: "Frescura tropical para tu día a día.", features: ["Fresca", "Tropical", "Ligera", "Moderna"]
+      },
+      // ========== SAQUITOS ==========
+      "2802LU": {
+        sku: "2802LU", name: "Saquito Lúrex", category: "SAQUITOS", fabric: "Lúrex",
+        sizes: ["8","10","12","14"], wholesalePrice: 22000, retailPrice: 24000,
+        colors: ["Negro"],
+        colorCodes: { "Negro": "#1a1a1a" },
+        folder: "2802LU-Saquito Lurex", images: ["DSC_0038.jpg", "DSC_0039.jpg", "DSC_0040.jpg", "DSC_0041.jpg", "DSC_0042.jpg", "DSC_0043.jpg", "4841e25b-dee7-433f-acd2-daf07b99bffa.jpg"],
+        description: "Brillo que abriga con glamour.", features: ["Brillo elegante", "Abrigado", "Glamoroso", "Versátil"]
+      },
+      "2802SF": {
+        sku: "2802SF", name: "Spolverino Seda Fría", category: "SAQUITOS", fabric: "Seda Fría",
+        sizes: ["8","10","12"], wholesalePrice: 14000, retailPrice: 16000,
+        colors: ["Negro"],
+        colorCodes: { "Negro": "#1a1a1a" },
+        folder: "2802SF-Spolverino Seda Fría",
+        images: ["DSC_0432.jpg","DSC_0433.jpg","DSC_0434.jpg","DSC_0435.jpg","DSC_0436.jpg","DSC_0437.jpg","DSC_0438.jpg","DSC_0439.jpg"],
+        description: "Elegancia fluida para superponer.", features: ["Fluido", "Elegante", "Versátil", "Ligero"]
+      },
+      // ========== SHORTS ==========
+      "2903FI": {
+        sku: "2903FI", name: "Short Fibrana", category: "SHORTS", fabric: "Fibrana Poplin",
+        sizes: ["14"], wholesalePrice: 6000, retailPrice: 8000,
+        colors: ["Estampados"],
+        colorCodes: { "Estampados": "linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1)" },
+        folder: "2903FI-Short Fibrana",
+        images: ["DSC_0177.jpg","DSC_0178.jpg","DSC_0179.jpg","DSC_0180.jpg","DSC_0181.jpg","DSC_0182.jpg","DSC_0183.jpg","DSC_0184.jpg","DSC_0896-2.jpg","DSC_0897-2.jpg"],
+        description: "Estampados vibrantes para el verano.", features: ["Estampado", "Fresco", "Veraniego", "Cómodo"]
+      },
+      "2903HW": {
+        sku: "2903HW", name: "Short Hawai", category: "SHORTS", fabric: "Hawai",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 6000, retailPrice: 8000,
+        colors: ["Negro","Crudo","Marrón"],
+        colorCodes: { "Negro": "#1a1a1a", "Crudo": "#f5f0e6", "Marrón": "#8b4513" },
+        folder: "2903HW-Short Hawai",
+        images: ["20.jpg","1cce68bc-8d86-490e-bfa5-b3fbe660d4f8.jpg","3c6efc58-cf71-418d-9ba7-c7d22a5c2023.jpg","6b445a27-7620-4bd4-912d-ec8511cec6f6.jpg","8a125c97-a075-46d0-a681-13284c88ecaf.jpg"],
+        description: "Liviandad tropical para días calurosos.", features: ["Liviano", "Tropical", "Fresco", "Cómodo"]
+      },
+      "2909LI": {
+        sku: "2909LI", name: "Short Lino", category: "SHORTS", fabric: "Lino Spandex",
+        sizes: ["12","14","16"], wholesalePrice: 9000, retailPrice: 11000,
+        colors: ["Negro","Estampados"],
+        colorCodes: { "Negro": "#1a1a1a", "Estampados": "linear-gradient(45deg, #ff6b6b, #4ecdc4)" },
+        folder: "2909LI-Short Lino",
+        images: ["DSC_0238.jpg","DSC_0239.jpg","DSC_0240.jpg","DSC_0241.jpg","DSC_0242-2.jpg","DSC_0243-2.jpg","DSC_0244-2.jpg","IMG_1945.jpg","IMG_2013.jpg"],
+        description: "Lino premium para el verano.", features: ["Tela natural", "Fresco", "Premium", "Cómodo"]
+      },
+      "2910CA": {
+        sku: "2910CA", name: "Short Pollera Cey", category: "SHORTS", fabric: "Cey",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 6000, retailPrice: 8000,
+        colors: ["Negro","Celeste","Beige","Rojo","Azul Marino"],
+        colorCodes: { "Negro": "#1a1a1a", "Celeste": "#87ceeb", "Beige": "#f5f0e6", "Rojo": "#c41e3a", "Azul Marino": "#1e3a5f" },
+        folder: "2910CA-Short Pollera Cey",
+        images: ["31.jpg","28c35a2f-6c3e-46dd-8504-2a28af59e32c.jpg"],
+        description: "Lo mejor de dos mundos: short y pollera.", features: ["2 en 1", "Versátil", "Femenino", "Cómodo"]
+      },
+      "2910LI": {
+        sku: "2910LI", name: "Bermuda Lino Tribotón", category: "SHORTS", fabric: "Lino",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 12000, retailPrice: 14000,
+        colors: ["Negro","Rojo","Marrón","Azul Marino"],
+        colorCodes: { "Negro": "#1a1a1a", "Rojo": "#c41e3a", "Marrón": "#8b4513", "Azul Marino": "#1e3a5f" },
+        folder: "2910LI-Bermuda Lino Tribotón",
+        images: ["DSC_0033.jpg","DSC_0034.jpg","DSC_0035.jpg","DSC_0036.jpg","DSC_0037.jpg","DSC_0038.jpg","IMG_1941.jpg","IMG_2009.jpg","IMG_2031.jpg"],
+        description: "Bermuda elegante con detalle de botones.", features: ["Detalle de botones", "Elegante", "Tela natural", "Versátil"]
+      },
+      // ========== VESTIDOS ==========
+      "3100SL": {
+        sku: "3100SL", name: "Vestido Sabrina", category: "VESTIDOS", fabric: "Seda Fría Slinky",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 18000, retailPrice: 20000,
+        colors: ["Negro","Estampados"],
+        colorCodes: { "Negro": "#1a1a1a", "Estampados": "linear-gradient(45deg, #ff6b6b, #4ecdc4)" },
+        folder: "3100SL-Vestido Sabrina", images: ["DSC_0202.jpg", "DSC_0203.jpg", "DSC_0204.jpg", "DSC_0205.jpg", "DSC_0206.jpg", "DSC_0688.jpg", "DSC_0689.jpg", "DSC_0690.jpg", "DSC_0691.jpg", "coloresvestsabrina.jpg"],
+        description: "Elegancia que fluye naturalmente.", features: ["Fluido", "Elegante", "Versátil", "Femenino"]
+      },
+      "3102FI": {
+        sku: "3102FI", name: "Vestido con Volado", category: "VESTIDOS", fabric: "Fibrana",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 17000, retailPrice: 19000,
+        colors: ["Estampados"],
+        colorCodes: { "Estampados": "linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1)" },
+        folder: "3102FI-Vestido con Volado", images: ["DSC_0107-2.jpg", "DSC_0108-2.jpg", "DSC_0109-2.jpg", "colores.jpg", "483b83af-42da-44bc-901e-1e16bb085d3b.jpg", "5310893e-aa57-4cb4-b9b9-697d8d3876ef.jpg", "7b67e7a9-9dd5-43df-b49c-ebbdb5c3b2c3.jpg", "94774d29-554f-4fdd-bc68-11a8e85f9032.jpg"],
+        description: "Volados que danzan con cada paso.", features: ["Volados", "Romántico", "Femenino", "Elegante"]
+      },
+      "3106MY": {
+        sku: "3106MY", name: "Vestido Morley", category: "VESTIDOS", fabric: "Morley Algodón",
+        sizes: ["6","8","10"], wholesalePrice: 10000, retailPrice: 12000,
+        colors: ["Fucsia","Gris Topo"],
+        colorCodes: { "Fucsia": "#ff1493", "Gris Topo": "#6b6b6b" },
+        folder: "3106MY-Vestido Morley", images: ["DSC_0336.jpg", "DSC_0337.jpg", "DSC_0338.jpg", "DSC_0339.jpg", "05e677c3-b553-46d0-bcd6-0d124a3acdb9.jpg", "0dac8c3c-bd4e-4a9a-8ad5-d16a1f40a376.jpg", "144dbfc7-7002-4e8e-92a6-6f7defbd6468.jpg", "27cd468c-0635-4ee2-9641-cec1f10813a3.jpg", "90b9d2e8-3a17-4ffc-8c03-33a0b91704bf.jpg"],
+        description: "Comodidad stretch que abraza tus curvas.", features: ["Stretch", "Cómodo", "Favorecedor", "Moderno"]
+      },
+      "3107CR": {
+        sku: "3107CR", name: "Vestido Camisero", category: "VESTIDOS", fabric: "Creep",
+        sizes: ["6","8"], wholesalePrice: 5000, retailPrice: 7000,
+        colors: ["Negro","Blanco","Rosa"],
+        colorCodes: { "Negro": "#1a1a1a", "Blanco": "#ffffff", "Rosa": "#f8b4c4" },
+        folder: "3107CR-Vestido Camisero", images: ["DSC_0044.jpg", "DSC_0045.jpg", "DSC_0046.jpg", "0aed68b2-8e6d-4c62-9bb2-ac2d38f28fc9.jpg", "13888d75-2331-49bf-b941-dbf1276ef3a0.jpg", "13a16faf-fd4e-4f7b-9133-579372e62413.jpg", "4f76c269-34a9-474e-be12-1b84322c433a.jpg", "52ba2277-26c0-4f8d-93b4-69e74feaa717.jpg"],
+        description: "El clásico camisero reinventado.", features: ["Clásico", "Versátil", "Elegante", "Atemporal"]
+      },
+      "3110FI": {
+        sku: "3110FI", name: "Solero Fibrana", category: "VESTIDOS", fabric: "Fibrana Poplin",
+        sizes: ["6","8","12","14","16"], wholesalePrice: 10000, retailPrice: 12000,
+        colors: ["Estampados"],
+        colorCodes: { "Estampados": "linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1)" },
+        folder: "3110FI-Solero Fibrana", images: ["21e0e0d7-842f-4af1-9cf8-cd2068664f1d.jpg", "9d2b1e07-2122-4f3c-84a9-fa56b589c00a.jpg", "a9e1b3c4-52b5-4ac4-ad45-6bdfa1d4f88f.jpg", "b5031acb-ac45-404b-afcd-a6bfabef1a9a.jpg", "d30c8d01-799d-437f-98f7-9dcdd06a8f70.jpg", "db5d559e-a42a-4ea9-806a-a4b389e4f8d1.jpg", "f169351f-6e0c-4614-b1fc-bef49e2a72bb.jpg", "f2e61945-9720-4526-abbc-1718bb0e94d0.jpg"],
+        description: "Frescura veraniega que enamora.", features: ["Fresco", "Veraniego", "Cómodo", "Alegre"]
+      },
+      "3110SF": {
+        sku: "3110SF", name: "Solero Seda Fría", category: "VESTIDOS", fabric: "Seda Fría Slinky",
+        sizes: ["6","8","10","12"], wholesalePrice: 18000, retailPrice: 20000,
+        colors: ["Negro"],
+        colorCodes: { "Negro": "#1a1a1a" },
+        folder: "3110SF-Solero Seda Fría", images: ["DSC_0764.jpg", "DSC_0765.jpg", "DSC_0767.jpg", "DSC_0768.jpg", "DSC_0820.jpg", "DSC_0821.jpg", "DSC_0822.jpg", "DSC_0823.jpg", "DSC_0824.jpg", "DSC_0825.jpg"],
+        description: "Elegancia minimalista para el verano.", features: ["Minimalista", "Elegante", "Fresco", "Sofisticado"]
+      },
+      "3112CR": {
+        sku: "3112CR", name: "Vestido Bretel Creep", category: "VESTIDOS", fabric: "Creep",
+        sizes: ["6","8"], wholesalePrice: 8000, retailPrice: 10000,
+        colors: ["Negro","Camel"],
+        colorCodes: { "Negro": "#1a1a1a", "Camel": "#c19a6b" },
+        folder: "3112CR-Vestido Bretel Creep", images: ["DSC_0071.jpg", "DSC_0072.jpg", "DSC_0073.jpg", "DSC_0074.jpg", "DSC_0075.jpg", "IMG-20231003-WA0134.jpg"],
+        description: "Breteles que estilizan.", features: ["Breteles finos", "Elegante", "Estiliza", "Versátil"]
+      },
+      "3113AL": {
+        sku: "3113AL", name: "Vestido Hindú", category: "VESTIDOS", fabric: "Algodón",
+        sizes: ["Único"], wholesalePrice: 20000, retailPrice: 22000,
+        colors: ["Estampados"],
+        colorCodes: { "Estampados": "linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcb77)" },
+        folder: "3113AL-Vestido Hindú", images: ["33.jpg", "DSC_0071.jpg", "DSC_0072.jpg", "DSC_0073.jpg", "DSC_0074.jpg", "DSC_0075.jpg", "DSC_0076.jpg", "DSC_0692.jpg", "DSC_0693.jpg", "DSC_0694.jpg"],
+        description: "Espíritu bohemio que libera.", features: ["Bohemio", "Artesanal", "Único", "Cómodo"]
+      },
+      "3115FI": {
+        sku: "3115FI", name: "Batón Fibrana", category: "VESTIDOS", fabric: "Fibrana",
+        sizes: ["14","16"], wholesalePrice: 12000, retailPrice: 14000,
+        colors: ["Estampados"],
+        colorCodes: { "Estampados": "linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1)" },
+        folder: "3115FI-Batón Fibrana", images: ["DSC_0209.jpg", "DSC_0210.jpg", "DSC_0211.jpg", "DSC_0212.jpg", "DSC_0585.jpg", "DSC_0586.jpg", "DSC_0587.jpg", "DSC_0588.jpg", "DSC_0589.jpg", "DSC_0590.jpg"],
+        description: "Comodidad de casa con estilo de calle.", features: ["Cómodo", "Versátil", "Fresco", "Práctico"]
+      },
+      "3116FI": {
+        sku: "3116FI", name: "Vestido Flor", category: "VESTIDOS", fabric: "Fibrana",
+        sizes: ["6","8"], wholesalePrice: 6000, retailPrice: 8000,
+        colors: ["Negro","Beige"],
+        colorCodes: { "Negro": "#1a1a1a", "Beige": "#f5f0e6" },
+        folder: "3116FI-Vestido Flor", images: ["DSC_0183.jpg", "DSC_0184.jpg", "DSC_0185.jpg", "DSC_0186.jpg", "DSC_0187.jpg", "DSC_0189.jpg", "213e2734-83ee-4a4c-b245-ffced357dea0.jpg", "36385699-cfc5-468f-a8ca-4f5c8367bfb2.jpg", "3893649d-2055-4096-addb-729716af64cd.jpg"],
+        description: "Detalle floral que enamora.", features: ["Detalle floral", "Romántico", "Femenino", "Delicado"]
+      },
+      "3118LE": {
+        sku: "3118LE", name: "Vestido Isabel", category: "VESTIDOS", fabric: "Lino Estampado",
+        sizes: ["10","12","14","16"], wholesalePrice: 13000, retailPrice: 15000,
+        colors: ["Estampados"],
+        colorCodes: { "Estampados": "linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1)" },
+        folder: "3118LE-Vestido Isabel", images: ["8.jpg", "DSC_6701.jpg", "DSC_6702.jpg", "DSC_6703.jpg", "DSC_6704.jpg", "DSC_6705.jpg", "DSC_6706.jpg", "DSC_6707.jpg", "2024-10-01-at-11.13.jpg", "2024-10-01-at-11.16.jpg"],
+        description: "Lino estampado para ocasiones especiales.", features: ["Lino estampado", "Especial", "Elegante", "Único"]
+      },
+      "3118LI": {
+        sku: "3118LI", name: "Vestido Lino", category: "VESTIDOS", fabric: "Lino Spandex",
+        sizes: ["10","14"], wholesalePrice: 10000, retailPrice: 12000,
+        colors: ["Verde Limón","Verde Manzana"],
+        colorCodes: { "Verde Limón": "#32cd32", "Verde Manzana": "#8db600" },
+        folder: "3118LI-Vestido Lino", images: ["DSC_0696.jpg", "DSC_0697.jpg", "DSC_0698.jpg", "DSC_0700.jpg", "DSC_0701.jpg", "DSC_0702.jpg", "DSC_0703.jpg", "DSC_0704.jpg", "DSC_0705.jpg", "DSC_0706.jpg"],
+        description: "Colores vibrantes que refrescan.", features: ["Colores vibrantes", "Fresco", "Veraniego", "Alegre"]
+      },
+      "3121MV": {
+        sku: "3121MV", name: "Vestido Vivi", category: "VESTIDOS", fabric: "Modal Viscosa",
+        sizes: ["8"], wholesalePrice: 10000, retailPrice: 12000,
+        colors: ["Camel"],
+        colorCodes: { "Camel": "#c19a6b" },
+        folder: "3121MV-Vestido Vivi", images: ["DSC_0684.jpg", "DSC_0685.jpg", "DSC_0686.jpg", "DSC_0687.jpg", "DSC_0688.jpg", "DSC_0689.jpg", "DSC_0690.jpg", "DSC_0691.jpg", "DSC_0692.jpg", "DSC_0693.jpg"],
+        description: "Suavidad modal que abraza.", features: ["Súper suave", "Cómodo", "Elegante", "Femenino"]
+      },
+      "3122MX": {
+        sku: "3122MX", name: "Vestido Renata", category: "VESTIDOS", fabric: "Morley Lúrex",
+        sizes: ["8","10","12"], wholesalePrice: 11000, retailPrice: 13000,
+        colors: ["Negro","Rosa Viejo","Violeta","Rojo","Beige"],
+        colorCodes: { "Negro": "#1a1a1a", "Rosa Viejo": "#d4a5a5", "Violeta": "#8b00ff", "Rojo": "#c41e3a", "Beige": "#f5f0e6" },
+        folder: "3122MX-Vestido Renata", images: ["DSC_0247-2.jpg", "DSC_0248-2.jpg", "DSC_0249-2.jpg", "DSC_0250-2.jpg", "DSC_0251-2.jpg", "DSC_0252-2.jpg", "DSC_0253-2.jpg", "DSC_0254-2.jpg", "DSC_0255-2.jpg", "DSC_0256-2.jpg"],
+        description: "Brillo sutil para momentos especiales.", features: ["Brillo sutil", "Elegante", "Especial", "Femenino"]
+      },
+      "3123MX": {
+        sku: "3123MX", name: "Solero Coraline", category: "VESTIDOS", fabric: "Morley Lúrex",
+        sizes: ["8","10","12","14"], wholesalePrice: 10000, retailPrice: 12000,
+        colors: ["Negro","Rosa Palo","Violeta","Rojo","Fucsia"],
+        colorCodes: { "Negro": "#1a1a1a", "Rosa Palo": "#e8c4c4", "Violeta": "#8b00ff", "Rojo": "#c41e3a", "Fucsia": "#ff1493" },
+        folder: "3123MX-Solero Coraline", images: ["DSC_0261-2.jpg", "DSC_0262-2.jpg", "DSC_0263-2.jpg", "DSC_0264-2.jpg", "DSC_0265-2.jpg", "DSC_0266-2.jpg", "DSC_0267-2.jpg", "DSC_0268-2.jpg", "DSC_0269-2.jpg", "DSC_0270-2.jpg"],
+        description: "Romanticismo con brillo.", features: ["Romántico", "Brillo sutil", "Femenino", "Moderno"]
+      },
+      "3124AL": {
+        sku: "3124AL", name: "Solero Hindú", category: "VESTIDOS", fabric: "Algodón",
+        sizes: ["Único"], wholesalePrice: 18000, retailPrice: 20000,
+        colors: ["Crudo","Turquesa","Azul","Bordo","Beige","Naranja"],
+        colorCodes: { "Crudo": "#f5f0e6", "Turquesa": "#40e0d0", "Azul": "#2c5282", "Bordo": "#722f37", "Beige": "#d4c4b0", "Naranja": "#ff8c00" },
+        folder: "3124AL-Solero Hindú", images: ["34.jpg", "DSC_0707.jpg", "DSC_0708.jpg", "DSC_0709.jpg", "DSC_0710.jpg", "DSC_0711.jpg", "DSC_0712.jpg", "DSC_0713.jpg", "74d0e468-ddca-4ab8-a5d6-a98b1f6a9a7a.jpg", "aa6c138e-97ac-4863-981f-c311e41aa88a.jpg"],
+        description: "Alma libre en algodón puro.", features: ["Bohemio", "Artesanal", "Único", "Fresco"]
+      },
+      "3124CY": {
+        sku: "3124CY", name: "Solero Cey", category: "VESTIDOS", fabric: "Cey Airflow",
+        sizes: ["8","10","12","14"], wholesalePrice: 13000, retailPrice: 15000,
+        colors: ["Negro","Verde Menta","Beige"],
+        colorCodes: { "Negro": "#1a1a1a", "Verde Menta": "#98fb98", "Beige": "#f5f0e6" },
+        folder: "3124CY-Solero Cey", images: ["DSC_0026.jpg", "DSC_0027.jpg", "DSC_0028.jpg", "DSC_0030.jpg", "DSC_0031.jpg", "DSC_0032.jpg", "0e44ff91-2d81-4fc2-b4a7-eb0f45b585b1.jpg", "464f706f-0504-478a-a582-68b88add64c0.jpg", "c6c22862-bcc6-441a-b71e-65f724d4ab20.jpg", "cbf4e8e7-438d-4d3b-9699-cf64da8572d1.jpg"],
+        description: "Airflow que respira contigo.", features: ["Tela airflow", "Fresco", "Cómodo", "Veraniego"]
+      },
+      "3126CY": {
+        sku: "3126CY", name: "Solero Cey Broderie", category: "VESTIDOS", fabric: "Cey Broderie",
+        sizes: ["8","10","12","14","16"], wholesalePrice: 15000, retailPrice: 17000,
+        colors: ["Negro","Beige","Celeste"],
+        colorCodes: { "Negro": "#1a1a1a", "Beige": "#f5f0e6", "Celeste": "#87ceeb" },
+        folder: "3126CY-Solero Cey Broderie", images: ["28.jpg", "DSC_0048.jpg", "DSC_0049.jpg", "DSC_0050.jpg", "DSC_0051.jpg", "DSC_0052.jpg", "DSC_0053.jpg", "DSC_0054.jpg", "DSC_0055.jpg", "07b103df-55ed-4485-b1a8-b2bc7f9afa38.jpg"],
+        description: "Bordado artesanal que enamora.", features: ["Bordado broderie", "Artesanal", "Romántico", "Elegante"]
+      }
+    };
+
+    // Current product data
+    let product = null;
+    let currentView = 'minorista';
+
+    // ============================================
+    // PRICING FUNCTIONS (CORRECTED)
+    // ============================================
+    // 1 prenda: minorista × 2
+    // 2-3 prendas: minorista + $5.000 por unidad
+    // 4+ prendas: precio mayorista
+
+    function calculateUnitPrice(qty, retailPrice, wholesalePrice) {
+      if (qty >= 4) {
+        return wholesalePrice; // Precio mayorista
+      } else if (qty >= 2) {
+        return retailPrice + 5000; // Minorista + $5.000
+      } else {
+        return retailPrice * 2; // Minorista × 2
+      }
+    }
+
+    function getPriceTierName(qty) {
+      if (qty >= 4) return '🌟 Precio MAYORISTA';
+      if (qty >= 2) return '📦 Precio 2-3 prendas';
+      return '🛍️ Precio individual';
+    }
+
+    function formatPrice(price) {
+      return '$' + Math.round(price).toLocaleString('es-AR');
+    }
+
+    // ============================================
+    // VIEW SWITCHING
+    // ============================================
+    function switchView(view) {
+      currentView = view;
+      
+      // Update toggle buttons
+      document.querySelectorAll('.customer-toggle__btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+
+      // Show/hide views
+      document.getElementById('viewMinorista').classList.toggle('active', view === 'minorista');
+      document.getElementById('viewRevendedor').classList.toggle('active', view === 'revendedor');
+
+      // Show/hide price displays
+      document.getElementById('priceMinorista').style.display = view === 'minorista' ? 'block' : 'none';
+      document.getElementById('priceRevendedor').style.display = view === 'revendedor' ? 'block' : 'none';
+
+      // Generate matrix if switching to revendedor
+      if (view === 'revendedor' && product) {
+        generateMatrix();
+        updateOrderSummary();
+      }
+    }
+
+    // ============================================
+    // MINORISTA VIEW FUNCTIONS
+    // ============================================
+    function changeQty(delta) {
+      const input = document.getElementById('quantity');
+      let val = parseInt(input.value) + delta;
+      if (val < 1) val = 1;
+      if (val > 99) val = 99;
+      input.value = val;
+    }
+
+    function selectColor(btn, color) {
+      document.querySelectorAll('.color-option').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('colorSelected').textContent = color;
+    }
+
+    function selectSize(btn, size) {
+      document.querySelectorAll('.size-tag').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function addToCartMinorista() {
+      const selectedColor = document.querySelector('.color-option.active')?.title;
+      const selectedSize = document.querySelector('.size-tag.active')?.textContent;
+      const quantity = parseInt(document.getElementById('quantity').value);
+
+      if (!selectedColor || !selectedSize) {
+        showNotification('Por favor, seleccioná un color y un talle.', 'error');
+        return;
+      }
+
+      const cart = getCart();
+      const item = {
+        sku: product.sku,
+        name: product.name,
+        image: `../assets/img/${product.folder}/${product.images[0]}`,
+        color: selectedColor,
+        size: selectedSize,
+        quantity: quantity,
+        retailPrice: product.retailPrice,
+        wholesalePrice: product.wholesalePrice
+      };
+
+      const existingIndex = cart.findIndex(i => 
+        i.sku === item.sku && i.color === item.color && i.size === item.size
+      );
+
+      if (existingIndex > -1) {
+        cart[existingIndex].quantity += quantity;
+      } else {
+        cart.push(item);
+      }
+
+      saveCart(cart);
+      showNotification(`✓ ${quantity}× ${product.name} (${selectedSize}/${selectedColor}) agregado al carrito`, 'success');
+    }
+
+    // ============================================
+    // REVENDEDOR VIEW - MATRIX FUNCTIONS
+    // ============================================
+    function generateMatrix() {
+      if (!product) return;
+
+      const table = document.getElementById('matrixTable');
+      
+      // Header row with colors
+      let headerHTML = '<thead><tr><th>Talle</th>';
+      product.colors.forEach(color => {
+        headerHTML += `<th>${color}</th>`;
+      });
+      headerHTML += '</tr></thead>';
+
+      // Body rows with sizes
+      let bodyHTML = '<tbody>';
+      product.sizes.forEach(size => {
+        bodyHTML += `<tr><td>${size}</td>`;
+        product.colors.forEach(color => {
+          const inputId = `matrix-${size}-${color.replace(/\s+/g, '_')}`;
+          bodyHTML += `
+            <td>
+              <input type="number" 
+                     class="matrix-input" 
+                     id="${inputId}"
+                     data-size="${size}" 
+                     data-color="${color}"
+                     value="0" 
+                     min="0" 
+                     max="99"
+                     onchange="updateOrderSummary()"
+                     onfocus="this.select()">
+            </td>
+          `;
+        });
+        bodyHTML += '</tr>';
+      });
+      bodyHTML += '</tbody>';
+
+      table.innerHTML = headerHTML + bodyHTML;
+    }
+
+    // Track if curva was used
+    let curvaUsed = false;
+    let curvaCount = 0;
+
+    function addCurva() {
+      if (!product) return;
+
+      // Add 1 of each size with rotating colors (offset by curva count)
+      product.sizes.forEach((size, index) => {
+        const colorIndex = (index + curvaCount) % product.colors.length;
+        const color = product.colors[colorIndex];
+        const inputId = `matrix-${size}-${color.replace(/\s+/g, '_')}`;
+        const input = document.getElementById(inputId);
+        if (input) {
+          input.value = parseInt(input.value || 0) + 1;
+        }
+      });
+
+      curvaUsed = true;
+      curvaCount++;
+      
+      updateOrderSummary();
+      showNotification(`✓ Curva #${curvaCount} agregada: +${product.sizes.length} prendas (1 de cada talle) a PRECIO CURVA`, 'success');
+    }
+
+    function clearMatrix() {
+      document.querySelectorAll('.matrix-input').forEach(input => {
+        input.value = 0;
+      });
+      curvaUsed = false;
+      curvaCount = 0;
+      updateOrderSummary();
+    }
+
+    function getMatrixSelection() {
+      const selection = [];
+      document.querySelectorAll('.matrix-input').forEach(input => {
+        const qty = parseInt(input.value) || 0;
+        if (qty > 0) {
+          selection.push({
+            size: input.dataset.size,
+            color: input.dataset.color,
+            quantity: qty
+          });
+        }
+      });
+      return selection;
+    }
+
+    function updateOrderSummary() {
+      const selection = getMatrixSelection();
+      const totalQty = selection.reduce((sum, item) => sum + item.quantity, 0);
+      
+      // Check if curva price applies (curva used AND qty >= sizes.length)
+      const curvaQty = product.sizes.length * curvaCount;
+      const isCurvaComplete = curvaUsed && totalQty >= curvaQty && curvaQty > 0;
+      
+      let unitPrice;
+      let tierName;
+      
+      if (isCurvaComplete) {
+        // Precio curva = mayorista - $1000
+        unitPrice = product.wholesalePrice - 1000;
+        tierName = '🔄 Precio CURVA (-$1.000/u)';
+      } else {
+        unitPrice = calculateUnitPrice(totalQty, product.retailPrice, product.wholesalePrice);
+        tierName = getPriceTierName(totalQty);
+      }
+      
+      const totalPrice = unitPrice * totalQty;
+
+      // Update summary display
+      document.getElementById('summaryQty').textContent = `${totalQty} unidades`;
+      document.getElementById('summaryUnitPrice').textContent = formatPrice(unitPrice);
+      document.getElementById('summaryTotal').textContent = formatPrice(totalPrice);
+      document.getElementById('summaryTier').innerHTML = `Tu nivel de precio: <span>${tierName}</span>`;
+
+      // Update selected items list
+      const selectedItemsContainer = document.getElementById('selectedItems');
+      const selectedItemsList = document.getElementById('selectedItemsList');
+
+      if (selection.length > 0) {
+        selectedItemsContainer.style.display = 'block';
+        selectedItemsList.innerHTML = selection.map(item => 
+          `<span class="selected-item-tag"><strong>${item.quantity}×</strong> ${item.size} ${item.color}</span>`
+        ).join('');
+      } else {
+        selectedItemsContainer.style.display = 'none';
+      }
+    }
+
+    function addToCartRevendedor() {
+      const selection = getMatrixSelection();
+      
+      if (selection.length === 0) {
+        showNotification('Seleccioná al menos una prenda en la tabla', 'error');
+        return;
+      }
+
+      const cart = getCart();
+      let addedCount = 0;
+      
+      // Check if curva price applies
+      const totalQty = selection.reduce((sum, item) => sum + item.quantity, 0);
+      const curvaQty = product.sizes.length * curvaCount;
+      const isCurvaComplete = curvaUsed && totalQty >= curvaQty && curvaQty > 0;
+      
+      // Precio curva = mayorista - $1000
+      const curvaPrice = product.wholesalePrice - 1000;
+
+      selection.forEach(sel => {
+        const item = {
+          sku: product.sku,
+          name: product.name,
+          image: `../assets/img/${product.folder}/${product.images[0]}`,
+          color: sel.color,
+          size: sel.size,
+          quantity: sel.quantity,
+          retailPrice: product.retailPrice,
+          wholesalePrice: isCurvaComplete ? curvaPrice : product.wholesalePrice,
+          isCurva: isCurvaComplete
+        };
+
+        const existingIndex = cart.findIndex(i => 
+          i.sku === item.sku && i.color === item.color && i.size === item.size
+        );
+
+        if (existingIndex > -1) {
+          cart[existingIndex].quantity += sel.quantity;
+        } else {
+          cart.push(item);
+        }
+        addedCount += sel.quantity;
+      });
+
+      saveCart(cart);
+      clearMatrix();
+      const priceType = isCurvaComplete ? ' a PRECIO CURVA' : '';
+      showNotification(`✓ ${addedCount} prendas agregadas al carrito${priceType}`, 'success');
+    }
+
+    function sendWhatsAppOrder() {
+      const selection = getMatrixSelection();
+      
+      if (selection.length === 0) {
+        showNotification('Seleccioná al menos una prenda', 'error');
+        return;
+      }
+
+      const totalQty = selection.reduce((sum, item) => sum + item.quantity, 0);
+      
+      // Check if curva price applies
+      const curvaQty = product.sizes.length * curvaCount;
+      const isCurvaComplete = curvaUsed && totalQty >= curvaQty && curvaQty > 0;
+      
+      let unitPrice;
+      let tierName;
+      
+      if (isCurvaComplete) {
+        unitPrice = product.wholesalePrice - 1000;
+        tierName = '🔄 Precio CURVA (-$1.000/u)';
+      } else {
+        unitPrice = calculateUnitPrice(totalQty, product.retailPrice, product.wholesalePrice);
+        tierName = getPriceTierName(totalQty);
+      }
+      
+      const totalPrice = unitPrice * totalQty;
+
+      let message = `¡Hola! 👋 Quiero hacer un pedido:\n\n`;
+      message += `📦 *${product.name}* (${product.sku})\n`;
+      message += `💰 Nivel: ${tierName}\n\n`;
+      message += `Detalle:\n`;
+
+      selection.forEach(item => {
+        message += `• ${item.quantity}× Talle ${item.size} - ${item.color}\n`;
+      });
+
+      message += `\n*Total: ${totalQty} unidades = ${formatPrice(totalPrice)}*\n`;
+      message += `(${formatPrice(unitPrice)} c/u)\n\n`;
+      message += `¿Tienen stock disponible? 🛍️`;
+
+      const phoneNumber = '5491112345678';
+      window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    // ============================================
+    // CART FUNCTIONS
+    // ============================================
+    function getCart() {
+      const cart = localStorage.getItem('almaraCart');
+      return cart ? JSON.parse(cart) : [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem('almaraCart', JSON.stringify(cart));
+      updateCartBadge();
+    }
+
+    function updateCartBadge() {
+      const cart = getCart();
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.querySelectorAll('.cart-icon .badge').forEach(badge => {
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'flex' : 'none';
+      });
+    }
+
+    // ============================================
+    // UI FUNCTIONS
+    // ============================================
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // Gallery current index
+    let currentGalleryIndex = 0;
+
+    function changeImage(thumb, src, index) {
+      currentGalleryIndex = index !== undefined ? index : currentGalleryIndex;
+      document.getElementById('mainImage').src = src;
+      document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+      if (thumb) thumb.classList.add('active');
+      updateGalleryCounter();
+    }
+
+    function updateGalleryCounter() {
+      // Counter removed - using vertical thumbnails design
+    }
+
+    function navigateGallery(direction) {
+      if (!product || !product.images) return;
+      
+      currentGalleryIndex += direction;
+      
+      // Loop around
+      if (currentGalleryIndex < 0) {
+        currentGalleryIndex = product.images.length - 1;
+      } else if (currentGalleryIndex >= product.images.length) {
+        currentGalleryIndex = 0;
+      }
+
+      // Update main image
+      const newSrc = `../assets/img/${product.folder}/${product.images[currentGalleryIndex]}`;
+      document.getElementById('mainImage').src = newSrc;
+
+      // Update active thumbnail
+      const thumbs = document.querySelectorAll('.gallery-thumb');
+      thumbs.forEach((t, i) => {
+        t.classList.toggle('active', i === currentGalleryIndex);
+      });
+
+      // Scroll thumbnail into view
+      if (thumbs[currentGalleryIndex]) {
+        thumbs[currentGalleryIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+
+      updateGalleryCounter();
+    }
+
+    function setupGalleryNavigation() {
+      const thumbsContainer = document.getElementById('galleryThumbs');
+      const thumbUpBtn = document.getElementById('thumbUp');
+      const thumbDownBtn = document.getElementById('thumbDown');
+      const scrollAmount = 110; // Scroll amount in pixels
+
+      // Thumbnail scroll buttons
+      if (thumbUpBtn) {
+        thumbUpBtn.addEventListener('click', () => {
+          thumbsContainer.scrollBy({ top: -scrollAmount, behavior: 'smooth' });
+        });
+      }
+
+      if (thumbDownBtn) {
+        thumbDownBtn.addEventListener('click', () => {
+          thumbsContainer.scrollBy({ top: scrollAmount, behavior: 'smooth' });
+        });
+      }
+
+      // Update button states based on scroll position
+      function updateScrollButtons() {
+        if (thumbUpBtn && thumbDownBtn && thumbsContainer) {
+          const isAtTop = thumbsContainer.scrollTop <= 0;
+          const isAtBottom = thumbsContainer.scrollTop + thumbsContainer.clientHeight >= thumbsContainer.scrollHeight - 5;
+          
+          thumbUpBtn.style.opacity = isAtTop ? '0.3' : '1';
+          thumbDownBtn.style.opacity = isAtBottom ? '0.3' : '1';
+        }
+      }
+
+      if (thumbsContainer) {
+        thumbsContainer.addEventListener('scroll', updateScrollButtons);
+        setTimeout(updateScrollButtons, 100); // Initial check
+      }
+
+      // Keyboard navigation (when not in zoom modal)
+      document.addEventListener('keydown', (e) => {
+        if (zoomModal && zoomModal.classList.contains('active')) return;
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') navigateGallery(-1);
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigateGallery(1);
+      });
+
+      // Swipe support for mobile on main image
+      let touchStartX = 0;
+      let touchStartY = 0;
+      const mainImage = document.getElementById('mainImage');
+
+      mainImage.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+
+      mainImage.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].screenX;
+        const touchEndY = e.changedTouches[0].screenY;
+        handleSwipe(touchEndX, touchEndY);
+      }, { passive: true });
+
+      function handleSwipe(touchEndX, touchEndY) {
+        const swipeThreshold = 50;
+        const diffX = touchStartX - touchEndX;
+        const diffY = touchStartY - touchEndY;
+        
+        // Horizontal swipe is stronger
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > swipeThreshold) {
+          if (diffX > 0) {
+            navigateGallery(1); // Swipe left = next
+          } else {
+            navigateGallery(-1); // Swipe right = prev
+          }
+        }
+      }
+    }
+
+    function showNotification(message, type) {
+      const existing = document.querySelector('.cart-notification');
+      if (existing) existing.remove();
+
+      const notification = document.createElement('div');
+      notification.className = `cart-notification cart-notification--${type}`;
+      notification.innerHTML = `<span>${type === 'success' ? '✓' : '⚠'}</span><p>${message}</p>`;
+      document.body.appendChild(notification);
+
+      setTimeout(() => notification.classList.add('show'), 10);
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+      }, 3000);
+    }
+
+    // ============================================
+    // INITIALIZATION
+    // ============================================
+    document.addEventListener('DOMContentLoaded', () => {
+      // Get SKU from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const sku = urlParams.get('sku') || '0401LU';
+
+      // Load product
+      product = productsDB[sku];
+      
+      if (!product) {
+        document.getElementById('productName').textContent = 'Producto no encontrado';
+        return;
+      }
+
+      // Update page title
+      document.title = `${product.name} | Almara+ Talles Reales`;
+      document.getElementById('pageTitle').textContent = `${product.name} | Almara+`;
+
+      // Breadcrumb
+      document.getElementById('breadcrumbCategory').textContent = product.category;
+      document.getElementById('breadcrumbProduct').textContent = product.name;
+
+      // Product name
+      document.getElementById('productName').textContent = product.name;
+
+      // Prices
+      document.getElementById('wholesalePriceDisplay').textContent = formatPrice(product.wholesalePrice);
+      document.getElementById('retailPriceDisplay').textContent = formatPrice(product.retailPrice);
+      
+      // Curva price = mayorista - $1000
+      const curvaPrice = product.wholesalePrice - 1000;
+      document.getElementById('curvaPriceDisplay').textContent = formatPrice(curvaPrice);
+
+      // Pricing tiers (CORRECTED FORMULA)
+      const tier1Price = product.retailPrice * 2; // 1 prenda: minorista × 2
+      const tier2Price = product.retailPrice + 5000; // 2-3 prendas: minorista + $5.000
+      const tier4Price = product.wholesalePrice; // 4+: mayorista
+
+      document.getElementById('tier1Price').textContent = formatPrice(tier1Price);
+      document.getElementById('tier2Price').textContent = formatPrice(tier2Price);
+      document.getElementById('tier4Price').textContent = formatPrice(tier4Price);
+
+      // Main image
+      document.getElementById('mainImage').src = `../assets/img/${product.folder}/${product.images[0]}`;
+      document.getElementById('mainImage').alt = product.name;
+
+      // Gallery thumbnails
+      const thumbsContainer = document.getElementById('galleryThumbs');
+      thumbsContainer.innerHTML = product.images.map((img, i) => `
+        <button class="gallery-thumb ${i === 0 ? 'active' : ''}" onclick="changeImage(this, '../assets/img/${product.folder}/${img}', ${i})">
+          <img src="../assets/img/${product.folder}/${img}" alt="Vista ${i + 1}">
+        </button>
+      `).join('');
+
+      // Setup gallery navigation
+      setupGalleryNavigation();
+
+      // Colors (minorista view)
+      const colorContainer = document.getElementById('colorSelector');
+      colorContainer.innerHTML = product.colors.map((color, i) => {
+        const colorCode = product.colorCodes[color] || '#ccc';
+        return `<button class="color-option ${i === 0 ? 'active' : ''}" onclick="selectColor(this, '${color}')" style="background:${colorCode}" title="${color}"></button>`;
+      }).join('');
+      document.getElementById('colorSelected').textContent = product.colors[0];
+
+      // Sizes (minorista view)
+      const sizeContainer = document.getElementById('sizeSelector');
+      sizeContainer.innerHTML = product.sizes.map((size, i) => 
+        `<button class="size-tag ${i === 0 ? 'active' : ''}" onclick="selectSize(this, '${size}')">${size}</button>`
+      ).join('');
+
+      // Description & features
+      document.getElementById('productDescription').textContent = product.description;
+      document.getElementById('productFeatures').innerHTML = product.features.map(f => `<li>✨ ${f}</li>`).join('');
+
+      // Details table
+      document.getElementById('detailSku').textContent = product.sku;
+      document.getElementById('detailCategory').textContent = product.category;
+      document.getElementById('detailFabric').textContent = product.fabric;
+      document.getElementById('detailSizes').textContent = product.sizes.join(', ');
+
+      // Generate matrix for revendedor view
+      generateMatrix();
+      updateOrderSummary();
+
+      // Load related products
+      loadRelatedProducts();
+
+      // Update cart badge
+      updateCartBadge();
+    });
+
+    // Load related products
+    function loadRelatedProducts() {
+      const container = document.getElementById('relatedProducts');
+      const otherProducts = Object.values(productsDB).filter(p => p.sku !== product.sku).slice(0, 4);
+      
+      container.innerHTML = otherProducts.map(p => `
+        <article class="product-card">
+          <a href="productDetail.html?sku=${p.sku}">
+            <div class="product-card__img">
+              <img src="../assets/img/${p.folder}/${p.images[0]}" alt="${p.name}" loading="lazy" onerror="this.src='../assets/img/logo.jpg'">
+            </div>
+            <h3 class="product-card__title">${p.name}</h3>
+            <p class="product-card__desc">${p.description.substring(0, 50)}...</p>
+          </a>
+          <p class="product-card__price">${formatPrice(p.retailPrice)}</p>
+          <a href="productDetail.html?sku=${p.sku}" class="product-card__link">Ver detalle</a>
+        </article>
+      `).join('');
+    }
+
+    // ===== ZOOM MODAL FUNCTIONALITY =====
+    let currentZoomIndex = 0;
+    const zoomModal = document.getElementById('zoomModal');
+    const zoomImage = document.getElementById('zoomImage');
+    const zoomCounter = document.getElementById('zoomCounter');
+    const zoomBtn = document.getElementById('zoomBtn');
+    const zoomClose = document.getElementById('zoomClose');
+    const zoomPrev = document.getElementById('zoomPrev');
+    const zoomNext = document.getElementById('zoomNext');
+    const zoomOverlay = document.querySelector('.zoom-modal__overlay');
+    const mainImage = document.getElementById('mainImage');
+
+    // Open zoom modal
+    function openZoom(index = 0) {
+      currentZoomIndex = index;
+      updateZoomImage();
+      zoomModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close zoom modal
+    function closeZoom() {
+      zoomModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Update zoom image
+    function updateZoomImage() {
+      const imageSrc = `../assets/img/${product.folder}/${product.images[currentZoomIndex]}`;
+      zoomImage.src = imageSrc;
+      zoomCounter.textContent = `${currentZoomIndex + 1} / ${product.images.length}`;
+    }
+
+    // Navigate images
+    function zoomNavigate(direction) {
+      currentZoomIndex += direction;
+      if (currentZoomIndex < 0) currentZoomIndex = product.images.length - 1;
+      if (currentZoomIndex >= product.images.length) currentZoomIndex = 0;
+      updateZoomImage();
+    }
+
+    // Event listeners
+    zoomBtn.addEventListener('click', () => {
+      // Find current image index
+      const currentSrc = mainImage.src;
+      const currentImageName = currentSrc.split('/').pop();
+      const index = product.images.findIndex(img => img === currentImageName);
+      openZoom(index >= 0 ? index : 0);
+    });
+
+    // Also open on main image click
+    mainImage.addEventListener('click', () => {
+      const currentSrc = mainImage.src;
+      const currentImageName = currentSrc.split('/').pop();
+      const index = product.images.findIndex(img => img === currentImageName);
+      openZoom(index >= 0 ? index : 0);
+    });
+
+    zoomClose.addEventListener('click', closeZoom);
+    zoomOverlay.addEventListener('click', closeZoom);
+    zoomPrev.addEventListener('click', () => zoomNavigate(-1));
+    zoomNext.addEventListener('click', () => zoomNavigate(1));
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!zoomModal.classList.contains('active')) return;
+      if (e.key === 'Escape') closeZoom();
+      if (e.key === 'ArrowLeft') zoomNavigate(-1);
+      if (e.key === 'ArrowRight') zoomNavigate(1);
+    });
+  </script>
+  <script src="../assets/js/auth.js"></script>
+</body>
+</html>

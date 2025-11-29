@@ -1,0 +1,24 @@
+{
+  "name": "almara-plus",
+  "version": "1.0.0",
+  "description": "Tienda Almara+ servida con Node.js y Express",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
+    "express": "^4.19.2",
+    "express-session": "^1.17.3",
+    "express-validator": "^7.3.1",
+    "helmet": "^7.0.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.15.3",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

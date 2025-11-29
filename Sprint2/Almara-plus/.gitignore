@@ -1,0 +1,16 @@
+node_modules/
+npm-debug.log*
+
+# Archivos temporales / del sistema
+.DS_Store
+Thumbs.db
+
+# Carpeta con nombres de archivo muy largos (no necesaria para el proyecto)
+assets/img/0902FI-Camisola Fibrana Lisa/tallescamisola_files/
+
+# Extensiones que no necesitamos versionar
+*.descarga
+*.enc
+*.exe
+
+

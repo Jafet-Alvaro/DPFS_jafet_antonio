@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contacto | Almara+ Talles Reales</title>
+  <link rel="icon" type="image/png" href="../favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../styles/main.css" />
+</head>
+<body>
+  <div class="topbar">
+    <p>📞 Estamos para ayudarte · Respondemos en menos de 24hs</p>
+  </div>
+
+  <header class="header">
+    <div class="container header__inner">
+      <div class="header__logo">
+        <a href="index.html">
+          <img src="../assets/img/logo.jpg" alt="Almara+">
+        </a>
+      </div>
+      <form class="header__search">
+        <input type="text" placeholder="Buscar productos..." />
+        <button type="submit" aria-label="Buscar">
+          <svg class="search-icon" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="6" />
+            <line x1="15" y1="15" x2="20" y2="20" />
+          </svg>
+        </button>
+      </form>
+      <div class="header__actions">
+        <a href="/users/login" class="header__link">Ingresar</a>
+        <a href="productCart.html" class="cart-icon">
+          🛒
+          <span class="badge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__item">Inicio</a>
+      <a href="shop.html" class="nav__item">Tienda</a>
+      <a href="coleccion.html" class="nav__item">Primavera Verano</a>
+      <a href="giftcard.html" class="nav__item">Gift Card</a>
+      <a href="talles.html" class="nav__item">Tabla de Talles</a>
+      <a href="nosotros.html" class="nav__item">Nosotros</a>
+      <a href="contacto.html" class="nav__item active">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="contact-hero">
+    <div class="container">
+      <span class="section__eyebrow">💬 Hablemos</span>
+      <h1>Contactanos</h1>
+      <p>Estamos acá para ayudarte. Escribinos y te respondemos en menos de 24hs.</p>
+    </div>
+  </section>
+
+  <!-- Contact Content -->
+  <section class="contact-content">
+    <div class="container">
+      <div class="contact-grid">
+        
+        <!-- Contact Form -->
+        <div class="contact-form-wrapper">
+          <h2>Envianos un mensaje</h2>
+          <form class="contact-form" onsubmit="submitForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nombre">Nombre completo *</label>
+                <input type="text" id="nombre" required placeholder="Tu nombre">
+              </div>
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" required placeholder="tu@email.com">
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="telefono">Teléfono / WhatsApp</label>
+                <input type="tel" id="telefono" placeholder="+54 9 11 1234-5678">
+              </div>
+              <div class="form-group">
+                <label for="asunto">Asunto *</label>
+                <select id="asunto" required>
+                  <option value="">Seleccioná un tema</option>
+                  <option value="consulta">Consulta general</option>
+                  <option value="pedido">Consulta sobre un pedido</option>
+                  <option value="talle">Ayuda con talles</option>
+                  <option value="mayorista">Quiero ser mayorista</option>
+                  <option value="cambio">Cambios y devoluciones</option>
+                  <option value="otro">Otro</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="mensaje">Mensaje *</label>
+              <textarea id="mensaje" rows="5" required placeholder="Contanos en qué podemos ayudarte..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--lg">Enviar mensaje</button>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <div class="contact-info__card">
+            <h3>Canales de atención</h3>
+            
+            <div class="contact-method">
+              <div class="contact-method__icon">💬</div>
+              <div class="contact-method__content">
+                <h4>WhatsApp</h4>
+                <p>La forma más rápida de contactarnos</p>
+                <a href="https://wa.me/5491112345678" class="btn btn--whatsapp">
+                  Escribir por WhatsApp
+                </a>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="contact-method__icon">📧</div>
+              <div class="contact-method__content">
+                <h4>Email</h4>
+                <p>Para consultas detalladas</p>
+                <a href="mailto:hola@almaraplus.com">contacto@almaraplus.com</a>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="contact-method__icon">📱</div>
+              <div class="contact-method__content">
+                <h4>Instagram</h4>
+                <p>Seguinos y escribinos por DM</p>
+                <a href="#">@almara.plus</a>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="contact-method__icon">🕐</div>
+              <div class="contact-method__content">
+                <h4>Horario de atención</h4>
+                <p>Lunes a Viernes: 9:00 - 18:00</p>
+                <p>Sábados: 10:00 - 14:00</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Showroom info -->
+          <div class="contact-info__card contact-info__card--showroom">
+            <h3>📍 Showroom</h3>
+            <p><strong>Visitanos con cita previa</strong></p>
+            <p>Buenos Aires, Argentina</p>
+            <p class="contact-showroom__note">
+              Coordiná tu visita por WhatsApp para poder atenderte de manera personalizada.
+            </p>
+            <a href="https://wa.me/5491112345678?text=Hola!%20Quiero%20coordinar%20una%20visita%20al%20showroom" class="btn btn--outline">
+              Agendar visita
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ rápidas -->
+  <section class="contact-faq">
+    <div class="container">
+      <div class="section__header section__header--center">
+        <div>
+          <span class="section__eyebrow">❓ Preguntas frecuentes</span>
+          <h2>Antes de escribir, quizás esto te ayude</h2>
+        </div>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-card">
+          <h3>¿Hacen envíos a todo el país?</h3>
+          <p>¡Sí! Enviamos a todo Argentina a través de Correo Argentino, Andreani y OCA. También hacemos envíos por moto en CABA y GBA.</p>
+        </div>
+        <div class="faq-card">
+          <h3>¿Cuánto tarda en llegar mi pedido?</h3>
+          <p>Los pedidos se preparan en 24-48hs hábiles. El envío tarda 3-5 días hábiles en CABA/GBA y 5-10 días en interior.</p>
+        </div>
+        <div class="faq-card">
+          <h3>¿Puedo cambiar una prenda?</h3>
+          <p>¡Por supuesto! Tenés 15 días para cambiar cualquier prenda por otro talle o modelo. Los cambios por talle son sin costo.</p>
+        </div>
+        <div class="faq-card">
+          <h3>¿Cómo sé qué talle elegir?</h3>
+          <p>Tenemos una <a href="talles.html">guía de talles completa</a> con medidas por categoría. Si tenés dudas, escribinos con tus medidas y te asesoramos.</p>
+        </div>
+        <div class="faq-card">
+          <h3>¿Tienen precios mayoristas?</h3>
+          <p>Sí, tenemos condiciones especiales para revendedoras. Escribinos por WhatsApp y te contamos todo sobre el programa mayorista.</p>
+        </div>
+        <div class="faq-card">
+          <h3>¿Qué medios de pago aceptan?</h3>
+          <p>Transferencia bancaria, Mercado Pago (tarjetas en cuotas), efectivo en showroom y ahora también aceptamos cripto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map placeholder -->
+  <section class="contact-map">
+    <div class="map-placeholder">
+      <div class="map-placeholder__content">
+        <span>📍</span>
+        <h3>Showroom en Buenos Aires</h3>
+        <p>Coordiná tu visita por WhatsApp</p>
+        <a href="https://wa.me/5491112345678" class="btn btn--primary">Agendar cita</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (compartido con index) -->
+  <footer class="footer" id="contacto">
+    <div class="container footer__inner">
+      <div class="footer__col footer__col-main">
+        <h3>ALMARA+</h3>
+        <p>Talles reales para mujeres auténticas. Moda plus size diseñada con amor y pensada para vos.</p>
+        <div class="footer__social">
+          <a href="#" title="Instagram"><img src="../assets/icons/insta.png" alt="Instagram"></a>
+          <a href="#" title="Facebook"><img src="../assets/icons/face.png" alt="Facebook"></a>
+          <a href="#" title="TikTok"><img src="../assets/icons/tik.png" alt="TikTok"></a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="shop.html">Ver todos los productos</a></li>
+          <li><a href="shop.html">Novedades</a></li>
+          <li><a href="shop.html">Sale</a></li>
+          <li><a href="#">Gift Card</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#">Guía de talles</a></li>
+          <li><a href="#">Envíos y entregas</a></li>
+          <li><a href="#">Cambios y devoluciones</a></li>
+          <li><a href="contacto.html">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>📍 Buenos Aires, Argentina</li>
+          <li>📧 contacto@almaraplus.com</li>
+          <li>📱 +54 9 11 6767-7843</li>
+          <li><a href="https://wa.me/5491167677843?text=Hola!%20Quiero%20consultar%20sobre%20los%20productos" class="footer__whatsapp">💬 WhatsApp directo</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <span>© 2025 Almara+. Todos los derechos reservados.</span>
+        <span>Hecho con 💛 para mujeres reales.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a href="https://wa.me/5491112345678?text=Hola!%20Quiero%20consultar%20sobre%20los%20productos" class="whatsapp-float" target="_blank" title="Consultanos por WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    function updateCartBadge() {
+      const cart = localStorage.getItem('almaraCart');
+      const cartItems = cart ? JSON.parse(cart) : [];
+      const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+      document.querySelectorAll('.cart-icon .badge').forEach(badge => {
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'flex' : 'none';
+      });
+    }
+
+    function submitForm(e) {
+      e.preventDefault();
+      
+      const nombre = document.getElementById('nombre').value;
+      const email = document.getElementById('email').value;
+      const telefono = document.getElementById('telefono').value;
+      const asunto = document.getElementById('asunto').value;
+      const mensaje = document.getElementById('mensaje').value;
+
+      // Create WhatsApp message
+      let whatsappMsg = `Hola! Soy ${nombre}.\n\n`;
+      whatsappMsg += `📧 Email: ${email}\n`;
+      if (telefono) whatsappMsg += `📱 Tel: ${telefono}\n`;
+      whatsappMsg += `📋 Asunto: ${asunto}\n\n`;
+      whatsappMsg += `💬 Mensaje:\n${mensaje}`;
+
+      // Open WhatsApp
+      window.open(`https://wa.me/5491112345678?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
+
+      // Show success
+      alert('¡Gracias por contactarnos! Te redirigimos a WhatsApp para continuar la conversación.');
+    }
+
+    updateCartBadge();
+  </script>
+  <script src="../assets/js/auth.js"></script>
+</body>
+</html>
+
+

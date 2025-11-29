@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gift Card | Almara+ Talles Reales</title>
+  <link rel="icon" type="image/png" href="../favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../styles/main.css" />
+</head>
+<body>
+  <div class="topbar">
+    <p>🎁 Regalá moda plus size · El regalo perfecto para mujeres reales</p>
+  </div>
+
+  <header class="header">
+    <div class="container header__inner">
+      <div class="header__logo">
+        <a href="index.html">
+          <img src="../assets/img/logo.jpg" alt="Almara+">
+        </a>
+      </div>
+      <form class="header__search">
+        <input type="text" placeholder="Buscar productos..." />
+        <button type="submit" aria-label="Buscar">
+          <svg class="search-icon" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="6" />
+            <line x1="15" y1="15" x2="20" y2="20" />
+          </svg>
+        </button>
+      </form>
+      <div class="header__actions">
+        <a href="/users/login" class="header__link">Ingresar</a>
+        <a href="productCart.html" class="cart-icon">
+          🛒
+          <span class="badge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__item">Inicio</a>
+      <a href="shop.html" class="nav__item">Tienda</a>
+      <a href="coleccion.html" class="nav__item">Primavera Verano</a>
+      <a href="giftcard.html" class="nav__item active">Gift Card</a>
+      <a href="talles.html" class="nav__item">Tabla de Talles</a>
+      <a href="nosotros.html" class="nav__item">Nosotros</a>
+      <a href="contacto.html" class="nav__item">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- Hero Gift Card -->
+  <section class="giftcard-hero">
+    <div class="container">
+      <div class="giftcard-hero__content">
+        <span class="section__eyebrow">🎁 El regalo perfecto</span>
+        <h1>Gift Card Almara+</h1>
+        <p>Regalá moda, regalá confianza. Dejá que ella elija las prendas que la hagan sentir increíble.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gift Cards Options -->
+  <section class="giftcard-options">
+    <div class="container">
+      <div class="section__header section__header--center">
+        <div>
+          <h2>Elegí el monto de tu Gift Card</h2>
+          <p>Todas las tarjetas tienen validez de 12 meses</p>
+        </div>
+      </div>
+
+      <div class="giftcard-grid">
+        <div class="giftcard-card" data-amount="10000">
+          <div class="giftcard-card__design">
+            <div class="giftcard-card__logo">ALMARA+</div>
+            <div class="giftcard-card__amount">$30.000</div>
+            <div class="giftcard-card__tagline">Talles reales para mujeres reales</div>
+          </div>
+          <div class="giftcard-card__info">
+            <h3>Gift Card $30.000</h3>
+            <p>Ideal para una prenda básica</p>
+            <button class="btn btn--primary" onclick="selectGiftCard(10000)">Seleccionar</button>
+          </div>
+        </div>
+
+        <div class="giftcard-card giftcard-card--popular" data-amount="20000">
+          <span class="giftcard-card__badge">Más elegida</span>
+          <div class="giftcard-card__design giftcard-card__design--gold">
+            <div class="giftcard-card__logo">ALMARA+</div>
+            <div class="giftcard-card__amount">$70.000</div>
+            <div class="giftcard-card__tagline">Talles reales para mujeres reales</div>
+          </div>
+          <div class="giftcard-card__info">
+            <h3>Gift Card $70.000</h3>
+            <p>Para un look completo</p>
+            <button class="btn btn--primary" onclick="selectGiftCard(20000)">Seleccionar</button>
+          </div>
+        </div>
+
+        <div class="giftcard-card" data-amount="30000">
+          <div class="giftcard-card__design giftcard-card__design--premium">
+            <div class="giftcard-card__logo">ALMARA+</div>
+            <div class="giftcard-card__amount">$120.000</div>
+            <div class="giftcard-card__tagline">Talles reales para mujeres reales</div>
+          </div>
+          <div class="giftcard-card__info">
+            <h3>Gift Card $120.000</h3>
+            <p>El regalo más generoso</p>
+            <button class="btn btn--primary" onclick="selectGiftCard(30000)">Seleccionar</button>
+          </div>
+        </div>
+
+        <div class="giftcard-card" data-amount="50000">
+          <div class="giftcard-card__design giftcard-card__design--vip">
+            <div class="giftcard-card__logo">ALMARA+</div>
+            <div class="giftcard-card__amount">$300.000</div>
+            <div class="giftcard-card__tagline">Talles reales para mujeres reales</div>
+          </div>
+          <div class="giftcard-card__info">
+            <h3>Gift Card $300.000</h3>
+            <p>Experiencia VIP completa</p>
+            <button class="btn btn--primary" onclick="selectGiftCard(50000)">Seleccionar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom amount -->
+      <div class="giftcard-custom">
+        <h3>¿Preferís otro monto?</h3>
+        <p>Elegí el valor que quieras para tu Gift Card</p>
+        <div class="giftcard-custom__form">
+          <div class="giftcard-custom__input">
+            <span>$</span>
+            <input type="number" id="customAmount" placeholder="Ej: 15000" min="5000" step="1000">
+          </div>
+          <button class="btn btn--primary" onclick="selectCustomAmount()">Continuar</button>
+        </div>
+        <small>Monto mínimo: $15.000</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="giftcard-how">
+    <div class="container">
+      <div class="section__header section__header--center">
+        <div>
+          <span class="section__eyebrow">📋 Súper fácil</span>
+          <h2>¿Cómo funciona?</h2>
+        </div>
+      </div>
+
+      <div class="giftcard-steps">
+        <div class="giftcard-step">
+          <div class="giftcard-step__number">1</div>
+          <h3>Elegí el monto</h3>
+          <p>Seleccioná una de nuestras opciones o elegí un monto personalizado.</p>
+        </div>
+        <div class="giftcard-step">
+          <div class="giftcard-step__number">2</div>
+          <h3>Completá los datos</h3>
+          <p>Ingresá el nombre de quien recibe el regalo y un mensaje especial.</p>
+        </div>
+        <div class="giftcard-step">
+          <div class="giftcard-step__number">3</div>
+          <h3>Realizá el pago</h3>
+          <p>Transferencia, efectivo o tarjeta. Todas las formas de pago disponibles.</p>
+        </div>
+        <div class="giftcard-step">
+          <div class="giftcard-step__number">4</div>
+          <h3>¡Listo para regalar!</h3>
+          <p>Recibís el código por email o WhatsApp para compartir con tu persona especial.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="giftcard-faq">
+    <div class="container">
+      <div class="section__header section__header--center">
+        <div>
+          <span class="section__eyebrow">❓ Preguntas frecuentes</span>
+          <h2>Dudas sobre Gift Cards</h2>
+        </div>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Cuánto tiempo tiene de validez la Gift Card?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Todas nuestras Gift Cards tienen una validez de 12 meses desde la fecha de compra.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Se puede usar en compras online y en showroom?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>¡Sí! La Gift Card se puede usar tanto en nuestra tienda online como en nuestro showroom físico.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Qué pasa si el monto de la compra es mayor?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Si la compra supera el monto de la Gift Card, simplemente se paga la diferencia con otro medio de pago.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Puedo combinar varias Gift Cards en una compra?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>¡Claro que sí! Podés usar hasta 3 Gift Cards en una misma compra.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>¿La Gift Card es reembolsable?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Las Gift Cards no son reembolsables, pero sí transferibles. Podés regalarla a otra persona si lo deseás.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="giftcard-cta">
+    <div class="container">
+      <div class="giftcard-cta__content">
+        <h2>¿Necesitás ayuda para elegir?</h2>
+        <p>Contactanos y te asesoramos para encontrar el regalo perfecto</p>
+        <a href="https://wa.me/5491112345678?text=Hola!%20Quiero%20consultar%20sobre%20las%20Gift%20Cards" class="btn btn--whatsapp btn--lg">
+          💬 Consultar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (compartido con index) -->
+  <footer class="footer" id="contacto">
+    <div class="container footer__inner">
+      <div class="footer__col footer__col-main">
+        <h3>ALMARA+</h3>
+        <p>Talles reales para mujeres auténticas. Moda plus size diseñada con amor y pensada para vos.</p>
+        <div class="footer__social">
+          <a href="#" title="Instagram"><img src="../assets/icons/insta.png" alt="Instagram"></a>
+          <a href="#" title="Facebook"><img src="../assets/icons/face.png" alt="Facebook"></a>
+          <a href="#" title="TikTok"><img src="../assets/icons/tik.png" alt="TikTok"></a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="shop.html">Ver todos los productos</a></li>
+          <li><a href="shop.html">Novedades</a></li>
+          <li><a href="shop.html">Sale</a></li>
+          <li><a href="#">Gift Card</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#">Guía de talles</a></li>
+          <li><a href="#">Envíos y entregas</a></li>
+          <li><a href="#">Cambios y devoluciones</a></li>
+          <li><a href="contacto.html">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>📍 Buenos Aires, Argentina</li>
+          <li>📧 contacto@almaraplus.com</li>
+          <li>📱 +54 9 11 6767-7843</li>
+          <li><a href="https://wa.me/5491167677843?text=Hola!%20Quiero%20consultar%20sobre%20los%20productos" class="footer__whatsapp">💬 WhatsApp directo</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <span>© 2025 Almara+. Todos los derechos reservados.</span>
+        <span>Hecho con 💛 para mujeres reales.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a href="https://wa.me/5491112345678?text=Hola!%20Quiero%20consultar%20sobre%20los%20productos" class="whatsapp-float" target="_blank" title="Consultanos por WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    // Update cart badge
+    function updateCartBadge() {
+      const cart = localStorage.getItem('almaraCart');
+      const cartItems = cart ? JSON.parse(cart) : [];
+      const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+      document.querySelectorAll('.cart-icon .badge').forEach(badge => {
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'flex' : 'none';
+      });
+    }
+
+    function selectGiftCard(amount) {
+      const message = `Hola! Quiero comprar una Gift Card de $${amount.toLocaleString('es-AR')}`;
+      window.open(`https://wa.me/5491112345678?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function selectCustomAmount() {
+      const amount = parseInt(document.getElementById('customAmount').value);
+      if (!amount || amount < 5000) {
+        alert('El monto mínimo es $5.000');
+        return;
+      }
+      const message = `Hola! Quiero comprar una Gift Card de $${amount.toLocaleString('es-AR')}`;
+      window.open(`https://wa.me/5491112345678?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('faq-item--open');
+      
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('faq-item--open'));
+      
+      // Open clicked if was closed
+      if (!isOpen) {
+        item.classList.add('faq-item--open');
+      }
+    }
+
+    updateCartBadge();
+  </script>
+  <script src="../assets/js/auth.js"></script>
+</body>
+</html>
+
+

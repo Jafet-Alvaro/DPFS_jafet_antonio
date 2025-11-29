@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ingresar | Almara+</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../../styles/main.css" />
+</head>
+<body class="auth-page">
+  <main class="auth">
+    <h1>Ingresar</h1>
+    <p class="auth__subtitle">Entrá para gestionar tus pedidos y seguir comprando donde quedaste.</p>
+    <form class="form" method="POST" action="/users/login">
+      <label>Email
+        <input type="email" name="email" required />
+      </label>
+      <label>Contraseña
+        <input type="password" name="password" required />
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" name="remember" />
+        <span>Mantenerme conectada por 30 días en este dispositivo</span>
+      </label>
+      <p class="auth__hint">Usá esta opción solo en tu computadora o celular personal.</p>
+      <button type="submit" class="btn btn--primary">Ingresar</button>
+      <a href="#" class="link">Olvidé mi contraseña</a>
+      <br>
+      <h4>¿No estás registrado aún? 👉 
+        <a href="/users/register" class="btn btn--primary">Registrarme</a>
+      </h4>
+    </form>
+  </main>
+  <script src="../../assets/js/forms.js"></script>
+</body>
+</html>
+
+

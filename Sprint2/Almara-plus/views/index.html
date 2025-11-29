@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Almara+ | Talles reales para mujeres auténticas</title>
+  <link rel="icon" type="image/png" href="../favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../styles/main.css" />
+</head>
+<body>
+  <div class="topbar">
+    <p>🏷️ Comprá 4+ prendas = PRECIO MAYORISTA · 💰 ¡Cuánto más llevás, más ahorrás! · 🚚 Envíos a todo el país</p>
+  </div>
+
+  <header class="header">
+    <div class="container header__inner">
+      <div class="header__logo">
+        <a href="index.html">
+          <img src="../assets/img/logo.jpg" alt="Almara+">
+        </a>
+      </div>
+
+      <form class="header__search" onsubmit="searchProducts(event)">
+        <input type="text" placeholder="Buscar productos..." id="searchInput" />
+        <button type="submit" aria-label="Buscar">
+          <svg class="search-icon" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="6" />
+            <line x1="15" y1="15" x2="20" y2="20" />
+          </svg>
+        </button>
+      </form>
+
+      <div class="header__actions">
+        <a href="/users/login" class="header__link">Ingresar</a>
+        <a href="productCart.html" class="cart-icon">
+          🛒
+          <span class="badge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__item active">Inicio</a>
+      <a href="shop.html" class="nav__item">Tienda</a>
+      <a href="coleccion.html" class="nav__item">Primavera Verano</a>
+      <a href="giftcard.html" class="nav__item">Gift Card</a>
+      <a href="talles.html" class="nav__item">Tabla de Talles</a>
+      <a href="nosotros.html" class="nav__item">Nosotros</a>
+      <a href="contacto.html" class="nav__item">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero" style="background-image: url('../assets/img/portada.jpg');">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">✨ Colección Primavera - Verano 2026</p>
+      <h1 class="hero__title">No solamente es<br>Talle Plus Size,<br>también es Actitud Plus</h1>
+      <p class="hero__text">
+        Prendas pensadas desde el molde plus size. Curvas completas, telas frescas y mucho estilo.
+      </p>
+      <div class="hero__actions">
+        <a href="shop.html" class="btn btn--primary">Ver colección</a>
+        <a href="#nuevos" class="btn btn--ghost">Nuevos ingresos</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span>Descubrí más</span>
+      <div class="scroll-indicator">↓</div>
+    </div>
+  </section>
+
+  <!-- FEATURES BAR -->
+  <section class="features-bar">
+    <div class="container features-bar__inner">
+      <div class="feature-item">
+        <span class="feature-icon">📏</span>
+        <div>
+          <strong>Talles Reales</strong>
+          <p>Del 6 al 16, moldes ampliados</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🚚</span>
+        <div>
+          <strong>Envío a todo el país</strong>
+          <p>Seguimiento en tiempo real</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">💳</span>
+        <div>
+          <strong>Múltiples pagos</strong>
+          <p>Efectivo, transferencia, tarjetas</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🔄</span>
+        <div>
+          <strong>Cambios sin costo</strong>
+          <p>15 días para cambiar</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="section categories">
+    <div class="container">
+      <h2 class="section__title">Explorá por categoría</h2>
+      <div class="categories__grid">
+        <a href="shop.html" class="category-card category-card--featured" style="background-image: url('../assets/img/3109CA-Vestido Cey/DSC_0988.jpg');">
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <span class="category-card__label">Vestidos</span>
+            <span class="category-card__count">+20 estilos</span>
+          </div>
+        </a>
+        <a href="shop.html" class="category-card" style="background-image: url('../assets/img/1923CA-Palazzo Cey/IMG_2024.jpg');">
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <span class="category-card__label">Pantalones</span>
+            <span class="category-card__count">+25 estilos</span>
+          </div>
+        </a>
+        <a href="shop.html" class="category-card" style="background-image: url('../assets/img/0401LU-Blusa Cruzada Lurex/DSC_0198.jpg');">
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <span class="category-card__label">Blusas</span>
+            <span class="category-card__count">+15 estilos</span>
+          </div>
+        </a>
+        <a href="shop.html" class="category-card" style="background-image: url('../assets/img/2900MD-Short Modal/DSC_0062.jpg');">
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <span class="category-card__label">Shorts</span>
+            <span class="category-card__count">+10 estilos</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW ARRIVALS -->
+  <section class="section products" id="nuevos">
+    <div class="container">
+      <div class="section__header">
+        <div>
+          <span class="section__eyebrow">Lo más nuevo</span>
+          <h2>¡Nuevos ingresos!</h2>
+        </div>
+        <a href="shop.html" class="btn btn--outline">Ver todos →</a>
+      </div>
+      <div class="products__grid">
+        <!-- Product 1: Vestido Cey -->
+        <article class="product-card">
+          <span class="badge badge--new">Nuevo</span>
+          <a href="productDetail.html?sku=3109CA">
+            <div class="product-card__img">
+              <img src="../assets/img/3109CA-Vestido Cey/DSC_0988.jpg" alt="Vestido Cey" loading="lazy" onerror="this.src='../assets/img/logo.jpg'">
+            </div>
+            <h3 class="product-card__title">Vestido Cey</h3>
+            <p class="product-card__desc">Airflow que respira frescura.</p>
+          </a>
+          <p class="product-card__price">$17.000</p>
+          <p class="product-card__colors">Negro · Beige · Verde</p>
+          <div class="product-card__actions">
+            <a href="productDetail.html?sku=3109CA" class="product-card__link">Ver detalle</a>
+            <button class="product-card__cart" onclick="quickAddToCart('3109CA')" title="Agregar al carrito">🛒</button>
+          </div>
+        </article>
+
+        <!-- Product 2: Blazer Golden -->
+        <article class="product-card">
+          <span class="badge badge--new">Nuevo</span>
+          <a href="productDetail.html?sku=0302BE">
+            <div class="product-card__img">
+              <img src="../assets/img/0302BE-Blazer Golden/blazergolden.jpg" alt="Blazer Golden" loading="lazy" onerror="this.src='../assets/img/logo.jpg'">
+            </div>
+            <h3 class="product-card__title">Blazer Golden</h3>
+            <p class="product-card__desc">Elegancia que impone presencia.</p>
+          </a>
+          <p class="product-card__price">$13.500</p>
+          <p class="product-card__colors">Negro · Verde Militar · Verde Esmeralda</p>
+          <div class="product-card__actions">
+            <a href="productDetail.html?sku=0302BE" class="product-card__link">Ver detalle</a>
+            <button class="product-card__cart" onclick="quickAddToCart('0302BE')" title="Agregar al carrito">🛒</button>
+          </div>
+        </article>
+
+        <!-- Product 3: Blusa Cruzada Lurex -->
+        <article class="product-card">
+          <span class="badge badge--new">Nuevo</span>
+          <a href="productDetail.html?sku=0401LU">
+            <div class="product-card__img">
+              <img src="../assets/img/0401LU-Blusa Cruzada Lurex/DSC_0198.jpg" alt="Blusa Cruzada Lurex" loading="lazy" onerror="this.src='../assets/img/logo.jpg'">
+            </div>
+            <h3 class="product-card__title">Blusa Cruzada Lurex</h3>
+            <p class="product-card__desc">Brillo sofisticado que realza tu silueta.</p>
+          </a>
+          <p class="product-card__price">$23.000</p>
+          <p class="product-card__colors">7 colores</p>
+          <div class="product-card__actions">
+            <a href="productDetail.html?sku=0401LU" class="product-card__link">Ver detalle</a>
+            <button class="product-card__cart" onclick="quickAddToCart('0401LU')" title="Agregar al carrito">🛒</button>
+          </div>
+        </article>
+
+        <!-- Product 4: Palazzo Cey -->
+        <article class="product-card">
+          <span class="badge badge--new">Nuevo</span>
+          <a href="productDetail.html?sku=1923CA">
+            <div class="product-card__img">
+              <img src="../assets/img/1923CA-Palazzo Cey/IMG_2024.jpg" alt="Palazzo Cey" loading="lazy" onerror="this.src='../assets/img/logo.jpg'">
+            </div>
+            <h3 class="product-card__title">Palazzo Cey</h3>
+            <p class="product-card__desc">Airflow que respira frescura.</p>
+          </a>
+          <p class="product-card__price">$14.000</p>
+          <p class="product-card__colors">5 colores</p>
+          <div class="product-card__actions">
+            <a href="productDetail.html?sku=1923CA" class="product-card__link">Ver detalle</a>
+            <button class="product-card__cart" onclick="quickAddToCart('1923CA')" title="Agregar al carrito">🛒</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING TIERS BANNER -->
+  <section class="pricing-banner">
+    <div class="container">
+      <div class="pricing-banner__header">
+        <span class="pricing-banner__icon">💰</span>
+        <h2>¡Cuánto más comprás, más ahorrás!</h2>
+        <p>Nuestro sistema de precios te premia por comprar más</p>
+      </div>
+      <div class="pricing-banner__grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="pricing-banner__tier">
+          <div class="tier-qty">1</div>
+          <div class="tier-label">prenda</div>
+          <div class="tier-formula">Minorista × 2</div>
+          <div class="tier-example">Ej: $26.000 → <strong>$52.000</strong></div>
+        </div>
+        <div class="pricing-banner__tier">
+          <div class="tier-qty">2-3</div>
+          <div class="tier-label">prendas</div>
+          <div class="tier-formula">Minorista + $5.000/u</div>
+          <div class="tier-example">Ej: $26.000 → <strong>$31.000/u</strong></div>
+        </div>
+        <div class="pricing-banner__tier pricing-banner__tier--best">
+          <div class="tier-badge">🌟 Mejor precio</div>
+          <div class="tier-qty">4+</div>
+          <div class="tier-label">prendas</div>
+          <div class="tier-formula">¡PRECIO MAYORISTA!</div>
+          <div class="tier-example">Ej: $26.000 → <strong>$23.000/u</strong></div>
+        </div>
+      </div>
+      <div class="pricing-banner__cta">
+        <a href="shop.html" class="btn btn--primary btn--lg">Empezar a comprar</a>
+        <p class="pricing-banner__note">El precio se calcula automáticamente según la cantidad total en tu carrito</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEST SELLERS -->
+  <section class="section products products--alt">
+    <div class="container">
+      <div class="section__header">
+        <div>
+          <span class="section__eyebrow">🔥 Lo más pedido</span>
+          <h2>Artículos con mayor demanda</h2>
+        </div>
+        <a href="shop.html" class="btn btn--outline">Ver más →</a>
+      </div>
+      <div class="products__grid">
+        <!-- Product 1: Short Modal -->
+        <article class="product-card">
+          <span class="badge badge--hot">🔥 Hot</span>
+          <a href="productDetail.html?sku=2900MD">
+            <div class="product-card__img">
+              <img src="../assets/img/2900MD-Short Modal/DSC_0062.jpg" alt="Short Modal" loading="lazy" onerror="this.src='../assets/img/logo.jpg'">
+            </div>
+            <h3 class="product-card__title">Short Modal</h3>
+            <p class="product-card__desc">Comodidad veraniega en estado puro.</p>
+          </a>
+          <p class="product-card__price">$8.000</p>
+          <p class="product-card__colors">6 colores</p>
+          <div class="product-card__actions">
+            <a href="productDetail.html?sku=2900MD" class="product-card__link">Ver detalle</a>
+            <button class="product-card__cart" onclick="quickAddToCart('2900MD')" title="Agregar al carrito">🛒</button>
+          </div>
+        </article>
+
+        <!-- Product 2: Mono Lino -->
+        <article class="product-card">
+          <span class="badge badge--hot">🔥 Hot</span>
+          <a href="productDetail.html?sku=1601LS">
+            <div class="product-card__img">
+              <img src="../assets/img/1601LS-Mono Lino/DSC_0352.jpg" alt="Mono Lino" loading="lazy" onerror="this.src='../assets/img/logo.jpg'">
+            </div>
+            <h3 class="product-card__title">Mono Lino</h3>
+            <p class="product-card__desc">Un solo paso y estás lista.</p>
+          </a>
+          <p class="product-card__price">$20.000</p>
+          <p class="product-card__colors">Negro · Verde Militar</p>
+          <div class="product-card__actions">
+            <a href="productDetail.html?sku=1601LS" class="product-card__link">Ver detalle</a>
+            <button class="product-card__cart" onclick="quickAddToCart('1601LS')" title="Agregar al carrito">🛒</button>
+          </div>
+        </article>
+
+        <!-- Product 3: Palazzo Lurex -->
+        <article class="product-card">
+          <span class="badge badge--hot">🔥 Hot</span>
+          <a href="productDetail.html?sku=1901LU">
+            <div class="product-card__img">
+              <img src="../assets/img/1901LU-Palazzo Lurex/DSC_0029.jpg" alt="Palazzo Lurex" loading="lazy" onerror="this.src='../assets/img/logo.jpg'">
+            </div>
+            <h3 class="product-card__title">Palazzo Lúrex</h3>
+            <p class="product-card__desc">Palazzo de gala que deslumbra.</p>
+          </a>
+          <p class="product-card__price">$24.000</p>
+          <p class="product-card__colors">Negro</p>
+          <div class="product-card__actions">
+            <a href="productDetail.html?sku=1901LU" class="product-card__link">Ver detalle</a>
+            <button class="product-card__cart" onclick="quickAddToCart('1901LU')" title="Agregar al carrito">🛒</button>
+          </div>
+        </article>
+
+        <!-- Product 4: Vestido Cey Scarlett -->
+        <article class="product-card">
+          <span class="badge badge--hot">🔥 Hot</span>
+          <a href="productDetail.html?sku=3125CY">
+            <div class="product-card__img">
+              <img src="../assets/img/3125CY-Vestido Cey Scarlett/26.jpg" alt="Vestido Cey Scarlett" loading="lazy" onerror="this.src='../assets/img/logo.jpg'">
+            </div>
+            <h3 class="product-card__title">Vestido Cey Scarlett</h3>
+            <p class="product-card__desc">Pasión y elegancia en un vestido.</p>
+          </a>
+          <p class="product-card__price">$17.000</p>
+          <p class="product-card__colors">Negro · Rojo · Celeste</p>
+          <div class="product-card__actions">
+            <a href="productDetail.html?sku=3125CY" class="product-card__link">Ver detalle</a>
+            <button class="product-card__cart" onclick="quickAddToCart('3125CY')" title="Agregar al carrito">🛒</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section class="section highlights">
+    <div class="container">
+      <div class="highlights__grid">
+        <div class="highlight-card highlight-card--primary">
+          <div class="highlight-card__icon">👗</div>
+          <h3>Básicos Premium</h3>
+          <p><strong>Hasta 15% OFF</strong> en prendas seleccionadas. Pensadas en talles reales que abrazan tus curvas.</p>
+          <a href="shop.html" class="btn btn--primary">Comprar ahora</a>
+        </div>
+        <div class="highlight-card highlight-card--secondary">
+          <div class="highlight-card__icon">🏷️</div>
+          <h3>Outlet ALMARA+</h3>
+          <p><strong>Hasta 30% OFF</strong> en stock limitado. Últimas unidades de la temporada anterior.</p>
+          <a href="shop.html" class="btn btn--outline">Ir al outlet</a>
+        </div>
+        <div class="highlight-card highlight-card--accent">
+          <div class="highlight-card__icon">📏</div>
+          <h3>Talles Reales</h3>
+          <p>Molde ampliado de sisa y cadera, no solo de largo. <strong>Guía de talles clara</strong> para que elijas perfecto.</p>
+          <a href="#" class="btn btn--ghost">Ver guía de talles</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SALE PRODUCTS -->
+  <section class="section products products--sale">
+    <div class="container">
+      <div class="section__header">
+        <div>
+          <span class="section__eyebrow">🔥 Oportunidades</span>
+          <h2>¡En SALE!</h2>
+        </div>
+        <a href="shop.html" class="btn btn--outline">Ver todo el sale →</a>
+      </div>
+      <div class="products__grid products__grid--3">
+        <!-- Sale Product 1 -->
+        <article class="product-card">
+          <span class="badge badge--sale">-20%</span>
+          <a href="productDetail.html?sku=0403PM">
+            <div class="product-card__img">
+              <img src="../assets/img/0403PM-Blusa Plumetí/2.jpg" alt="Blusa Plumetí" loading="lazy" onerror="this.src='../assets/img/logo.jpg'">
+            </div>
+            <h3 class="product-card__title">Blusa Plumetí</h3>
+            <p class="product-card__desc">Textura delicada y romántica.</p>
+          </a>
+          <p class="product-card__price">$10.000 <span class="old-price">$12.000</span></p>
+          <p class="product-card__colors">4 colores</p>
+          <div class="product-card__actions">
+            <a href="productDetail.html?sku=0403PM" class="product-card__link">Ver detalle</a>
+            <button class="product-card__cart" onclick="quickAddToCart('0403PM')" title="Agregar al carrito">🛒</button>
+          </div>
+        </article>
+
+        <!-- Sale Product 2 -->
+        <article class="product-card">
+          <span class="badge badge--sale">-17%</span>
+          <a href="productDetail.html?sku=3102FI">
+            <div class="product-card__img">
+              <img src="../assets/img/3102FI-Vestido con Volado/DSC_0107-2.jpg" alt="Vestido con Volado" loading="lazy" onerror="this.src='../assets/img/logo.jpg'">
+            </div>
+            <h3 class="product-card__title">Vestido con Volado</h3>
+            <p class="product-card__desc">Volados que danzan con cada paso.</p>
+          </a>
+          <p class="product-card__price">$19.000 <span class="old-price">$23.000</span></p>
+          <p class="product-card__colors">Estampados</p>
+          <div class="product-card__actions">
+            <a href="productDetail.html?sku=3102FI" class="product-card__link">Ver detalle</a>
+            <button class="product-card__cart" onclick="quickAddToCart('3102FI')" title="Agregar al carrito">🛒</button>
+          </div>
+        </article>
+
+        <!-- Sale Product 3 -->
+        <article class="product-card">
+          <span class="badge badge--sale">-23%</span>
+          <a href="productDetail.html?sku=0908LY">
+            <div class="product-card__img">
+              <img src="../assets/img/0908LY-Camisola Cey Lazo Nudo/DSC_0222.jpg" alt="Camisola Cey Lazo" loading="lazy" onerror="this.src='../assets/img/logo.jpg'">
+            </div>
+            <h3 class="product-card__title">Camisola Cey Lazo</h3>
+            <p class="product-card__desc">Detalle de lazo que conquista miradas.</p>
+          </a>
+          <p class="product-card__price">$10.000 <span class="old-price">$13.000</span></p>
+          <p class="product-card__colors">5 colores</p>
+          <div class="product-card__actions">
+            <a href="productDetail.html?sku=0908LY" class="product-card__link">Ver detalle</a>
+            <button class="product-card__cart" onclick="quickAddToCart('0908LY')" title="Agregar al carrito">🛒</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT / NOSOTROS -->
+  <section class="about-section" id="nosotros">
+    <div class="container about-section__inner">
+      <div class="about-section__image">
+        <img src="../assets/img/0200MD-Babucha Modal/DSC_0033.jpg" alt="Sobre Almara+" loading="lazy">
+      </div>
+      <div class="about-section__content">
+        <span class="section__eyebrow">Nuestra historia</span>
+        <h2>Somos Almara+</h2>
+        <p>Nacimos con la misión de crear moda <strong>real para cuerpos reales</strong>. Cada prenda está diseñada desde el molde plus size, no adaptada.</p>
+        <p>Entendemos que la moda debe <strong>celebrar tu cuerpo</strong>, no ocultarlo. Por eso nuestras prendas tienen cortes pensados para realzar tus curvas, con telas frescas y cómodas.</p>
+        <ul class="about-section__list">
+          <li>✓ Talles del 6 al 16 (moldería ampliada)</li>
+          <li>✓ Telas premium seleccionadas</li>
+          <li>✓ Diseños exclusivos pensados para vos</li>
+          <li>✓ Precios mayoristas para emprendedoras</li>
+        </ul>
+        <a href="shop.html" class="btn btn--primary">Conocé nuestra colección</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section testimonials-section">
+    <div class="container">
+      <div class="section__header section__header--center">
+        <div>
+          <span class="section__eyebrow">💬 Lo que dicen nuestras clientas</span>
+          <h2>Testimonios reales</h2>
+        </div>
+      </div>
+      <div class="testimonials__grid">
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-card__text">"Por fin encontré una marca que entiende mi cuerpo. Los talles son reales, no tuve que seguir buscando. ¡Las amo!"</p>
+          <div class="testimonial-card__author">
+            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="María Laura" class="testimonial-card__avatar">
+            <div>
+              <strong>María Laura</strong>
+              <span>Buenos Aires</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-card__text">"Excelente calidad y el envío llegó súper rápido. La atención por WhatsApp es increíble, me ayudaron a elegir el talle perfecto."</p>
+          <div class="testimonial-card__author">
+            <img src="https://randomuser.me/api/portraits/women/76.jpg" alt="Carolina S." class="testimonial-card__avatar">
+            <div>
+              <strong>Carolina S.</strong>
+              <span>Córdoba</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial-card__text">"Empecé a revender la marca y mis clientas están encantadas. La relación calidad-precio es imbatible. 100% recomendado."</p>
+          <div class="testimonial-card__author">
+            <img src="https://randomuser.me/api/portraits/women/89.jpg" alt="Valentina G." class="testimonial-card__avatar">
+            <div>
+              <strong>Valentina G.</strong>
+              <span>Mendoza</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonials__stats">
+        <div class="stat-item">
+          <span class="stat-number">15+</span>
+          <span class="stat-label">Años de experiencia</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">92%</span>
+          <span class="stat-label">Clientes satisfechas</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">4.7/5</span>
+          <span class="stat-label">Calificación promedio</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <div class="container newsletter-section__inner">
+      <div class="newsletter-section__content">
+        <h2>¡Conseguí un 10% en tu primera compra!</h2>
+        <p>Suscribite y recibí novedades, lanzamientos exclusivos y ofertas especiales directamente en tu mail.</p>
+        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+          <input type="email" placeholder="Tu correo electrónico" required id="newsletterEmail" />
+          <button type="submit" class="btn btn--primary">Suscribirme</button>
+        </form>
+        <p class="newsletter-section__note">🔒 No spam. Podés darte de baja cuando quieras.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM FEED (Visual) -->
+  <section class="instagram-section">
+    <div class="container">
+      <div class="section__header section__header--center">
+        <div>
+          <span class="section__eyebrow">📸 Seguinos en Instagram</span>
+          <h2>@almara.plus</h2>
+        </div>
+      </div>
+      <div class="instagram__grid">
+        <a href="#" class="instagram__item">
+          <img src="../assets/img/3109CA-Vestido Cey/DSC_0988.jpg" alt="Instagram" loading="lazy">
+          <div class="instagram__overlay">❤️</div>
+        </a>
+        <a href="#" class="instagram__item">
+          <img src="../assets/img/0302BE-Blazer Golden/blazergolden.jpg" alt="Instagram" loading="lazy">
+          <div class="instagram__overlay">❤️</div>
+        </a>
+        <a href="#" class="instagram__item">
+          <img src="../assets/img/3125CY-Vestido Cey Scarlett/26.jpg" alt="Instagram" loading="lazy">
+          <div class="instagram__overlay">❤️</div>
+        </a>
+        <a href="#" class="instagram__item">
+          <img src="../assets/img/1923CA-Palazzo Cey/IMG_2024.jpg" alt="Instagram" loading="lazy">
+          <div class="instagram__overlay">❤️</div>
+        </a>
+        <a href="#" class="instagram__item">
+          <img src="../assets/img/0401LU-Blusa Cruzada Lurex/DSC_0198.jpg" alt="Instagram" loading="lazy">
+          <div class="instagram__overlay">❤️</div>
+        </a>
+        <a href="#" class="instagram__item">
+          <img src="../assets/img/2900MD-Short Modal/DSC_0062.jpg" alt="Instagram" loading="lazy">
+          <div class="instagram__overlay">❤️</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="contacto">
+    <div class="container footer__inner">
+      <div class="footer__col footer__col-main">
+        <h3>ALMARA+</h3>
+        <p>Talles reales para mujeres auténticas. Moda plus size diseñada con amor y pensada para vos.</p>
+        <div class="footer__social">
+          <a href="#" title="Instagram"><img src="../assets/icons/insta.png" alt="Instagram"></a>
+          <a href="#" title="Facebook"><img src="../assets/icons/face.png" alt="Facebook"></a>
+          <a href="#" title="TikTok"><img src="../assets/icons/tik.png" alt="TikTok"></a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="shop.html">Ver todos los productos</a></li>
+          <li><a href="shop.html">Novedades</a></li>
+          <li><a href="shop.html">Sale</a></li>
+          <li><a href="#">Gift Card</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#">Guía de talles</a></li>
+          <li><a href="#">Envíos y entregas</a></li>
+          <li><a href="#">Cambios y devoluciones</a></li>
+          <li><a href="contacto.html">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>📍 Buenos Aires, Argentina</li>
+          <li>📧 contacto@almaraplus.com</li>
+          <li>📱 +54 9 11 6767-7843</li>
+          <li><a href="https://wa.me/5491167677843?text=Hola!%20Quiero%20consultar%20sobre%20los%20productos" class="footer__whatsapp">💬 WhatsApp directo</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <span>© 2025 Almara+. Todos los derechos reservados.</span>
+        <span>Hecho con 💛 para mujeres reales.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a href="https://wa.me/5491112345678?text=Hola!%20Quiero%20consultar%20sobre%20los%20productos" class="whatsapp-float" target="_blank" title="Consultanos por WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    // Products data for quick add
+    const productsData = {
+      '3109CA': { name: 'Vestido Cey', colors: ['Negro'], sizes: ['8'], retailPrice: 17000, folder: '3109CA-Vestido Cey', image: 'DSC_0988.jpg' },
+      '0302BE': { name: 'Blazer Golden', colors: ['Negro'], sizes: ['6'], retailPrice: 13500, folder: '0302BE-Blazer Golden', image: 'blazergolden.jpg' },
+      '0401LU': { name: 'Blusa Cruzada Lurex', colors: ['Negro'], sizes: ['8'], retailPrice: 23000, folder: '0401LU-Blusa Cruzada Lurex', image: 'DSC_0198.jpg' },
+      '1923CA': { name: 'Palazzo Cey', colors: ['Negro'], sizes: ['8'], retailPrice: 14000, folder: '1923CA-Palazzo Cey', image: 'IMG_2024.jpg' },
+      '2900MD': { name: 'Short Modal', colors: ['Negro'], sizes: ['6'], retailPrice: 8000, folder: '2900MD-Short Modal', image: 'DSC_0062.jpg' },
+      '1601LS': { name: 'Mono Lino', colors: ['Negro'], sizes: ['12'], retailPrice: 20000, folder: '1601LS-Mono Lino', image: 'DSC_0352.jpg' },
+      '1901LU': { name: 'Palazzo Lúrex', colors: ['Negro'], sizes: ['8'], retailPrice: 24000, folder: '1901LU-Palazzo Lurex', image: 'DSC_0029.jpg' },
+      '3125CY': { name: 'Vestido Cey Scarlett', colors: ['Rojo'], sizes: ['12'], retailPrice: 17000, folder: '3125CY-Vestido Cey Scarlett', image: '26.jpg' },
+      '0403PM': { name: 'Blusa Plumetí', colors: ['Negro'], sizes: ['8'], retailPrice: 10000, folder: '0403PM-Blusa Plumetí', image: '2.jpg' },
+      '3102FI': { name: 'Vestido con Volado', colors: ['Estampado'], sizes: ['8'], retailPrice: 19000, folder: '3102FI-Vestido con Volado', image: 'DSC_0107-2.jpg' },
+      '0908LY': { name: 'Camisola Cey Lazo', colors: ['Negro'], sizes: ['8'], retailPrice: 10000, folder: '0908LY-Camisola Cey Lazo Nudo', image: 'DSC_0222.jpg' }
+    };
+
+    // Cart functions
+    function getCart() {
+      const cart = localStorage.getItem('almaraCart');
+      return cart ? JSON.parse(cart) : [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem('almaraCart', JSON.stringify(cart));
+      updateCartBadge();
+    }
+
+    function updateCartBadge() {
+      const cart = getCart();
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const badges = document.querySelectorAll('.cart-icon .badge');
+      badges.forEach(badge => {
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'flex' : 'none';
+      });
+    }
+
+    function quickAddToCart(sku) {
+      const product = productsData[sku];
+      if (!product) return;
+
+      const cartItem = {
+        sku: sku,
+        name: product.name,
+        color: product.colors[0],
+        size: product.sizes[0],
+        quantity: 1,
+        price: product.retailPrice,
+        wholesalePrice: product.retailPrice,
+        image: `../assets/img/${product.folder}/${product.image}`,
+        folder: product.folder
+      };
+
+      const cart = getCart();
+      const existingIndex = cart.findIndex(item => 
+        item.sku === cartItem.sku && 
+        item.color === cartItem.color && 
+        item.size === cartItem.size
+      );
+
+      if (existingIndex > -1) {
+        cart[existingIndex].quantity += 1;
+      } else {
+        cart.push(cartItem);
+      }
+
+      saveCart(cart);
+      showNotification(`¡${product.name} agregado al carrito!`, 'success');
+      animateCartIcon();
+    }
+
+    function showNotification(message, type) {
+      const existing = document.querySelector('.cart-notification');
+      if (existing) existing.remove();
+
+      const notification = document.createElement('div');
+      notification.className = `cart-notification cart-notification--${type}`;
+      notification.innerHTML = `
+        <span>${type === 'success' ? '✓' : '⚠'}</span>
+        <p>${message}</p>
+      `;
+      document.body.appendChild(notification);
+
+      setTimeout(() => notification.classList.add('show'), 10);
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+      }, 3000);
+    }
+
+    function animateCartIcon() {
+      const cartIcon = document.querySelector('.cart-icon');
+      if (cartIcon) {
+        cartIcon.classList.add('cart-bounce');
+        setTimeout(() => cartIcon.classList.remove('cart-bounce'), 500);
+      }
+    }
+
+    function searchProducts(e) {
+      e.preventDefault();
+      const query = document.getElementById('searchInput').value;
+      if (query.trim()) {
+        window.location.href = `shop.html?search=${encodeURIComponent(query)}`;
+      }
+    }
+
+    function subscribeNewsletter(e) {
+      e.preventDefault();
+      const email = document.getElementById('newsletterEmail').value;
+      if (email) {
+        showNotification('¡Gracias por suscribirte! Revisá tu email para el cupón de 10% OFF', 'success');
+        document.getElementById('newsletterEmail').value = '';
+      }
+    }
+
+    // Initialize
+    updateCartBadge();
+  </script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/forms.js"></script>
+</body>
+</html>

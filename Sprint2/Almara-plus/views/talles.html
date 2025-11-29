@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Guía de Talles | Almara+ Talles Reales</title>
+  <link rel="icon" type="image/png" href="../favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../styles/main.css" />
+</head>
+<body>
+  <div class="topbar">
+    <p>📏 Talles reales pensados para curvas auténticas · Moldería ampliada de sisa y cadera</p>
+  </div>
+
+  <header class="header">
+    <div class="container header__inner">
+      <div class="header__logo">
+        <a href="index.html">
+          <img src="../assets/img/logo.jpg" alt="Almara+">
+        </a>
+      </div>
+      <form class="header__search">
+        <input type="text" placeholder="Buscar productos..." />
+        <button type="submit" aria-label="Buscar">
+          <svg class="search-icon" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="6" />
+            <line x1="15" y1="15" x2="20" y2="20" />
+          </svg>
+        </button>
+      </form>
+      <div class="header__actions">
+        <a href="/users/login" class="header__link">Ingresar</a>
+        <a href="productCart.html" class="cart-icon">
+          🛒
+          <span class="badge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__item">Inicio</a>
+      <a href="shop.html" class="nav__item">Tienda</a>
+      <a href="coleccion.html" class="nav__item">Primavera Verano</a>
+      <a href="giftcard.html" class="nav__item">Gift Card</a>
+      <a href="talles.html" class="nav__item active">Tabla de Talles</a>
+      <a href="nosotros.html" class="nav__item">Nosotros</a>
+      <a href="contacto.html" class="nav__item">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="talles-hero">
+    <div class="container">
+      <span class="section__eyebrow">📏 Guía completa</span>
+      <h1>Tabla de Talles</h1>
+      <p>Nuestros talles están diseñados pensando en curvas reales. No solo ampliamos el largo, sino también la sisa y cadera para un calce perfecto.</p>
+    </div>
+  </section>
+
+  <!-- How to measure -->
+  <section class="talles-measure">
+    <div class="container">
+      <div class="section__header section__header--center">
+        <div>
+          <span class="section__eyebrow">📐 Paso a paso</span>
+          <h2>¿Cómo tomar tus medidas?</h2>
+        </div>
+      </div>
+
+      <div class="measure-grid">
+        <div class="measure-image">
+          <div class="measure-diagram">
+            <svg viewBox="0 0 200 400" class="body-diagram">
+              <!-- Simplified body silhouette -->
+              <ellipse cx="100" cy="40" rx="25" ry="30" fill="#f0e6d3"/>
+              <path d="M60 70 Q50 120 55 180 Q50 250 60 320 L80 380 L90 380 L95 320 Q100 280 105 320 L110 380 L120 380 L140 320 Q150 250 145 180 Q150 120 140 70 Z" fill="#f0e6d3"/>
+              <!-- Measurement lines -->
+              <line x1="45" y1="100" x2="155" y2="100" stroke="#C9A227" stroke-width="2" stroke-dasharray="5,3"/>
+              <text x="160" y="105" fill="#C9A227" font-size="12">Busto</text>
+              <line x1="50" y1="150" x2="150" y2="150" stroke="#C9A227" stroke-width="2" stroke-dasharray="5,3"/>
+              <text x="155" y="155" fill="#C9A227" font-size="12">Cintura</text>
+              <line x1="45" y1="200" x2="155" y2="200" stroke="#C9A227" stroke-width="2" stroke-dasharray="5,3"/>
+              <text x="160" y="205" fill="#C9A227" font-size="12">Cadera</text>
+            </svg>
+          </div>
+        </div>
+        <div class="measure-instructions">
+          <div class="measure-step">
+            <span class="measure-step__icon">👕</span>
+            <div>
+              <h3>Busto</h3>
+              <p>Medí la parte más ancha del busto, pasando la cinta por debajo de los brazos y sobre los omóplatos.</p>
+            </div>
+          </div>
+          <div class="measure-step">
+            <span class="measure-step__icon">📍</span>
+            <div>
+              <h3>Cintura</h3>
+              <p>Medí la parte más angosta del torso, generalmente a la altura del ombligo o justo arriba.</p>
+            </div>
+          </div>
+          <div class="measure-step">
+            <span class="measure-step__icon">👖</span>
+            <div>
+              <h3>Cadera</h3>
+              <p>Medí la parte más ancha de la cadera, aproximadamente 20 cm debajo de la cintura.</p>
+            </div>
+          </div>
+          <div class="measure-tip">
+            <strong>💡 Tips:</strong>
+            <ul>
+              <li>Usá una cinta métrica flexible</li>
+              <li>No ajustes demasiado la cinta</li>
+              <li>Medí sobre ropa interior o ropa ajustada</li>
+              <li>Si estás entre dos talles, elegí el más grande</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Size tables by category -->
+  <section class="talles-tables">
+    <div class="container">
+      <div class="section__header section__header--center">
+        <div>
+          <span class="section__eyebrow">📊 Por categoría</span>
+          <h2>Tablas de Talles</h2>
+        </div>
+      </div>
+
+      <!-- Category tabs -->
+      <div class="talles-tabs">
+        <button class="talles-tab active" onclick="showTable('tops')">Tops y Blusas</button>
+        <button class="talles-tab" onclick="showTable('vestidos')">Vestidos</button>
+        <button class="talles-tab" onclick="showTable('pantalones')">Pantalones</button>
+        <button class="talles-tab" onclick="showTable('shorts')">Shorts y Polleras</button>
+      </div>
+
+      <!-- Tables -->
+      <div class="talles-table-container">
+        <!-- Tops y Blusas -->
+        <div class="talles-table" id="table-tops">
+          <h3>👚 Tops, Blusas, Camisas y Remeras</h3>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Talle</th>
+                  <th>Busto (cm)</th>
+                  <th>Cintura (cm)</th>
+                  <th>Cadera (cm)</th>
+                  <th>Largo (cm)</th>
+                  <th>Equivalencia</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>6</strong></td>
+                  <td>100 - 106</td>
+                  <td>86 - 92</td>
+                  <td>106 - 112</td>
+                  <td>62</td>
+                  <td>XXL</td>
+                </tr>
+                <tr>
+                  <td><strong>8</strong></td>
+                  <td>106 - 112</td>
+                  <td>92 - 98</td>
+                  <td>112 - 118</td>
+                  <td>64</td>
+                  <td>XXXL</td>
+                </tr>
+                <tr>
+                  <td><strong>10</strong></td>
+                  <td>112 - 118</td>
+                  <td>98 - 104</td>
+                  <td>118 - 124</td>
+                  <td>66</td>
+                  <td>4XL</td>
+                </tr>
+                <tr>
+                  <td><strong>12</strong></td>
+                  <td>118 - 124</td>
+                  <td>104 - 110</td>
+                  <td>124 - 130</td>
+                  <td>68</td>
+                  <td>5XL</td>
+                </tr>
+                <tr>
+                  <td><strong>14</strong></td>
+                  <td>124 - 130</td>
+                  <td>110 - 116</td>
+                  <td>130 - 136</td>
+                  <td>70</td>
+                  <td>6XL</td>
+                </tr>
+                <tr>
+                  <td><strong>16</strong></td>
+                  <td>130 - 136</td>
+                  <td>116 - 122</td>
+                  <td>136 - 142</td>
+                  <td>72</td>
+                  <td>7XL</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Vestidos -->
+        <div class="talles-table" id="table-vestidos" style="display: none;">
+          <h3>👗 Vestidos y Monos</h3>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Talle</th>
+                  <th>Busto (cm)</th>
+                  <th>Cintura (cm)</th>
+                  <th>Cadera (cm)</th>
+                  <th>Largo total (cm)</th>
+                  <th>Equivalencia</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>6</strong></td>
+                  <td>100 - 106</td>
+                  <td>86 - 92</td>
+                  <td>106 - 112</td>
+                  <td>95</td>
+                  <td>XXL</td>
+                </tr>
+                <tr>
+                  <td><strong>8</strong></td>
+                  <td>106 - 112</td>
+                  <td>92 - 98</td>
+                  <td>112 - 118</td>
+                  <td>97</td>
+                  <td>XXXL</td>
+                </tr>
+                <tr>
+                  <td><strong>10</strong></td>
+                  <td>112 - 118</td>
+                  <td>98 - 104</td>
+                  <td>118 - 124</td>
+                  <td>99</td>
+                  <td>4XL</td>
+                </tr>
+                <tr>
+                  <td><strong>12</strong></td>
+                  <td>118 - 124</td>
+                  <td>104 - 110</td>
+                  <td>124 - 130</td>
+                  <td>101</td>
+                  <td>5XL</td>
+                </tr>
+                <tr>
+                  <td><strong>14</strong></td>
+                  <td>124 - 130</td>
+                  <td>110 - 116</td>
+                  <td>130 - 136</td>
+                  <td>103</td>
+                  <td>6XL</td>
+                </tr>
+                <tr>
+                  <td><strong>16</strong></td>
+                  <td>130 - 136</td>
+                  <td>116 - 122</td>
+                  <td>136 - 142</td>
+                  <td>105</td>
+                  <td>7XL</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pantalones -->
+        <div class="talles-table" id="table-pantalones" style="display: none;">
+          <h3>👖 Pantalones, Palazzos y Capris</h3>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Talle</th>
+                  <th>Cintura (cm)</th>
+                  <th>Cadera (cm)</th>
+                  <th>Largo (cm)</th>
+                  <th>Tiro (cm)</th>
+                  <th>Equivalencia</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>6</strong></td>
+                  <td>86 - 92</td>
+                  <td>106 - 112</td>
+                  <td>100</td>
+                  <td>32</td>
+                  <td>XXL</td>
+                </tr>
+                <tr>
+                  <td><strong>8</strong></td>
+                  <td>92 - 98</td>
+                  <td>112 - 118</td>
+                  <td>101</td>
+                  <td>33</td>
+                  <td>XXXL</td>
+                </tr>
+                <tr>
+                  <td><strong>10</strong></td>
+                  <td>98 - 104</td>
+                  <td>118 - 124</td>
+                  <td>102</td>
+                  <td>34</td>
+                  <td>4XL</td>
+                </tr>
+                <tr>
+                  <td><strong>12</strong></td>
+                  <td>104 - 110</td>
+                  <td>124 - 130</td>
+                  <td>103</td>
+                  <td>35</td>
+                  <td>5XL</td>
+                </tr>
+                <tr>
+                  <td><strong>14</strong></td>
+                  <td>110 - 116</td>
+                  <td>130 - 136</td>
+                  <td>104</td>
+                  <td>36</td>
+                  <td>6XL</td>
+                </tr>
+                <tr>
+                  <td><strong>16</strong></td>
+                  <td>116 - 122</td>
+                  <td>136 - 142</td>
+                  <td>105</td>
+                  <td>37</td>
+                  <td>7XL</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Shorts -->
+        <div class="talles-table" id="table-shorts" style="display: none;">
+          <h3>🩳 Shorts, Bermudas y Polleras</h3>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Talle</th>
+                  <th>Cintura (cm)</th>
+                  <th>Cadera (cm)</th>
+                  <th>Largo (cm)</th>
+                  <th>Equivalencia</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>6</strong></td>
+                  <td>86 - 92</td>
+                  <td>106 - 112</td>
+                  <td>38</td>
+                  <td>XXL</td>
+                </tr>
+                <tr>
+                  <td><strong>8</strong></td>
+                  <td>92 - 98</td>
+                  <td>112 - 118</td>
+                  <td>40</td>
+                  <td>XXXL</td>
+                </tr>
+                <tr>
+                  <td><strong>10</strong></td>
+                  <td>98 - 104</td>
+                  <td>118 - 124</td>
+                  <td>42</td>
+                  <td>4XL</td>
+                </tr>
+                <tr>
+                  <td><strong>12</strong></td>
+                  <td>104 - 110</td>
+                  <td>124 - 130</td>
+                  <td>44</td>
+                  <td>5XL</td>
+                </tr>
+                <tr>
+                  <td><strong>14</strong></td>
+                  <td>110 - 116</td>
+                  <td>130 - 136</td>
+                  <td>46</td>
+                  <td>6XL</td>
+                </tr>
+                <tr>
+                  <td><strong>16</strong></td>
+                  <td>116 - 122</td>
+                  <td>136 - 142</td>
+                  <td>48</td>
+                  <td>7XL</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tips section -->
+  <section class="talles-tips">
+    <div class="container">
+      <div class="tips-grid">
+        <div class="tip-card">
+          <span class="tip-card__icon">💡</span>
+          <h3>Si estás entre dos talles...</h3>
+          <p>Te recomendamos elegir el talle más grande. Nuestras prendas tienen un calce cómodo y holgado.</p>
+        </div>
+        <div class="tip-card">
+          <span class="tip-card__icon">📱</span>
+          <h3>¿Dudas con tu talle?</h3>
+          <p>Escribinos por WhatsApp con tus medidas y te asesoramos personalmente para que elijas perfecto.</p>
+        </div>
+        <div class="tip-card">
+          <span class="tip-card__icon">🔄</span>
+          <h3>Cambios sin costo</h3>
+          <p>Si el talle no es el correcto, tenés 15 días para cambiarlo sin costo adicional.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="talles-cta">
+    <div class="container">
+      <div class="talles-cta__content">
+        <h2>¿Necesitás ayuda para elegir tu talle?</h2>
+        <p>Nuestro equipo está listo para asesorarte</p>
+        <a href="https://wa.me/5491112345678?text=Hola!%20Necesito%20ayuda%20para%20elegir%20mi%20talle" class="btn btn--whatsapp btn--lg">
+          💬 Consultar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (compartido con index) -->
+  <footer class="footer" id="contacto">
+    <div class="container footer__inner">
+      <div class="footer__col footer__col-main">
+        <h3>ALMARA+</h3>
+        <p>Talles reales para mujeres auténticas. Moda plus size diseñada con amor y pensada para vos.</p>
+        <div class="footer__social">
+          <a href="#" title="Instagram"><img src="../assets/icons/insta.png" alt="Instagram"></a>
+          <a href="#" title="Facebook"><img src="../assets/icons/face.png" alt="Facebook"></a>
+          <a href="#" title="TikTok"><img src="../assets/icons/tik.png" alt="TikTok"></a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="shop.html">Ver todos los productos</a></li>
+          <li><a href="shop.html">Novedades</a></li>
+          <li><a href="shop.html">Sale</a></li>
+          <li><a href="#">Gift Card</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#">Guía de talles</a></li>
+          <li><a href="#">Envíos y entregas</a></li>
+          <li><a href="#">Cambios y devoluciones</a></li>
+          <li><a href="contacto.html">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>📍 Buenos Aires, Argentina</li>
+          <li>📧 contacto@almaraplus.com</li>
+          <li>📱 +54 9 11 6767-7843</li>
+          <li><a href="https://wa.me/5491167677843?text=Hola!%20Quiero%20consultar%20sobre%20los%20productos" class="footer__whatsapp">💬 WhatsApp directo</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <span>© 2025 Almara+. Todos los derechos reservados.</span>
+        <span>Hecho con 💛 para mujeres reales.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a href="https://wa.me/5491112345678?text=Hola!%20Quiero%20consultar%20sobre%20los%20productos" class="whatsapp-float" target="_blank" title="Consultanos por WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    function updateCartBadge() {
+      const cart = localStorage.getItem('almaraCart');
+      const cartItems = cart ? JSON.parse(cart) : [];
+      const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+      document.querySelectorAll('.cart-icon .badge').forEach(badge => {
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'flex' : 'none';
+      });
+    }
+
+    function showTable(category) {
+      // Hide all tables
+      document.querySelectorAll('.talles-table').forEach(t => t.style.display = 'none');
+      // Show selected
+      document.getElementById('table-' + category).style.display = 'block';
+      // Update tabs
+      document.querySelectorAll('.talles-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    updateCartBadge();
+  </script>
+  <script src="../assets/js/auth.js"></script>
+</body>
+</html>
+
+

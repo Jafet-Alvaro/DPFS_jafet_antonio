@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carrito | Almara+ Talles Reales</title>
+  <link rel="icon" type="image/png" href="../favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <style>
+    /* Pricing tiers section */
+    .pricing-tiers {
+      background: linear-gradient(135deg, #f8f5f0 0%, #fff9f0 100%);
+      border: 2px solid var(--gold);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-tiers__header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .pricing-tiers__header h3 {
+      margin: 0;
+      color: var(--black);
+    }
+
+    .pricing-tiers__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 900px) {
+      .pricing-tiers__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .pricing-tiers__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pricing-tier {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      border: 2px solid #eee;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .pricing-tier--active {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, #fffef5 0%, #fff9e6 100%);
+      box-shadow: 0 4px 20px rgba(201, 162, 39, 0.2);
+    }
+
+    .pricing-tier--active::before {
+      content: '✓ Tu nivel';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--black);
+      padding: 0.2rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .pricing-tier--best {
+      border-color: #28a745;
+    }
+
+    .pricing-tier--best .pricing-tier__label {
+      color: #28a745;
+    }
+
+    .pricing-tier__qty {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 0.25rem;
+    }
+
+    .pricing-tier__label {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-tier__formula {
+      font-size: 0.75rem;
+      color: #999;
+      background: #f5f5f5;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .pricing-tier--active .pricing-tier__formula {
+      background: rgba(201, 162, 39, 0.15);
+      color: #8a6d1b;
+    }
+
+    /* Current tier indicator */
+    .current-tier-indicator {
+      background: linear-gradient(135deg, var(--gold) 0%, #d4af37 100%);
+      color: var(--black);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .current-tier-indicator__info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .current-tier-indicator__icon {
+      font-size: 1.5rem;
+    }
+
+    .current-tier-indicator__text strong {
+      display: block;
+    }
+
+    .current-tier-indicator__text span {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    .current-tier-indicator__tip {
+      background: rgba(0,0,0,0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+
+    /* Price breakdown in summary */
+    .summary-breakdown {
+      background: #f8f8f8;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    .summary-breakdown__title {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .summary-breakdown__row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.25rem 0;
+      color: #666;
+    }
+
+    .summary-breakdown__row--highlight {
+      color: var(--black);
+      font-weight: 600;
+    }
+
+    /* Add prenda tip */
+    .add-more-tip {
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      color: #2e7d32;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .add-more-tip a {
+      color: #1b5e20;
+      font-weight: 600;
+    }
+
+    /* Item price display update */
+    .cart-item__price .price-original {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 0.85rem;
+    }
+
+    .cart-item__price .price-tier {
+      font-size: 0.75rem;
+      color: var(--gold);
+      background: #fff9e6;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-top: 0.25rem;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <p>🏷️ Comprá 4+ prendas y obtené precio MAYORISTA · Envíos a todo el país</p>
+  </div>
+
+  <header class="header">
+    <div class="container header__inner">
+      <div class="header__logo">
+        <a href="index.html">
+          <img src="../assets/img/logo.jpg" alt="Almara+">
+        </a>
+      </div>
+      <form class="header__search">
+        <input type="text" placeholder="Buscar productos..." />
+        <button type="submit" aria-label="Buscar">
+          <svg class="search-icon" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="6" />
+            <line x1="15" y1="15" x2="20" y2="20" />
+          </svg>
+        </button>
+      </form>
+      <div class="header__actions">
+        <a href="/users/login" class="header__link">Ingresar</a>
+        <a href="productCart.html" class="cart-icon">
+          🛒
+          <span class="badge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__item">Inicio</a>
+      <a href="shop.html" class="nav__item">Tienda</a>
+      <a href="coleccion.html" class="nav__item">Primavera Verano</a>
+      <a href="giftcard.html" class="nav__item">Gift Card</a>
+      <a href="talles.html" class="nav__item">Tabla de Talles</a>
+      <a href="nosotros.html" class="nav__item">Nosotros</a>
+      <a href="contacto.html" class="nav__item">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="index.html">Inicio</a> / <span>Carrito de compras</span>
+    </div>
+  </div>
+
+  <main class="cart-page container">
+    <h1>🛒 Tu Carrito <span id="cartCount">(0 productos)</span></h1>
+    
+    <!-- Pricing tiers explanation -->
+    <div class="pricing-tiers" id="pricingTiers">
+      <div class="pricing-tiers__header">
+        <span style="font-size: 1.5rem;">💰</span>
+        <h3>¿Cuánto más comprás, más ahorrás!</h3>
+      </div>
+      <div class="pricing-tiers__grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="pricing-tier" id="tier1">
+          <div class="pricing-tier__qty">1</div>
+          <div class="pricing-tier__label">prenda</div>
+          <div class="pricing-tier__formula">Minorista × 2</div>
+        </div>
+        <div class="pricing-tier" id="tier2">
+          <div class="pricing-tier__qty">2-3</div>
+          <div class="pricing-tier__label">prendas</div>
+          <div class="pricing-tier__formula">Minorista + $5.000/u</div>
+        </div>
+        <div class="pricing-tier pricing-tier--best" id="tier4">
+          <div class="pricing-tier__qty">4+</div>
+          <div class="pricing-tier__label">🌟 ¡Mejor precio!</div>
+          <div class="pricing-tier__formula">Precio MAYORISTA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart with items -->
+    <div class="cart-layout" id="cartWithItems" style="display: none;">
+      <!-- Current tier indicator -->
+      <div class="current-tier-indicator" id="currentTierIndicator">
+        <div class="current-tier-indicator__info">
+          <span class="current-tier-indicator__icon">📦</span>
+          <div class="current-tier-indicator__text">
+            <strong id="tierName">Cargando...</strong>
+            <span id="tierDescription">Calculando tu precio...</span>
+          </div>
+        </div>
+        <div class="current-tier-indicator__tip" id="tierTip">
+          Tip: Sumá más prendas para ahorrar
+        </div>
+      </div>
+
+      <div class="cart-items" id="cartItems">
+        <!-- Cart items will be loaded dynamically -->
+      </div>
+
+      <aside class="cart-summary">
+        <h2>Resumen del pedido</h2>
+        
+        <!-- Add more tip -->
+        <div class="add-more-tip" id="addMoreTip" style="display: none;">
+          <span>💡</span>
+          <span id="addMoreText">Agregá X prenda más para mejor precio</span>
+        </div>
+
+        <!-- Price breakdown -->
+        <div class="summary-breakdown" id="priceBreakdown">
+          <div class="summary-breakdown__title">
+            <span>📊</span> Desglose de precio
+          </div>
+          <div class="summary-breakdown__row">
+            <span>Precio base (minorista)</span>
+            <span id="basePrice">$0</span>
+          </div>
+          <div class="summary-breakdown__row" id="adjustmentRow">
+            <span id="adjustmentLabel">Ajuste</span>
+            <span id="adjustmentValue">$0</span>
+          </div>
+          <div class="summary-breakdown__row summary-breakdown__row--highlight">
+            <span>Tu precio final</span>
+            <span id="finalPriceBreakdown">$0</span>
+          </div>
+        </div>
+
+        <div class="summary-row">
+          <span>Subtotal (<span id="totalQty">0</span> prendas)</span>
+          <span id="subtotalAmount">$0</span>
+        </div>
+        
+        <div class="summary-row savings" id="savingsRow">
+          <span>Tu ahorro vs. comprar 1</span>
+          <span id="savings">-$0</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Envío</span>
+          <span>A calcular</span>
+        </div>
+
+        <div class="summary-row total">
+          <span>TOTAL</span>
+          <span class="amount" id="totalAmount">$0</span>
+        </div>
+
+        <div class="promo-code">
+          <label>¿Tenés un código de descuento?</label>
+          <div class="promo-code__input">
+            <input type="text" placeholder="Ingresá tu código" id="promoCode">
+            <button type="button" onclick="applyPromo()">Aplicar</button>
+          </div>
+        </div>
+
+        <button class="btn btn--primary" onclick="checkout()">
+          FINALIZAR COMPRA
+        </button>
+        
+        <button class="btn btn--whatsapp" onclick="sendWhatsApp()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Consultar por WhatsApp
+        </button>
+
+        <div class="continue-shopping">
+          <a href="shop.html">← Seguir comprando</a>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Empty cart -->
+    <div class="cart-empty" id="cartEmpty">
+      <div class="cart-empty__icon">🛒</div>
+      <h2>Tu carrito está vacío</h2>
+      <p>¡Explorá nuestra colección y encontrá las prendas perfectas para vos!</p>
+      <a href="shop.html" class="btn btn--primary">Ver productos</a>
+    </div>
+  </main>
+
+  <!-- FOOTER (compartido con index) -->
+  <footer class="footer" id="contacto">
+    <div class="container footer__inner">
+      <div class="footer__col footer__col-main">
+        <h3>ALMARA+</h3>
+        <p>Talles reales para mujeres auténticas. Moda plus size diseñada con amor y pensada para vos.</p>
+        <div class="footer__social">
+          <a href="#" title="Instagram"><img src="../assets/icons/insta.png" alt="Instagram"></a>
+          <a href="#" title="Facebook"><img src="../assets/icons/face.png" alt="Facebook"></a>
+          <a href="#" title="TikTok"><img src="../assets/icons/tik.png" alt="TikTok"></a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="shop.html">Ver todos los productos</a></li>
+          <li><a href="shop.html">Novedades</a></li>
+          <li><a href="shop.html">Sale</a></li>
+          <li><a href="#">Gift Card</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#">Guía de talles</a></li>
+          <li><a href="#">Envíos y entregas</a></li>
+          <li><a href="#">Cambios y devoluciones</a></li>
+          <li><a href="contacto.html">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>📍 Buenos Aires, Argentina</li>
+          <li>📧 contacto@almaraplus.com</li>
+          <li>📱 +54 9 11 6767-7843</li>
+          <li><a href="https://wa.me/5491167677843?text=Hola!%20Quiero%20consultar%20sobre%20los%20productos" class="footer__whatsapp">💬 WhatsApp directo</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <span>© 2025 Almara+. Todos los derechos reservados.</span>
+        <span>Hecho con 💛 para mujeres reales.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a href="https://wa.me/5491112345678?text=Hola!%20Quiero%20consultar%20sobre%20los%20productos" class="whatsapp-float" target="_blank" title="Consultanos por WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    // ============================================
+    // PRICING TIERS SYSTEM (CORRECTED)
+    // ============================================
+    // 1 prenda: precio minorista × 2
+    // 2-3 prendas: precio minorista + $5.000 por unidad
+    // 4+ prendas: precio mayorista
+
+    // Get cart from localStorage
+    function getCart() {
+      const cart = localStorage.getItem('almaraCart');
+      return cart ? JSON.parse(cart) : [];
+    }
+
+    // Save cart to localStorage
+    function saveCart(cart) {
+      localStorage.setItem('almaraCart', JSON.stringify(cart));
+      renderCart();
+      updateCartBadge();
+    }
+
+    // Update cart badge count
+    function updateCartBadge() {
+      const cart = getCart();
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const badges = document.querySelectorAll('.cart-icon .badge');
+      badges.forEach(badge => {
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'flex' : 'none';
+      });
+    }
+
+    // Format price
+    function formatPrice(price) {
+      return '$' + Math.round(price).toLocaleString('es-AR');
+    }
+
+    // Calculate price tier based on total quantity
+    function getPriceTier(totalQty) {
+      if (totalQty >= 4) return 4;  // Mayorista
+      if (totalQty >= 2) return 2;  // 2-3 prendas
+      return 1;                      // 1 prenda
+    }
+
+    // Calculate final price for an item based on tier
+    // CORRECTED:
+    // 1 prenda: minorista × 2
+    // 2-3 prendas: minorista + $5.000 por unidad
+    // 4+ prendas: mayorista
+    function calculateItemPrice(item, tier) {
+      const minorista = item.price || item.retailPrice;
+      const mayorista = item.wholesalePrice;
+
+      switch (tier) {
+        case 1: // 1 prenda: minorista × 2
+          return minorista * 2;
+        case 2: // 2-3 prendas: minorista + $5.000 por unidad
+          return minorista + 5000;
+        case 4: // 4+ prendas: mayorista
+        default:
+          return mayorista;
+      }
+    }
+
+    // Calculate total with tier adjustments
+    // CORRECTED FORMULA:
+    // 1 prenda: minorista × 2
+    // 2-3 prendas: minorista + $5.000 por unidad
+    // 4+ prendas: mayorista
+    function calculateTotals(cart) {
+      const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const tier = getPriceTier(totalQty);
+
+      let subtotalMinorista = 0; // Base: precio minorista por unidad
+      let subtotalMayorista = 0; // Precio mayorista total
+      let finalTotal = 0;
+
+      cart.forEach(item => {
+        const minorista = item.price || item.retailPrice;
+        subtotalMinorista += minorista * item.quantity;
+        subtotalMayorista += item.wholesalePrice * item.quantity;
+        finalTotal += calculateItemPrice(item, tier) * item.quantity;
+      });
+
+      let adjustmentLabel = '';
+      
+      switch (tier) {
+        case 1:
+          adjustmentLabel = 'Recargo (1 prenda): Minorista ×2';
+          break;
+        case 2:
+          adjustmentLabel = '2-3 prendas: Minorista +$5.000/u';
+          break;
+        case 4:
+          adjustmentLabel = '🎉 ¡Precio MAYORISTA aplicado!';
+          break;
+      }
+
+      // Calculate savings vs buying 1 item at a time
+      const worstCaseTotal = subtotalMinorista * 2;
+      const savings = worstCaseTotal - finalTotal;
+
+      return {
+        totalQty,
+        tier,
+        subtotalMinorista,
+        subtotalMayorista,
+        finalTotal,
+        adjustmentLabel,
+        savings,
+        worstCaseTotal
+      };
+    }
+
+    // Update tier indicator UI
+    function updateTierIndicator(tier, totalQty) {
+      const tierNames = {
+        1: 'Precio Individual',
+        2: 'Precio 2-3 Prendas',
+        4: '🌟 Precio Mayorista'
+      };
+
+      const tierDescriptions = {
+        1: 'Minorista × 2 por prenda única',
+        2: 'Minorista + $5.000 por unidad',
+        4: '¡El mejor precio por unidad!'
+      };
+
+      const prendas = 4 - totalQty;
+      const tierTips = {
+        1: `💡 Sumá ${prendas} prenda(s) más para precio mayorista`,
+        2: `💡 Sumá ${prendas} prenda(s) más para precio mayorista`,
+        4: `🎉 ¡Felicitaciones! Tenés el mejor precio`
+      };
+
+      document.getElementById('tierName').textContent = tierNames[tier];
+      document.getElementById('tierDescription').textContent = tierDescriptions[tier];
+      document.getElementById('tierTip').textContent = tierTips[tier];
+
+      // Update tier cards
+      document.querySelectorAll('.pricing-tier').forEach(el => {
+        el.classList.remove('pricing-tier--active');
+      });
+      document.getElementById('tier' + tier).classList.add('pricing-tier--active');
+
+      // Show/hide add more tip
+      const addMoreTip = document.getElementById('addMoreTip');
+      const addMoreText = document.getElementById('addMoreText');
+      
+      if (tier < 4) {
+        addMoreTip.style.display = 'flex';
+        const prendas = 4 - totalQty;
+        addMoreText.textContent = `Agregá ${prendas} prenda${prendas > 1 ? 's' : ''} más para obtener precio MAYORISTA. `;
+        addMoreText.innerHTML += `<a href="shop.html">Ver productos →</a>`;
+      } else {
+        addMoreTip.style.display = 'none';
+      }
+
+      // Update indicator style based on tier
+      const indicator = document.getElementById('currentTierIndicator');
+      if (tier === 4) {
+        indicator.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+        indicator.style.color = '#fff';
+      } else {
+        indicator.style.background = 'linear-gradient(135deg, var(--gold) 0%, #d4af37 100%)';
+        indicator.style.color = 'var(--black)';
+      }
+    }
+
+    // Render cart items
+    function renderCart() {
+      const cart = getCart();
+      const cartItems = document.getElementById('cartItems');
+      const cartWithItems = document.getElementById('cartWithItems');
+      const cartEmpty = document.getElementById('cartEmpty');
+      const cartCount = document.getElementById('cartCount');
+      const pricingTiers = document.getElementById('pricingTiers');
+
+      if (cart.length === 0) {
+        cartWithItems.style.display = 'none';
+        cartEmpty.style.display = 'block';
+        pricingTiers.style.display = 'block';
+        cartCount.textContent = '(0 productos)';
+        return;
+      }
+
+      cartWithItems.style.display = 'grid';
+      cartEmpty.style.display = 'none';
+      pricingTiers.style.display = 'block';
+      
+      const totals = calculateTotals(cart);
+      cartCount.textContent = `(${totals.totalQty} prenda${totals.totalQty !== 1 ? 's' : ''})`;
+
+      // Update tier indicator
+      updateTierIndicator(totals.tier, totals.totalQty);
+
+      cartItems.innerHTML = cart.map((item, index) => {
+        const tierPrice = calculateItemPrice(item, totals.tier);
+        const minorista = item.price || item.retailPrice;
+        const worstPrice = minorista * 2; // Precio si comprara 1 sola
+        const showOriginal = tierPrice < worstPrice;
+
+        const tierLabel = totals.tier === 4 ? 'Mayorista' : totals.tier === 2 ? '2-3 prendas' : 'Individual';
+
+        return `
+          <div class="cart-item" data-index="${index}">
+            <img src="${item.image}" alt="${item.name}" class="cart-item__image" onerror="this.src='../assets/img/logo.jpg'">
+            
+            <div class="cart-item__info">
+              <h3>${item.name}</h3>
+              <p>Talle: ${item.size} · Color: ${item.color}</p>
+              <span class="item-sku">SKU: ${item.sku}</span>
+            </div>
+            
+            <div class="cart-item__price">
+              ${showOriginal ? `<div class="price-original">${formatPrice(worstPrice)} c/u</div>` : ''}
+              <div class="price-unit">${formatPrice(tierPrice)} c/u</div>
+              <div class="price-total">${formatPrice(tierPrice * item.quantity)}</div>
+              <span class="price-tier">${tierLabel}</span>
+            </div>
+            
+            <div class="cart-item__actions">
+              <div class="qty-controls">
+                <button onclick="updateQuantity(${index}, -1)">−</button>
+                <input type="number" value="${item.quantity}" min="1" max="99" onchange="setQuantity(${index}, this.value)" readonly>
+                <button onclick="updateQuantity(${index}, 1)">+</button>
+              </div>
+              <button class="btn-remove" onclick="removeItem(${index})">🗑️ Eliminar</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      updateTotals(totals);
+    }
+
+    // Update totals display
+    function updateTotals(totals) {
+      document.getElementById('totalQty').textContent = totals.totalQty;
+      document.getElementById('basePrice').textContent = formatPrice(totals.subtotalMinorista);
+      document.getElementById('subtotalAmount').textContent = formatPrice(totals.finalTotal);
+      document.getElementById('totalAmount').textContent = formatPrice(totals.finalTotal);
+
+      // Adjustment row
+      const adjustmentLabel = document.getElementById('adjustmentLabel');
+      const adjustmentValue = document.getElementById('adjustmentValue');
+
+      if (totals.tier === 1) {
+        adjustmentLabel.textContent = 'Recargo prenda única (×2)';
+        adjustmentValue.textContent = '+' + formatPrice(totals.subtotalMinorista);
+        adjustmentValue.style.color = '#dc3545';
+      } else if (totals.tier === 2) {
+        adjustmentLabel.textContent = '+$5.000/unidad (2-3 prendas)';
+        adjustmentValue.textContent = '+' + formatPrice(5000 * totals.totalQty);
+        adjustmentValue.style.color = '#fd7e14';
+      } else {
+        adjustmentLabel.textContent = '🎉 Descuento mayorista';
+        const descuento = totals.subtotalMinorista - totals.subtotalMayorista;
+        adjustmentValue.textContent = '-' + formatPrice(descuento);
+        adjustmentValue.style.color = '#28a745';
+      }
+
+      document.getElementById('finalPriceBreakdown').textContent = formatPrice(totals.finalTotal);
+
+      // Savings
+      const savingsRow = document.getElementById('savingsRow');
+      const savingsEl = document.getElementById('savings');
+      
+      if (totals.savings > 0) {
+        savingsRow.style.display = 'flex';
+        savingsEl.textContent = '-' + formatPrice(totals.savings);
+      } else {
+        savingsRow.style.display = 'none';
+      }
+    }
+
+    // Update item quantity
+    function updateQuantity(index, delta) {
+      const cart = getCart();
+      cart[index].quantity += delta;
+      
+      if (cart[index].quantity < 1) {
+        cart[index].quantity = 1;
+      }
+      if (cart[index].quantity > 99) {
+        cart[index].quantity = 99;
+      }
+      
+      saveCart(cart);
+    }
+
+    // Set specific quantity
+    function setQuantity(index, value) {
+      const cart = getCart();
+      let qty = parseInt(value);
+      if (isNaN(qty) || qty < 1) qty = 1;
+      if (qty > 99) qty = 99;
+      cart[index].quantity = qty;
+      saveCart(cart);
+    }
+
+    // Remove item
+    function removeItem(index) {
+      const cart = getCart();
+      const item = cart[index];
+      
+      if (confirm(`¿Eliminar "${item.name}" del carrito?`)) {
+        cart.splice(index, 1);
+        saveCart(cart);
+        showNotification('Producto eliminado del carrito', 'success');
+      }
+    }
+
+    // Clear entire cart
+    function clearCart() {
+      if (confirm('¿Estás segura de vaciar todo el carrito?')) {
+        localStorage.removeItem('almaraCart');
+        renderCart();
+        updateCartBadge();
+        showNotification('Carrito vaciado', 'success');
+      }
+    }
+
+    // Apply promo code
+    function applyPromo() {
+      const code = document.getElementById('promoCode').value.trim().toUpperCase();
+      
+      if (!code) {
+        showNotification('Ingresá un código de descuento', 'error');
+        return;
+      }
+
+      const promoCodes = {
+        'ALMARA10': 10,
+        'VERANO20': 20,
+        'BIENVENIDA': 15
+      };
+
+      if (promoCodes[code]) {
+        showNotification(`¡Código aplicado! ${promoCodes[code]}% de descuento`, 'success');
+      } else {
+        showNotification('Código inválido o expirado', 'error');
+      }
+    }
+
+    // Checkout
+    function checkout() {
+      const cart = getCart();
+      if (cart.length === 0) {
+        showNotification('Tu carrito está vacío', 'error');
+        return;
+      }
+      
+      const totals = calculateTotals(cart);
+      const tierNames = { 1: 'Individual', 2: '2 Prendas', 3: '3 Prendas', 4: 'Mayorista' };
+      
+      alert(`¡Gracias por tu pedido! 🎉\n\n` +
+        `Total: ${formatPrice(totals.finalTotal)}\n` +
+        `Nivel de precio: ${tierNames[totals.tier]}\n\n` +
+        `Nos pondremos en contacto para coordinar pago y envío.\n` +
+        `También podés consultar por WhatsApp.`);
+    }
+
+    // Send order via WhatsApp
+    function sendWhatsApp() {
+      const cart = getCart();
+      if (cart.length === 0) {
+        showNotification('Tu carrito está vacío', 'error');
+        return;
+      }
+
+      const totals = calculateTotals(cart);
+      const tierNames = { 
+        1: 'Individual (Minorista ×2)', 
+        2: '2-3 Prendas (Minorista +$5.000/u)', 
+        4: '🌟 Mayorista' 
+      };
+
+      let message = '¡Hola! 👋 Me interesa hacer un pedido:\n\n';
+      message += `📦 *${totals.totalQty} prenda(s) - ${tierNames[totals.tier]}*\n\n`;
+      
+      cart.forEach((item, i) => {
+        const tierPrice = calculateItemPrice(item, totals.tier);
+        const itemTotal = tierPrice * item.quantity;
+        message += `${i + 1}. *${item.name}*\n`;
+        message += `   Talle: ${item.size} | Color: ${item.color}\n`;
+        message += `   Cantidad: ${item.quantity} x ${formatPrice(tierPrice)} = ${formatPrice(itemTotal)}\n\n`;
+      });
+
+      message += `*TOTAL: ${formatPrice(totals.finalTotal)}*\n\n`;
+      
+      if (totals.savings > 0) {
+        message += `💰 *Ahorro vs. comprar 1: ${formatPrice(totals.savings)}*\n\n`;
+      }
+      
+      message += '¿Podrían darme info sobre stock y formas de pago? 🛍️';
+
+      const phoneNumber = '5491112345678';
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      
+      window.open(whatsappUrl, '_blank');
+    }
+
+    // Show notification
+    function showNotification(message, type) {
+      const existing = document.querySelector('.cart-notification');
+      if (existing) existing.remove();
+
+      const notification = document.createElement('div');
+      notification.className = `cart-notification cart-notification--${type}`;
+      notification.innerHTML = `
+        <span>${type === 'success' ? '✓' : '⚠'}</span>
+        <p>${message}</p>
+      `;
+      document.body.appendChild(notification);
+
+      setTimeout(() => notification.classList.add('show'), 10);
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+      }, 3000);
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCart();
+      updateCartBadge();
+    });
+  </script>
+  <script src="../assets/js/auth.js"></script>
+</body>
+</html>
